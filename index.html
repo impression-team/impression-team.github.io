@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impression Team Studio — Game Development</title>
+  <meta name="description" content="Impression Team Studio — indie game development studio from Belgrade, Serbia. Mobile, Steam and console games across puzzle, idle, action and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050a14;
+      --bg2: #080f1e;
+      --accent: #00d4ff;
+      --accent2: #7b2fff;
+      --accent3: #ff3e6c;
+      --glow: rgba(0, 212, 255, 0.25);
+      --text: #c8d8f0;
+      --text-dim: #6a7f9a;
+      --card-bg: rgba(10, 20, 40, 0.85);
+      --border: rgba(0, 212, 255, 0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── Starfield ── */
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    #stars::before, #stars::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 40%, #fff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 5%, #aef 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 60%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 20%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 20% 80%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 75%, #fff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 90% 90%, #aef 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 55%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 65% 35%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 5% 50%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 78%, #fff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 15% 65%, #aef 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 45%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 90%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 10%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 25%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 70%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 50%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 30%, #fff 0%, transparent 100%);
+      opacity: 0.6;
+    }
+    #stars::after {
+      transform: translateY(-50px);
+      opacity: 0.3;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(5, 10, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--accent2); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent); }
+
+    /* ── Sections ── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero-grid-line {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      perspective: 800px;
+      transform: rotateX(30deg) scale(1.5);
+      transform-origin: center bottom;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,47,255,0.18) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      color: #fff;
+      text-shadow: 0 0 40px rgba(0,212,255,0.4);
+    }
+    h1 span {
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-dim);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.05em;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 3px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0,212,255,0.5);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 35px rgba(0,212,255,0.8);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      border: 1px solid var(--accent2);
+      color: var(--accent2);
+    }
+    .btn-outline:hover {
+      background: rgba(123,47,255,0.15);
+      box-shadow: 0 0 20px rgba(123,47,255,0.4);
+      transform: translateY(-2px);
+    }
+
+    /* ── Shared section styles ── */
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .separator {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin-bottom: 2rem;
+    }
+
+    /* ── About ── */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p {
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+    .stat-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: left; }
+    .stat-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .about-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .platform-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .platform-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--glow);
+    }
+    .platform-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .platform-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .platform-card p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── Genres ── */
+    #genres { background: var(--bg); }
+    .genres-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .genre-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 6px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .genre-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .genre-card:hover::before { opacity: 1; }
+    .genre-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px var(--glow);
+      transform: translateY(-4px);
+    }
+    .genre-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .genre-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .genre-card p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── Portfolio ── */
+    #portfolio { background: var(--bg2); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .game-card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+    .game-card:hover {
+      border-color: var(--accent2);
+      box-shadow: 0 0 30px rgba(123,47,255,0.3);
+      transform: translateY(-5px);
+    }
+    .game-card-header {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card-body {
+      padding: 1.2rem 1.4rem;
+    }
+    .game-card-body h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.82rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+    .game-genre-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .tag-puzzle { background: rgba(0,212,255,0.12); color: var(--accent); border: 1px solid rgba(0,212,255,0.3); }
+    .tag-idle { background: rgba(123,47,255,0.12); color: #a070ff; border: 1px solid rgba(123,47,255,0.3); }
+    .tag-action { background: rgba(255,62,108,0.12); color: var(--accent3); border: 1px solid rgba(255,62,108,0.3); }
+    .tag-racing { background: rgba(255,180,0,0.12); color: #ffb400; border: 1px solid rgba(255,180,0,0.3); }
+    .tag-casual { background: rgba(0,220,120,0.12); color: #00dc78; border: 1px solid rgba(0,220,120,0.3); }
+    .game-links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .store-btn {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      transition: all 0.2s;
+    }
+    .store-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* gradient headers for game cards */
+    .gc-match3 { background: linear-gradient(135deg, #1a0533, #0a2040); }
+    .gc-idle { background: linear-gradient(135deg, #0d1f3a, #1a0533); }
+    .gc-action { background: linear-gradient(135deg, #1a0a1a, #0a1a2a); }
+    .gc-racing { background: linear-gradient(135deg, #1a1000, #0a1a2a); }
+    .gc-casual { background: linear-gradient(135deg, #001a10, #001030); }
+    .gc-puzzle { background: linear-gradient(135deg, #001a1a, #0a0a2a); }
+
+    /* ── Contact ── */
+    #contact { background: var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 1.5rem; }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      background: var(--card-bg);
+    }
+    .contact-item p {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .contact-item a:hover { text-decoration: underline; }
+    .store-section h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .store-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .big-store-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card-bg);
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .big-store-btn:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--glow);
+    }
+    .big-store-btn span:first-child { font-size: 1.8rem; }
+    .big-store-btn .store-name { color: #fff; font-size: 0.95rem; font-weight: 600; }
+    .big-store-btn .store-sub { font-size: 0.75rem; color: var(--text-dim); display: block; }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    footer span { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .section-inner { padding: 4rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="#hero" class="nav-logo">Impression<span>&nbsp;Team</span></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#genres">Genres</a></li>
+    <li><a href="#portfolio">Games</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-grid-line"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag">// Game Development Studio</div>
+  <h1>IMPRESSION<br><span>TEAM STUDIO</span></h1>
+  <p class="hero-sub">Crafting worlds. Shipping games. From Belgrade to the universe.</p>
+  <div class="hero-cta">
+    <a href="#portfolio" class="btn btn-primary">View Our Games</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-tag">// Who We Are</span>
+        <h2>Independent Studio.<br>Infinite Imagination.</h2>
+        <div class="separator"></div>
+        <p>Impression Team Studio is an indie game development studio headquartered in Belgrade, Serbia. We design and build engaging games for mobile platforms, PC via Steam, and consoles — reaching players across the globe.</p>
+        <p>Our team combines technical expertise with a passion for creative gameplay, delivering titles that are easy to pick up and hard to put down. From idle tycoons to fast-paced action and satisfying puzzles, we build across a wide spectrum of genres.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">12+</div>
+            <div class="stat-label">Games Released</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Platforms</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">🌍</div>
+            <div class="stat-label">Global Players</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="platform-card">
+          <div class="platform-icon">📱</div>
+          <div>
+            <h3>Mobile Games</h3>
+            <p>iOS &amp; Android titles on the App Store and Google Play — optimized for touch, built for everyone.</p>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon">🎮</div>
+          <div>
+            <h3>Steam &amp; Console</h3>
+            <p>PC and console releases for players who want a richer, deeper experience on the big screen.</p>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon">🛠️</div>
+          <div>
+            <h3>Full-Cycle Development</h3>
+            <p>From concept and prototyping through launch, live-ops, and updates — we do it all in-house.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Genres -->
+<section id="genres">
+  <div class="section-inner">
+    <span class="section-tag">// What We Build</span>
+    <h2>Game Genres</h2>
+    <div class="separator"></div>
+    <div class="genres-grid">
+      <div class="genre-card">
+        <span class="genre-icon">🧩</span>
+        <h3>Puzzle</h3>
+        <p>Match-3, pipes, bubble shooters and logic challenges that keep players thinking and tapping.</p>
+      </div>
+      <div class="genre-card">
+        <span class="genre-icon">🏗️</span>
+        <h3>Idle &amp; Tycoon</h3>
+        <p>Satisfying incremental builders and management sims — construct, upgrade, automate.</p>
+      </div>
+      <div class="genre-card">
+        <span class="genre-icon">🔫</span>
+        <h3>Action</h3>
+        <p>Fast-paced shooters, defenders, and arcade games with punchy controls and intense runs.</p>
+      </div>
+      <div class="genre-card">
+        <span class="genre-icon">🏎️</span>
+        <h3>Racing</h3>
+        <p>High-speed racing and chase games built for mobile thrills and endless replayability.</p>
+      </div>
+      <div class="genre-card">
+        <span class="genre-icon">🎨</span>
+        <h3>Casual</h3>
+        <p>Coloring, creative, and relaxing games for broad audiences — pick up, enjoy, put down.</p>
+      </div>
+      <div class="genre-card">
+        <span class="genre-icon">👾</span>
+        <h3>Arcade &amp; RPG</h3>
+        <p>Retro-inspired defense games, survival challenges, and light RPG progression loops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section id="portfolio">
+  <div class="section-inner">
+    <span class="section-tag">// Our Work</span>
+    <h2>Portfolio</h2>
+    <div class="separator"></div>
+    <div class="portfolio-grid">
+
+      <div class="game-card">
+        <div class="game-card-header gc-match3">🍬</div>
+        <div class="game-card-body">
+          <h3>Bee Rush: Match 3 Candy Puzzle</h3>
+          <span class="game-genre-tag tag-puzzle">Puzzle</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=com.chardymov.slr" target="_blank" class="store-btn">Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-idle">🦸</div>
+        <div class="game-card-body">
+          <h3>Build My Hotel with Super Hero</h3>
+          <span class="game-genre-tag tag-idle">Idle / Tycoon</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=idle.craft.simulator" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/super-hero-hotel-build-tower/id6475118803" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-idle">🎸</div>
+        <div class="game-card-body">
+          <h3>Band Manager Idler</h3>
+          <span class="game-genre-tag tag-idle">Idle / Simulator</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=band.manager.idler" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/music-band-tycoon-idle-games/id6443993567" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-casual">🦄</div>
+        <div class="game-card-body">
+          <h3>Kawaii Unicorn: Coloring World</h3>
+          <span class="game-genre-tag tag-casual">Casual</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=com.chardymov.patu" target="_blank" class="store-btn">Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-idle">🏠</div>
+        <div class="game-card-body">
+          <h3>House Construct Idler</h3>
+          <span class="game-genre-tag tag-idle">Idle / Builder</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=house.construct.idler" target="_blank" class="store-btn">Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-puzzle">🔵</div>
+        <div class="game-card-body">
+          <h3>Bubble Rush Shooter</h3>
+          <span class="game-genre-tag tag-puzzle">Puzzle / Shooter</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=com.chardymov.brs" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/bubble-rush-shooter/id1601039219" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-action">🚀</div>
+        <div class="game-card-body">
+          <h3>Invaders City Defence</h3>
+          <span class="game-genre-tag tag-action">Action / RPG</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=invaders.city.defence" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/invaders-city-defence-idle-rpg/id6448887151" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-action">🔫</div>
+        <div class="game-card-body">
+          <h3>Guns and Bike</h3>
+          <span class="game-genre-tag tag-action">Action</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=guns.and.bike" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/guns-bike-push-the-trigger/id6469506304" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-racing">🏍️</div>
+        <div class="game-card-body">
+          <h3>Drag Race Queen</h3>
+          <span class="game-genre-tag tag-racing">Racing</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=drag.race.queen" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/bike-race-queen-racing-games/id6449099005" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-idle">🏥</div>
+        <div class="game-card-body">
+          <h3>Maternity Hospital Tycoon Idle</h3>
+          <span class="game-genre-tag tag-idle">Idle / Tycoon</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=baby.boom.room" target="_blank" class="store-btn">Google Play</a>
+            <a href="https://apps.apple.com/us/app/baby-boom-room-hospital-tycoon/id6444125769" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-puzzle">🔧</div>
+        <div class="game-card-body">
+          <h3>Space Pipes Connect Puzzle</h3>
+          <span class="game-genre-tag tag-puzzle">Puzzle</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=com.chardymov.pipesconnect" target="_blank" class="store-btn">Google Play</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-idle">✈️</div>
+        <div class="game-card-body">
+          <h3>Aircraft Constructor Idler</h3>
+          <span class="game-genre-tag tag-idle">Idle / Builder</span>
+          <div class="game-links">
+            <a href="https://play.google.com/store/apps/details?id=aircraft.constructor.idler" target="_blank" class="store-btn">Google Play</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-tag">// Reach Us</span>
+        <h2>Let's Build<br>Something Together</h2>
+        <div class="separator"></div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <a href="https://maps.google.com/?q=Belgrade,Serbia" target="_blank">Belgrade, Serbia</a>
+            <p>Our home base — heart of the Balkans tech scene.</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <a href="mailto:mail@impression.team">mail@impression.team</a>
+            <p>For business inquiries, collaborations, or press.</p>
+          </div>
+        </div>
+      </div>
+      <div class="store-section">
+        <h3>Find us on</h3>
+        <div class="store-links">
+          <a href="https://play.google.com/store/apps/developer?id=Impression+Team+Studio" target="_blank" class="big-store-btn">
+            <span>▶</span>
+            <div>
+              <span class="store-name">Google Play</span>
+              <span class="store-sub">Android — Impression Team Studio</span>
+            </div>
+          </a>
+          <a href="https://apps.apple.com/us/developer/vitalii-chardymov/id1543773818" target="_blank" class="big-store-btn">
+            <span>🍎</span>
+            <div>
+              <span class="store-name">App Store</span>
+              <span class="store-sub">iOS — Vitalii Chardymov</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2024–2026 <span>Impression Team Studio</span> · Belgrade, Serbia · All rights reserved</p>
+</footer>
+
+</body>
+</html>
