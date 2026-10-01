@@ -549,7 +549,7 @@
         <!-- Honeypot for bots: real people never see or fill this -->
         <div class="hp" aria-hidden="true">
           <label for="f-honey">Leave empty</label>
-          <input type="text" id="f-honey" name="_honey" tabindex="-1" autocomplete="off" />
+          <input type="text" id="f-honey" name="website" tabindex="-1" autocomplete="off" />
         </div>
 
         <div class="form-actions">
@@ -568,8 +568,8 @@
   <form method="dialog" class="cd-body" id="consent-form">
     <span class="section-tag"><span data-lang="ru">// Шаг 2 из 2</span><span data-lang="en">// Step 2 of 2</span></span>
     <h3 id="cd-title"><span data-lang="ru">Согласие на обработку персональных данных</span><span data-lang="en">Consent to personal data processing</span></h3>
-    <p data-lang="ru">Заявка ещё не отправлена. Чтобы мы могли её получить и связаться с вами, нужно ваше согласие на обработку указанных в форме данных: имени, email, телефона или Telegram и текста заявки — в целях рассмотрения заявки и связи с вами.</p>
-    <p data-lang="en">Your request has not been sent yet. To receive it and contact you, we need your consent to process the data from the form — name, email, phone or Telegram and the request text — for the purpose of handling your request.</p>
+    <p data-lang="ru">Заявка ещё не отправлена. Чтобы мы могли её получить и связаться с вами, нужно ваше согласие на обработку указанных в форме данных: имени, email, телефона или Telegram и текста заявки, а также IP-адреса и времени отправки (для подтверждения согласия) — в целях рассмотрения заявки и связи с вами.</p>
+    <p data-lang="en">Your request has not been sent yet. To receive it and contact you, we need your consent to process the data from the form — name, email, phone or Telegram and the request text, plus your IP address and the time of sending (as proof of consent) — for the purpose of handling your request.</p>
 
     <details class="operator">
       <summary><span data-lang="ru">Сведения об операторе</span><span data-lang="en">Data controller details</span></summary>
@@ -616,7 +616,9 @@
 
 <script>
 (function () {
-  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/chardymov@yandex.ru';
+  // Yandex Cloud Function that emails requests (code: form-handler/ in the repo, not published).
+  var FORM_ENDPOINT = '__FORM_ENDPOINT__';
+  var pageLoadedAt = Date.now();
   var CONTACT_EMAIL = 'chardymov@yandex.ru';
 
   var MESSAGES = {
@@ -719,13 +721,11 @@
       project_type: f['project_type'].value,
       budget: f['budget'].value.trim(),
       message: f['message'].value.trim(),
-      consent: 'Да — согласие на обработку ПДн дано ' + new Date().toISOString() +
-               ' (' + location.origin + '/pd-consent.html)',
-      page_language: currentLang(),
-      _honey: f['_honey'].value,
-      _subject: 'Заявка с сайта: ' + f['project_type'].value,
-      _template: 'table',
-      _replyto: f['email'].value.trim()
+      consent: true,
+      consent_at: new Date().toISOString(),
+      lang: currentLang(),
+      website: f['website'].value,
+      fill_ms: Date.now() - pageLoadedAt
     };
 
     sending = true;
@@ -735,12 +735,13 @@
 
     fetch(FORM_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      // text/plain keeps this a "simple" CORS request (no preflight); the body is still JSON.
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
       body: JSON.stringify(data)
     })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
       .then(function (res) {
-        if (res.ok && String(res.body.success) === 'true') {
+        if (res.ok && res.body.success === true) {
           form.reset();
           dialog.close();
           setStatus(status, 'ok', 'ok');
