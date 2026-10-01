@@ -289,7 +289,6 @@
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
     .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
     .consent {
-      grid-column: 1 / -1;
       display: flex;
       gap: 0.8rem;
       align-items: flex-start;
@@ -309,6 +308,37 @@
       cursor: pointer;
     }
     .consent label { cursor: pointer; }
+
+    /* ── Consent dialog ── */
+    dialog {
+      width: min(560px, calc(100% - 2rem));
+      max-height: calc(100% - 2rem);
+      margin: auto;
+      padding: 0;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: #0a1426;
+      color: var(--text);
+      box-shadow: 0 0 40px rgba(0,212,255,0.25);
+    }
+    dialog::backdrop { background: rgba(2, 5, 12, 0.8); backdrop-filter: blur(3px); }
+    .cd-body { display: flex; flex-direction: column; gap: 1rem; padding: 1.8rem; }
+    .cd-body .section-tag { margin-bottom: 0; }
+    .cd-body h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #fff; line-height: 1.35; }
+    .cd-body > p { font-size: 0.92rem; line-height: 1.6; }
+    .operator summary, .footer-req summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-size: 0.85rem;
+      width: fit-content;
+    }
+    .operator p { margin-top: 0.6rem; font-size: 0.85rem; line-height: 1.6; color: var(--text-dim); }
+    .footer-req { margin: 0.2rem 0; }
+    .footer-req summary { color: var(--text-dim); font-size: 0.8rem; margin: 0 auto; }
+    .footer-req p { margin-top: 0.3rem; }
+    .cd-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn-ghost { background: none; border: 1px solid var(--border); color: var(--text-dim); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
     .form-actions { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start; }
     .form-status { font-size: 0.92rem; line-height: 1.5; min-height: 1.4em; }
     .form-status.ok { color: var(--ok); }
@@ -522,16 +552,8 @@
           <input type="text" id="f-honey" name="_honey" tabindex="-1" autocomplete="off" />
         </div>
 
-        <div class="consent">
-          <input type="checkbox" id="f-consent" name="consent" required />
-          <label for="f-consent">
-            <span data-lang="ru">Я даю <a href="pd-consent.html" target="_blank">согласие на обработку персональных данных</a> индивидуальному предпринимателю Чардымову Виталию Викторовичу в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и <a href="pd-policy.html" target="_blank">Политикой обработки персональных данных</a>.</span>
-            <span data-lang="en">I give my <a href="pd-consent.html" target="_blank">consent to the processing of my personal data</a> to sole proprietor Vitalii Chardymov under Russian Federal Law No. 152-FZ “On Personal Data” and the <a href="pd-policy.html" target="_blank">Personal Data Processing Policy</a> (documents in Russian).</span>
-          </label>
-        </div>
-
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="f-submit" disabled>
+          <button type="submit" class="btn btn-primary" id="f-submit">
             <span data-lang="ru">Отправить заявку</span><span data-lang="en">Send request</span>
           </button>
           <div class="form-status" id="f-status" role="status" aria-live="polite"></div>
@@ -541,9 +563,48 @@
   </div>
 </section>
 
+<!-- Step 2: consent before anything is sent -->
+<dialog id="consent-dialog" aria-labelledby="cd-title">
+  <form method="dialog" class="cd-body" id="consent-form">
+    <span class="section-tag"><span data-lang="ru">// Шаг 2 из 2</span><span data-lang="en">// Step 2 of 2</span></span>
+    <h3 id="cd-title"><span data-lang="ru">Согласие на обработку персональных данных</span><span data-lang="en">Consent to personal data processing</span></h3>
+    <p data-lang="ru">Заявка ещё не отправлена. Чтобы мы могли её получить и связаться с вами, нужно ваше согласие на обработку указанных в форме данных: имени, email, телефона или Telegram и текста заявки — в целях рассмотрения заявки и связи с вами.</p>
+    <p data-lang="en">Your request has not been sent yet. To receive it and contact you, we need your consent to process the data from the form — name, email, phone or Telegram and the request text — for the purpose of handling your request.</p>
+
+    <details class="operator">
+      <summary><span data-lang="ru">Сведения об операторе</span><span data-lang="en">Data controller details</span></summary>
+      <p>Индивидуальный предприниматель Чардымов Виталий Викторович<br>
+      ИНН 165712716370, ОГРНИП 321169000131667<br>
+      421001, Российская Федерация, Республика Татарстан, г. Казань, ул. Чистопольская, д. 68, кв. 2<br>
+      <a href="mailto:chardymov@yandex.ru">chardymov@yandex.ru</a></p>
+    </details>
+
+    <div class="consent">
+      <input type="checkbox" id="f-consent" />
+      <label for="f-consent">
+        <span data-lang="ru">Я даю <a href="pd-consent.html" target="_blank">согласие на обработку персональных данных</a> оператору, указанному в сведениях выше, в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и <a href="pd-policy.html" target="_blank">Политикой обработки персональных данных</a>.</span>
+        <span data-lang="en">I give my <a href="pd-consent.html" target="_blank">consent to the processing of my personal data</a> to the data controller specified above under Russian Federal Law No. 152-FZ “On Personal Data” and the <a href="pd-policy.html" target="_blank">Personal Data Processing Policy</a> (documents in Russian).</span>
+      </label>
+    </div>
+
+    <div class="cd-actions">
+      <button type="button" class="btn btn-primary" id="cd-confirm" disabled>
+        <span data-lang="ru">Согласен и отправить</span><span data-lang="en">Agree and send</span>
+      </button>
+      <button type="button" class="btn btn-ghost" id="cd-cancel">
+        <span data-lang="ru">Назад</span><span data-lang="en">Back</span>
+      </button>
+    </div>
+    <div class="form-status" id="cd-status" role="status" aria-live="polite"></div>
+  </form>
+</dialog>
+
 <footer>
   <p>© 2024–2026 <span>Impression Team Studio</span></p>
-  <p>ИП Чардымов Виталий Викторович · ИНН 165712716370 · ОГРНИП 321169000131667</p>
+  <details class="footer-req">
+    <summary><span data-lang="ru">Реквизиты</span><span data-lang="en">Company details</span></summary>
+    <p>ИП Чардымов Виталий Викторович · ИНН 165712716370 · ОГРНИП 321169000131667</p>
+  </details>
   <p>
     <a href="pd-policy.html"><span data-lang="ru">Политика обработки персональных данных</span><span data-lang="en">Personal Data Policy</span></a>
     ·
@@ -607,27 +668,48 @@
     b.addEventListener('click', function () { applyLang(b.getAttribute('data-set-lang')); });
   });
 
-  // ── Form ──
+  // ── Form: step 1 validates, step 2 asks for consent, only then data is sent ──
   var form = document.getElementById('order-form');
-  var consent = document.getElementById('f-consent');
   var submit = document.getElementById('f-submit');
   var status = document.getElementById('f-status');
+  var dialog = document.getElementById('consent-dialog');
+  var consent = document.getElementById('f-consent');
+  var confirmBtn = document.getElementById('cd-confirm');
+  var cancelBtn = document.getElementById('cd-cancel');
+  var dialogStatus = document.getElementById('cd-status');
+  var sending = false;
 
-  function setStatus(kind, key) {
-    status.className = 'form-status' + (kind ? ' ' + kind : '');
-    status.textContent = key ? MESSAGES[currentLang()][key] : '';
+  function setStatus(el, kind, key) {
+    el.className = 'form-status' + (kind ? ' ' + kind : '');
+    el.textContent = key ? MESSAGES[currentLang()][key] : '';
   }
 
-  consent.addEventListener('change', function () { submit.disabled = !consent.checked; });
+  function updateConfirm() { confirmBtn.disabled = sending || !consent.checked; }
+
+  function openConsent() {
+    consent.checked = false;
+    updateConfirm();
+    setStatus(dialogStatus, '', null);
+    dialog.showModal();
+  }
+
+  consent.addEventListener('change', updateConfirm);
+  cancelBtn.addEventListener('click', function () { if (!sending) dialog.close(); });
+  dialog.addEventListener('cancel', function (e) { if (sending) e.preventDefault(); });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!consent.checked) return;
     if (!form.checkValidity()) {
-      setStatus('err', 'invalid');
+      setStatus(status, 'err', 'invalid');
       form.reportValidity();
       return;
     }
+    setStatus(status, '', null);
+    openConsent();
+  });
+
+  confirmBtn.addEventListener('click', function () {
+    if (!consent.checked || sending) return;
 
     var f = form.elements;
     var data = {
@@ -646,8 +728,10 @@
       _replyto: f['email'].value.trim()
     };
 
+    sending = true;
+    updateConfirm();
     submit.disabled = true;
-    setStatus('', 'sending');
+    setStatus(dialogStatus, '', 'sending');
 
     fetch(FORM_ENDPOINT, {
       method: 'POST',
@@ -658,13 +742,18 @@
       .then(function (res) {
         if (res.ok && String(res.body.success) === 'true') {
           form.reset();
-          setStatus('ok', 'ok');
+          dialog.close();
+          setStatus(status, 'ok', 'ok');
         } else {
           throw new Error(res.body && res.body.message);
         }
       })
-      .catch(function () { setStatus('err', 'error'); })
-      .finally(function () { submit.disabled = !consent.checked; });
+      .catch(function () { setStatus(dialogStatus, 'err', 'error'); })
+      .finally(function () {
+        sending = false;
+        updateConfirm();
+        submit.disabled = false;
+      });
   });
 })();
 </script>
