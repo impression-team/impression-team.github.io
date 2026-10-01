@@ -561,6 +561,9 @@
       color: var(--text-dim);
     }
     footer span { color: var(--accent); }
+    .footer-links { margin-top: 0.6rem; }
+    .footer-links a { color: var(--text-dim); text-decoration: none; }
+    .footer-links a:hover { color: var(--accent); }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
@@ -587,6 +590,7 @@
     <li><a href="#genres">Genres</a></li>
     <li><a href="#portfolio">Games</a></li>
     <li><a href="#apps">Apps</a></li>
+    <li><a href="services.html">Services</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -600,7 +604,7 @@
   <p class="hero-sub">Crafting worlds. Shipping games. From Belgrade to the universe.</p>
   <div class="hero-cta">
     <a href="#portfolio" class="btn btn-primary">View Our Games</a>
-    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <a href="services.html" class="btn btn-outline">Order Development</a>
   </div>
 </section>
 
@@ -962,6 +966,11 @@
 <!-- Footer -->
 <footer>
   <p>© 2024–2026 <span>Impression Team Studio</span> · Belgrade, Serbia · All rights reserved</p>
+  <p class="footer-links">
+    <a href="services.html">Custom Development</a> ·
+    <a href="privacy.html">Privacy Policy</a> ·
+    <a href="terms.html">Terms</a>
+  </p>
 </footer>
 
 </body>

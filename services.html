@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Разработка на заказ — Impression Team Studio</title>
+  <meta name="description" content="Разработка сайтов, мобильных игр и приложений на заказ. Custom development of websites, mobile games and apps by Impression Team Studio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050a14;
+      --bg2: #080f1e;
+      --accent: #00d4ff;
+      --accent2: #7b2fff;
+      --accent3: #ff3e6c;
+      --glow: rgba(0, 212, 255, 0.25);
+      --text: #c8d8f0;
+      --text-dim: #6a7f9a;
+      --card-bg: rgba(10, 20, 40, 0.85);
+      --border: rgba(0, 212, 255, 0.18);
+      --ok: #00dc78;
+    }
+
+    /* ── Language switch: show only the active language ── */
+    html[lang="ru"] [data-lang="en"],
+    html[lang="en"] [data-lang="ru"] { display: none !important; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.2rem 4rem;
+      background: rgba(5, 10, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent); }
+    .lang-switch {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .lang-switch button {
+      background: none;
+      border: 0;
+      color: var(--text-dim);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+    }
+    .lang-switch button[aria-pressed="true"] { background: var(--accent); color: #000; font-weight: 700; }
+
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: 6rem 2rem; }
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .separator {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9rem 2rem 4rem;
+      overflow: hidden;
+      background-image:
+        radial-gradient(circle at 50% 50%, rgba(123,47,255,0.18) 0%, transparent 45%),
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: auto, 60px 60px, 60px 60px;
+    }
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      padding: 0.35rem 1rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      color: #fff;
+      text-shadow: 0 0 40px rgba(0,212,255,0.4);
+    }
+    h1 span[data-lang] { color: #fff; }
+    h1 span[data-lang] span { color: var(--accent); }
+    .hero-sub {
+      max-width: 720px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 3px;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: 0;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0,212,255,0.5);
+    }
+    .btn-primary:hover:not(:disabled) { box-shadow: 0 0 35px rgba(0,212,255,0.8); transform: translateY(-2px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .btn-outline { border: 1px solid var(--accent2); color: var(--accent2); }
+    .btn-outline:hover { background: rgba(123,47,255,0.15); box-shadow: 0 0 20px rgba(123,47,255,0.4); }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* ── Services ── */
+    #services { background: var(--bg2); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 2rem 1.8rem;
+      transition: all 0.25s;
+    }
+    .card:hover { border-color: var(--accent); box-shadow: 0 0 25px var(--glow); transform: translateY(-4px); }
+    .card-icon { font-size: 2.4rem; margin-bottom: 1rem; display: block; }
+    .card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .card p { font-size: 0.95rem; color: var(--text); line-height: 1.6; margin-bottom: 1rem; }
+    .card ul { list-style: none; }
+    .card li {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .card li::before { content: '›'; position: absolute; left: 0; color: var(--accent2); font-weight: 600; }
+
+    /* ── Process ── */
+    #process { background: var(--bg); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      counter-reset: step;
+    }
+    .step {
+      border-left: 2px solid var(--accent2);
+      padding: 0.4rem 0 0.4rem 1.4rem;
+    }
+    .step-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .step h3 { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: #fff; margin-bottom: 0.4rem; }
+    .step p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.55; }
+
+    /* ── Order form ── */
+    #order { background: var(--bg2); }
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .order-intro p { line-height: 1.7; margin-bottom: 1rem; font-size: 1rem; }
+    .order-intro .dim { color: var(--text-dim); font-size: 0.9rem; }
+    form {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field.full { grid-column: 1 / -1; }
+    label.lbl {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    label.lbl .req { color: var(--accent3); }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      background: rgba(5, 10, 20, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1rem;
+      padding: 0.75rem 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .consent {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      background: rgba(0, 212, 255, 0.04);
+    }
+    .consent input {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      margin-top: 0.1rem;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .consent label { cursor: pointer; }
+    .form-actions { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start; }
+    .form-status { font-size: 0.92rem; line-height: 1.5; min-height: 1.4em; }
+    .form-status.ok { color: var(--ok); }
+    .form-status.err { color: var(--accent3); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+    footer span { color: var(--accent); }
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { display: none; }
+      .order-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .section-inner { padding: 4rem 1rem; }
+    }
+    @media (max-width: 560px) {
+      form { grid-template-columns: 1fr; padding: 1.4rem 1rem; }
+      .nav-logo { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Impression<span>&nbsp;Team</span></a>
+  <div class="nav-right">
+    <ul>
+      <li><a href="#services"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></a></li>
+      <li><a href="#process"><span data-lang="ru">Как работаем</span><span data-lang="en">Process</span></a></li>
+      <li><a href="index.html#portfolio"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></a></li>
+      <li><a href="#order"><span data-lang="ru">Заявка</span><span data-lang="en">Request</span></a></li>
+    </ul>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-tag"><span data-lang="ru">// Разработка на заказ</span><span data-lang="en">// Custom Development</span></div>
+  <h1>
+    <span data-lang="ru">Создаём сайты,<br><span>игры и приложения</span></span>
+    <span data-lang="en">We build websites,<br><span>games and apps</span></span>
+  </h1>
+  <p class="hero-sub">
+    <span data-lang="ru">Полный цикл — от идеи и прототипа до публикации в App Store, Google Play и Mac App Store и поддержки после релиза. За плечами 16+ выпущенных игр и собственные приложения.</span>
+    <span data-lang="en">Full cycle — from idea and prototype to release on the App Store, Google Play and Mac App Store, plus post-launch support. 16+ shipped games and our own apps.</span>
+  </p>
+  <div class="hero-cta">
+    <a href="#order" class="btn btn-primary"><span data-lang="ru">Оставить заявку</span><span data-lang="en">Send a request</span></a>
+    <a href="index.html#portfolio" class="btn btn-outline"><span data-lang="ru">Наши игры</span><span data-lang="en">Our games</span></a>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-tag"><span data-lang="ru">// Что мы делаем</span><span data-lang="en">// What we do</span></span>
+    <h2><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></h2>
+    <div class="separator"></div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">🎮</span>
+        <h3><span data-lang="ru">Игры</span><span data-lang="en">Games</span></h3>
+        <p data-lang="ru">Мобильные игры для iOS и Android на Unity — от прототипа до релиза и живых обновлений.</p>
+        <p data-lang="en">Mobile games for iOS and Android built with Unity — from prototype to release and live updates.</p>
+        <ul data-lang="ru">
+          <li>Головоломки, idle и tycoon, экшен, казуальные игры</li>
+          <li>Реклама и встроенные покупки</li>
+          <li>Публикация в App Store и Google Play</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Puzzle, idle &amp; tycoon, action, casual</li>
+          <li>Ads and in-app purchases</li>
+          <li>Publishing on the App Store and Google Play</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="card-icon">📱</span>
+        <h3><span data-lang="ru">Приложения</span><span data-lang="en">Apps</span></h3>
+        <p data-lang="ru">Приложения для iOS, Android и macOS — утилиты, инструменты для бизнеса, сервисные приложения.</p>
+        <p data-lang="en">Apps for iOS, Android and macOS — utilities, business tools and service apps.</p>
+        <ul data-lang="ru">
+          <li>Нативные приложения для macOS и iOS</li>
+          <li>Работа с устройствами и периферией</li>
+          <li>Пример: <a href="index.html#apps">TSPL Label Print</a> в Mac App Store</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Native macOS and iOS apps</li>
+          <li>Device and peripheral integration</li>
+          <li>Example: <a href="index.html#apps">TSPL Label Print</a> on the Mac App Store</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌐</span>
+        <h3><span data-lang="ru">Сайты</span><span data-lang="en">Websites</span></h3>
+        <p data-lang="ru">Лендинги, сайты студий и компаний, промо-страницы игр и приложений.</p>
+        <p data-lang="en">Landing pages, studio and company websites, promo pages for games and apps.</p>
+        <ul data-lang="ru">
+          <li>Адаптивная вёрстка под телефоны и компьютеры</li>
+          <li>Формы заявок и обратной связи</li>
+          <li>Политики конфиденциальности и app-ads.txt для приложений</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Responsive layouts for phones and desktops</li>
+          <li>Request and contact forms</li>
+          <li>Privacy policies and app-ads.txt for apps</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section id="process">
+  <div class="section-inner">
+    <span class="section-tag"><span data-lang="ru">// Как мы работаем</span><span data-lang="en">// How we work</span></span>
+    <h2><span data-lang="ru">Процесс</span><span data-lang="en">Process</span></h2>
+    <div class="separator"></div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3><span data-lang="ru">Заявка</span><span data-lang="en">Request</span></h3>
+        <p data-lang="ru">Опишите задачу в форме ниже — достаточно нескольких предложений.</p>
+        <p data-lang="en">Describe your project in the form below — a few sentences are enough.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3><span data-lang="ru">Оценка</span><span data-lang="en">Estimate</span></h3>
+        <p data-lang="ru">Уточняем детали и присылаем оценку сроков и стоимости.</p>
+        <p data-lang="en">We clarify the details and send you a time and cost estimate.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3><span data-lang="ru">Разработка</span><span data-lang="en">Development</span></h3>
+        <p data-lang="ru">Работаем этапами и регулярно показываем промежуточные версии.</p>
+        <p data-lang="en">We work in milestones and regularly share builds along the way.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <h3><span data-lang="ru">Запуск</span><span data-lang="en">Launch</span></h3>
+        <p data-lang="ru">Публикуем в сторах или на хостинге и сопровождаем после релиза.</p>
+        <p data-lang="en">We publish to the stores or your hosting and support you after launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Order form -->
+<section id="order">
+  <div class="section-inner">
+    <div class="order-grid">
+      <div class="order-intro">
+        <span class="section-tag"><span data-lang="ru">// Заявка</span><span data-lang="en">// Request</span></span>
+        <h2><span data-lang="ru">Расскажите<br>о проекте</span><span data-lang="en">Tell us<br>about your project</span></h2>
+        <div class="separator"></div>
+        <p data-lang="ru">Заполните форму — мы свяжемся с вами, чтобы обсудить детали.</p>
+        <p data-lang="en">Fill in the form and we will get back to you to discuss the details.</p>
+        <p class="dim" data-lang="ru">Поля, отмеченные <span style="color:var(--accent3)">*</span>, обязательны.</p>
+        <p class="dim" data-lang="en">Fields marked with <span style="color:var(--accent3)">*</span> are required.</p>
+      </div>
+
+      <form id="order-form" novalidate>
+        <div class="field">
+          <label class="lbl" for="f-name"><span data-lang="ru">Имя</span><span data-lang="en">Name</span> <span class="req">*</span></label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required maxlength="100" />
+        </div>
+        <div class="field">
+          <label class="lbl" for="f-email">Email <span class="req">*</span></label>
+          <input type="email" id="f-email" name="email" autocomplete="email" required maxlength="150" />
+        </div>
+        <div class="field">
+          <label class="lbl" for="f-phone"><span data-lang="ru">Телефон или Telegram</span><span data-lang="en">Phone or Telegram</span></label>
+          <input type="text" id="f-phone" name="phone" autocomplete="tel" maxlength="100" />
+        </div>
+        <div class="field">
+          <label class="lbl" for="f-type"><span data-lang="ru">Что нужно сделать</span><span data-lang="en">Project type</span> <span class="req">*</span></label>
+          <select id="f-type" name="project_type" required>
+            <option value="" data-ru="Выберите…" data-en="Choose…"></option>
+            <option value="Игра / Game" data-ru="Игра" data-en="Game"></option>
+            <option value="Приложение / App" data-ru="Приложение" data-en="App"></option>
+            <option value="Сайт / Website" data-ru="Сайт" data-en="Website"></option>
+            <option value="Другое / Other" data-ru="Другое" data-en="Other"></option>
+          </select>
+        </div>
+        <div class="field full">
+          <label class="lbl" for="f-budget"><span data-lang="ru">Бюджет и сроки</span><span data-lang="en">Budget and timeline</span></label>
+          <input type="text" id="f-budget" name="budget" maxlength="200" data-ph-ru="Например: до 300 000 ₽, запуск через 3 месяца" data-ph-en="E.g. up to $5,000, launch in 3 months" />
+        </div>
+        <div class="field full">
+          <label class="lbl" for="f-message"><span data-lang="ru">Описание задачи</span><span data-lang="en">Project description</span> <span class="req">*</span></label>
+          <textarea id="f-message" name="message" required maxlength="5000" data-ph-ru="Что хотите создать, для каких платформ, есть ли примеры или дизайн" data-ph-en="What you want to build, for which platforms, any references or design"></textarea>
+        </div>
+
+        <!-- Honeypot for bots: real people never see or fill this -->
+        <div class="hp" aria-hidden="true">
+          <label for="f-honey">Leave empty</label>
+          <input type="text" id="f-honey" name="_honey" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="f-consent" name="consent" required />
+          <label for="f-consent">
+            <span data-lang="ru">Я даю <a href="pd-consent.html" target="_blank">согласие на обработку персональных данных</a> индивидуальному предпринимателю Чардымову Виталию Викторовичу в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и <a href="pd-policy.html" target="_blank">Политикой обработки персональных данных</a>.</span>
+            <span data-lang="en">I give my <a href="pd-consent.html" target="_blank">consent to the processing of my personal data</a> to sole proprietor Vitalii Chardymov under Russian Federal Law No. 152-FZ “On Personal Data” and the <a href="pd-policy.html" target="_blank">Personal Data Processing Policy</a> (documents in Russian).</span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="f-submit" disabled>
+            <span data-lang="ru">Отправить заявку</span><span data-lang="en">Send request</span>
+          </button>
+          <div class="form-status" id="f-status" role="status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024–2026 <span>Impression Team Studio</span></p>
+  <p>ИП Чардымов Виталий Викторович · ИНН 165712716370 · ОГРНИП 321169000131667</p>
+  <p>
+    <a href="pd-policy.html"><span data-lang="ru">Политика обработки персональных данных</span><span data-lang="en">Personal Data Policy</span></a>
+    ·
+    <a href="pd-consent.html"><span data-lang="ru">Согласие на обработку ПДн</span><span data-lang="en">Personal Data Consent</span></a>
+    ·
+    <a href="privacy.html"><span data-lang="ru">Политика конфиденциальности игр</span><span data-lang="en">Games Privacy Policy</span></a>
+  </p>
+</footer>
+
+<script>
+(function () {
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/chardymov@yandex.ru';
+  var CONTACT_EMAIL = 'chardymov@yandex.ru';
+
+  var MESSAGES = {
+    ru: {
+      sending: 'Отправляем…',
+      ok: 'Спасибо! Заявка отправлена — мы ответим на указанный email.',
+      invalid: 'Заполните обязательные поля и проверьте email.',
+      error: 'Не удалось отправить заявку. Попробуйте ещё раз или напишите нам на ' + CONTACT_EMAIL + '.'
+    },
+    en: {
+      sending: 'Sending…',
+      ok: 'Thank you! Your request has been sent — we will reply to the email you provided.',
+      invalid: 'Please fill in the required fields and check your email.',
+      error: 'Could not send the request. Please try again or email us at ' + CONTACT_EMAIL + '.'
+    }
+  };
+
+  // ── Language ──
+  var root = document.documentElement;
+  function currentLang() { return root.lang === 'en' ? 'en' : 'ru'; }
+
+  function applyLang(lang) {
+    root.lang = lang;
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    document.querySelectorAll('option[data-' + lang + ']').forEach(function (o) {
+      o.textContent = o.getAttribute('data-' + lang);
+    });
+    document.querySelectorAll('[data-ph-' + lang + ']').forEach(function (el) {
+      el.placeholder = el.getAttribute('data-ph-' + lang);
+    });
+    document.title = lang === 'en'
+      ? 'Custom Development — Impression Team Studio'
+      : 'Разработка на заказ — Impression Team Studio';
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  var initial = new URLSearchParams(location.search).get('lang');
+  if (initial !== 'ru' && initial !== 'en') {
+    try { initial = localStorage.getItem('lang'); } catch (e) { initial = null; }
+  }
+  if (initial !== 'ru' && initial !== 'en') {
+    initial = /^(ru|uk|be|kk)/i.test(navigator.language || '') ? 'ru' : 'en';
+  }
+  applyLang(initial);
+
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { applyLang(b.getAttribute('data-set-lang')); });
+  });
+
+  // ── Form ──
+  var form = document.getElementById('order-form');
+  var consent = document.getElementById('f-consent');
+  var submit = document.getElementById('f-submit');
+  var status = document.getElementById('f-status');
+
+  function setStatus(kind, key) {
+    status.className = 'form-status' + (kind ? ' ' + kind : '');
+    status.textContent = key ? MESSAGES[currentLang()][key] : '';
+  }
+
+  consent.addEventListener('change', function () { submit.disabled = !consent.checked; });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!consent.checked) return;
+    if (!form.checkValidity()) {
+      setStatus('err', 'invalid');
+      form.reportValidity();
+      return;
+    }
+
+    var f = form.elements;
+    var data = {
+      name: f['name'].value.trim(),
+      email: f['email'].value.trim(),
+      phone: f['phone'].value.trim(),
+      project_type: f['project_type'].value,
+      budget: f['budget'].value.trim(),
+      message: f['message'].value.trim(),
+      consent: 'Да — согласие на обработку ПДн дано ' + new Date().toISOString() +
+               ' (' + location.origin + '/pd-consent.html)',
+      page_language: currentLang(),
+      _honey: f['_honey'].value,
+      _subject: 'Заявка с сайта: ' + f['project_type'].value,
+      _template: 'table',
+      _replyto: f['email'].value.trim()
+    };
+
+    submit.disabled = true;
+    setStatus('', 'sending');
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+      .then(function (res) {
+        if (res.ok && String(res.body.success) === 'true') {
+          form.reset();
+          setStatus('ok', 'ok');
+        } else {
+          throw new Error(res.body && res.body.message);
+        }
+      })
+      .catch(function () { setStatus('err', 'error'); })
+      .finally(function () { submit.disabled = !consent.checked; });
+  });
+})();
+</script>
+
+</body>
+</html>
