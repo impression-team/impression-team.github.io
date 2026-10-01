@@ -440,6 +440,47 @@
     .gc-casual { background: linear-gradient(135deg, #001a10, #001030); }
     .gc-puzzle { background: linear-gradient(135deg, #001a1a, #0a0a2a); }
 
+    /* ── Apps ── */
+    #apps { background: var(--bg); }
+    .app-card {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 3rem;
+      max-width: 820px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+    }
+    .app-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px var(--glow);
+    }
+    .app-icon {
+      width: 110px; height: 110px;
+      flex-shrink: 0;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .app-body h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .app-body p {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
     /* ── Contact ── */
     #contact { background: var(--bg); }
     .contact-grid {
@@ -527,6 +568,7 @@
       nav ul { gap: 1.2rem; }
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
       .section-inner { padding: 4rem 1.5rem; }
+      .app-card { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
     }
     @media (max-width: 480px) {
       nav ul { display: none; }
@@ -544,6 +586,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#genres">Genres</a></li>
     <li><a href="#portfolio">Games</a></li>
+    <li><a href="#apps">Apps</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -573,7 +616,7 @@
         <p>Our team combines technical expertise with a passion for creative gameplay, delivering titles that are easy to pick up and hard to put down. From idle tycoons to fast-paced action and satisfying puzzles, we build across a wide spectrum of genres.</p>
         <div class="stat-row">
           <div class="stat">
-            <div class="stat-num">12+</div>
+            <div class="stat-num">16+</div>
             <div class="stat-label">Games Released</div>
           </div>
           <div class="stat">
@@ -801,6 +844,71 @@
         </div>
       </div>
 
+      <div class="game-card">
+        <div class="game-card-header gc-puzzle">👽</div>
+        <div class="game-card-body">
+          <h3>Alien Invasion Puzzle</h3>
+          <span class="game-genre-tag tag-puzzle">Puzzle</span>
+          <div class="game-links">
+            <a href="https://apps.apple.com/us/app/alien-invasion-puzzle/id6462422314" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-puzzle">🧲</div>
+        <div class="game-card-body">
+          <h3>Magnet Guy</h3>
+          <span class="game-genre-tag tag-puzzle">Puzzle</span>
+          <div class="game-links">
+            <a href="https://apps.apple.com/us/app/magnet-guy/id6452722233" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-casual">🦌</div>
+        <div class="game-card-body">
+          <h3>Dream Dart: Rescuing the Wild</h3>
+          <span class="game-genre-tag tag-action">Action / Shooter</span>
+          <div class="game-links">
+            <a href="https://apps.apple.com/us/app/dream-dart-rescuing-the-wild/id6450841031" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-card-header gc-action">🎯</div>
+        <div class="game-card-body">
+          <h3>Sniper Tank: Precision Strike</h3>
+          <span class="game-genre-tag tag-action">Action / Shooter</span>
+          <div class="game-links">
+            <a href="https://apps.apple.com/us/app/sniper-tank-precision-strike/id6450857107" target="_blank" class="store-btn">App Store</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Apps -->
+<section id="apps">
+  <div class="section-inner">
+    <span class="section-tag">// Beyond Games</span>
+    <h2>Apps</h2>
+    <div class="separator"></div>
+    <div class="app-card">
+      <div class="app-icon gc-puzzle">🏷️</div>
+      <div class="app-body">
+        <h3>TSPL Label Print</h3>
+        <span class="game-genre-tag tag-puzzle">macOS · Utilities</span>
+        <p>Print labels from PDF files and images on a thermal label printer — no vendor driver required. A fix for label printers whose drivers don't support your version of macOS or Apple silicon.</p>
+        <div class="game-links">
+          <a href="https://apps.apple.com/us/app/tspl-label-print/id6815395919?mt=12" target="_blank" class="store-btn">Mac App Store</a>
+          <a href="tspl-privacy.html" class="store-btn">Privacy Policy</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
