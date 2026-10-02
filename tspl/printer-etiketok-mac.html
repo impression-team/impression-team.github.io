@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Принтер этикеток не печатает на Mac (Apple M1–M4): причина и решения</title>
+  <meta name="description" content="Термопринтер этикеток Xprinter, TSC или Gprinter перестал печатать после обновления macOS или не работает на Mac с Apple silicon? Как за минуту найти причину (badarch) и 5 способов решения." />
+  <link rel="canonical" href="https://impression-team.github.io/tspl/printer-etiketok-mac.html" />
+  <meta property="og:title" content="Принтер этикеток не печатает на Mac: причина и решения" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Принтер этикеток не печатает на Mac: почему так бывает и что делать","datePublished":"2026-10-02","inLanguage":"ru","author":{"@type":"Organization","name":"Impression Team Studio"},"mainEntityOfPage":"https://impression-team.github.io/tspl/printer-etiketok-mac.html"}
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #050a14; --accent: #00d4ff; --accent2: #7b2fff; --accent3: #ff3e6c; --text: #c8d8f0; --text-dim: #6a7f9a; --border: rgba(0,212,255,0.18); }
+    body { background: var(--bg); color: var(--text); font-family: 'Exo 2', sans-serif; font-weight: 300; }
+    a { color: var(--accent); }
+    nav { padding: 1.2rem 2rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+    .nav-logo span { color: var(--accent2); }
+    nav .back { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+    main { max-width: 760px; margin: 0 auto; padding: 3rem 1rem 4rem; }
+    .tag { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.8rem; }
+    h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.4rem, 4vw, 2.2rem); color: #fff; line-height: 1.25; margin-bottom: 0.6rem; }
+    .meta { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: #fff; margin: 2.4rem 0 0.8rem; line-height: 1.35; }
+    p, li { line-height: 1.75; font-size: 1.02rem; }
+    p { margin-bottom: 0.9rem; }
+    ol, ul { padding-left: 1.4rem; margin-bottom: 1rem; }
+    li + li { margin-top: 0.35rem; }
+    strong { color: #fff; font-weight: 600; }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.9em; color: #ffd0dc; }
+    pre { background: #0a1426; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 0.9rem 1rem; margin: 0 0 1rem; overflow-x: auto; }
+    pre code { color: #fff; font-size: 0.9rem; }
+    .cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.4rem 0; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 3px; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; background: var(--accent); color: #000; font-weight: 700; box-shadow: 0 0 20px rgba(0,212,255,0.45); }
+    .btn.ghost { background: none; color: var(--text); border: 1px solid var(--border); box-shadow: none; font-weight: 400; }
+    footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(--text-dim); line-height: 1.8; }
+    footer a { color: var(--text-dim); }
+    @media (max-width: 480px) { nav { padding: 1rem; } .nav-logo { font-size: 0.8rem; } .btn { width: 100%; text-align: center; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">Impression<span>&nbsp;Team</span></a>
+  <a href="./" class="back">TSPL Label Print →</a>
+</nav>
+<main>
+  <span class="tag">// Инструкция</span>
+  <h1>Принтер этикеток не печатает на Mac: почему так бывает и что делать</h1>
+  <p class="meta">Обновлено 2 октября 2026 · 5 минут чтения</p>
+<p>Эта инструкция для тех, у кого Mac на процессоре Apple (M1, M2, M3, M4) и недорогой термопринтер этикеток вроде Xprinter, TSC или Gprinter. Принтер вчера печатал наклейки для Ozon и Wildberries, а после обновления macOS замолчал. Или так и не заработал на новом MacBook.</p>
+<p>Знакомая картина: задание уходит в очередь печати, иногда даже «успешно завершается», а лента не двигается. Переустановка драйвера не помогает. Ниже объясню, почему так происходит, как в этом убедиться за минуту и какие есть решения, от бесплатных до радикальных.</p>
+<h2>Почему принтер молчит</h2>
+<p>Сам принтер почти всегда исправен. Ломается звено между macOS и принтером — <strong>фильтр драйвера</strong>. Это маленькая программа, которая превращает PDF в команды на языке принтера. У большинства дешёвых принтеров этикеток этот язык называется TSPL.</p>
+<p>Многие производители собрали фильтры для macOS много лет назад, только под Mac на процессорах Intel, и больше их не обновляли. На Mac с Apple silicon такой код может работать только через транслятор Rosetta. Если Rosetta нет или macOS отказывается запускать старый фильтр, система печати получает ошибку. Задание «печатается» впустую, и до принтера не доходит ни одной команды.</p>
+<h2>Как проверить за минуту</h2>
+<p>Откройте «Терминал» (Программы → Утилиты) и выполните:</p>
+<pre><code>lpstat -l -p
+</code></pre>
+<p>Найдите свой принтер и строку <code>Alerts</code>. Если там есть <strong><code>com.apple.badarch-error</code></strong>, это ровно наш случай: macOS не смогла запустить фильтр драйвера из-за архитектуры процессора.</p>
+<p>То же самое видно в журнале печати:</p>
+<pre><code>grep -i badarch /var/log/cups/error_log
+</code></pre>
+<h2>Решение 1. Установить Rosetta (бесплатно, 2 минуты)</h2>
+<p>Если фильтр собран для 64-битных Intel-процессоров, а Rosetta на Mac просто не установлена, помогает одна команда:</p>
+<pre><code>softwareupdate --install-rosetta --agree-to-license
+</code></pre>
+<p>После установки отправьте задание ещё раз. Не помогло? Значит, фильтр 32-битный или новая macOS его не запускает. Тогда идём дальше.</p>
+<p>Важно: Apple объявила macOS 27 последней версией с Rosetta. В следующей версии macOS программы и драйверы, собранные только под Intel, на Mac с Apple silicon перестанут запускаться. Исключение Apple оставляет лишь для старых игр. Так что даже если этот способ сработал, он временный.</p>
+<h2>Решение 2. Поискать новый драйвер</h2>
+<p>Зайдите на сайт производителя принтера. Проверьте, нет ли драйвера для macOS с пометкой «Apple silicon», «ARM» или «Universal». Если есть, это лучший вариант. Для многих недорогих моделей такого драйвера нет и, судя по всему, не будет.</p>
+<h2>Решение 3. Windows-компьютер или виртуальная машина</h2>
+<p>Старый ноутбук на Windows рядом с принтером решает проблему, но добавляет ещё одно устройство в рабочий процесс.</p>
+<p>С виртуальной машиной (Parallels, VMware) на Mac с Apple silicon есть подвох. Внутри неё работает Windows для ARM, и принтеру нужен драйвер именно для Windows ARM64. Обычные драйверы x64 там часто не ставятся.</p>
+<h2>Решение 4. Печатать в обход драйвера</h2>
+<p>Драйвер на самом деле не нужен. Принтеру достаточно получить готовые команды TSPL «как есть», и macOS это умеет: задание с параметром <code>-o raw</code> идёт мимо фильтра. Проблема в том, что эти команды кто-то должен сформировать. Нужно превратить PDF-этикетку в чёрно-белую картинку нужного размера и упаковать её в команду <code>BITMAP</code>. Вручную это неудобно.</p>
+<p>Для этого я сделал небольшое приложение <strong>TSPL Label Print</strong>. Оно открывает PDF или картинку, показывает превью и само отправляет принтеру команды TSPL, минуя сломанный драйвер.</p>
+<p>Как начать:</p>
+<ol>
+<li>Принтер должен быть в «Системных настройках → Принтеры и сканеры». Если он уже там, хоть со старым драйвером, ничего менять не нужно.</li>
+<li>Перетащите в окно приложения PDF-этикетку из личного кабинета маркетплейса или службы доставки.</li>
+<li>Выберите размер этикетки (58×40, 75×50, 100×150 или свой) и нажмите «Печать». Многостраничный PDF печатается по этикетке на страницу.</li>
+</ol>
+<p>Есть пробная версия на 20 этикеток, тестовая этикетка бесплатна. Так совместимость с вашим принтером можно проверить до покупки. Полная версия стоит 499 ₽ один раз и работает на всех ваших Mac без интернета.</p>
+<p class="cta"><a class="btn" href="./#download">Скачать пробную версию</a> <a class="btn ghost" href="./">Подробнее о программе</a></p>
+
+<h2>Решение 5. Новый принтер</h2>
+<p>Если ничего не подошло, остаётся купить принтер с официальным драйвером для Apple silicon. Перед покупкой проверьте это на сайте производителя, а не только в карточке товара.</p>
+<h2>Как понять, что ваш принтер «говорит» на TSPL</h2>
+<p>Посмотрите характеристики модели: в них будет «TSPL», «TSPL2» или «эмуляция TSC». Это большинство недорогих USB-принтеров этикеток с разрешением 203 dpi у Xprinter, TSC, Gprinter и их аналогов. Если сомневаетесь, напечатайте тестовую этикетку в пробной версии TSPL Label Print. Сразу станет ясно, понимает ли принтер команды.</p>
+</main>
+<footer>
+  <p>© 2024–2026 Impression Team Studio · <a href="./">TSPL Label Print</a> · <a href="mailto:vitaliy.chardymov@gmail.com">vitaliy.chardymov@gmail.com</a></p>
+  <p>Xprinter, TSC, Gprinter — товарные знаки их владельцев; упоминаются для описания совместимости.</p>
+</footer>
+</body>
+</html>

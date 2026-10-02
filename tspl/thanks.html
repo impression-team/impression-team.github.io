@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Ваш ключ — TSPL Label Print</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #050a14; --accent: #00d4ff; --accent2: #7b2fff; --accent3: #ff3e6c; --text: #c8d8f0; --text-dim: #6a7f9a; --card-bg: rgba(10,20,40,0.85); --border: rgba(0,212,255,0.18); --ok: #00dc78; }
+    body {
+      background: var(--bg); color: var(--text); font-family: 'Exo 2', sans-serif; font-weight: 300;
+      min-height: 100vh; display: flex; flex-direction: column;
+      background-image: radial-gradient(circle at 50% 30%, rgba(123,47,255,0.16) 0%, transparent 45%),
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: auto, 60px 60px, 60px 60px;
+    }
+    a { color: var(--accent); }
+    nav { padding: 1.2rem 2rem; border-bottom: 1px solid var(--border); background: rgba(5,10,20,0.85); }
+    .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; }
+    .nav-logo span { color: var(--accent2); }
+    main { flex: 1; width: 100%; max-width: 720px; margin: 0 auto; padding: 4rem 1rem; }
+    .card { border: 1px solid var(--border); background: var(--card-bg); border-radius: 8px; padding: 2rem; }
+    .tag { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.7rem; }
+    h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.4rem, 4vw, 2rem); color: #fff; line-height: 1.25; margin-bottom: 1rem; }
+    p, li { line-height: 1.65; }
+    p + p { margin-top: 0.8rem; }
+    .spinner { width: 34px; height: 34px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.9s linear infinite; margin: 1rem 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .key { margin: 1.2rem 0 0.8rem; background: rgba(5,10,20,0.9); border: 1px solid var(--accent); border-radius: 6px; padding: 1rem; font-family: ui-monospace, Menlo, monospace; font-size: 0.82rem; line-height: 1.5; color: #fff; word-break: break-all; user-select: all; }
+    .btn { display: inline-block; padding: 0.75rem 1.6rem; border-radius: 3px; font-family: 'Exo 2', sans-serif; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: 0; background: var(--accent); color: #000; font-weight: 700; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    .btn.ghost { background: none; color: var(--text); border: 1px solid var(--border); box-shadow: none; font-weight: 400; }
+    .actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+    ol { padding-left: 1.3rem; margin-top: 0.6rem; }
+    .ok { color: var(--ok); }
+    .err { color: var(--accent3); }
+    .dim { color: var(--text-dim); font-size: 0.88rem; margin-top: 1.4rem; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<nav><a href="../index.html" class="nav-logo">Impression<span>&nbsp;Team</span></a></nav>
+<main>
+  <div class="card">
+    <span class="tag">// TSPL Label Print</span>
+
+    <div id="s-wait">
+      <h1>Проверяем оплату…</h1>
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Обычно это занимает несколько секунд. Не закрывайте страницу.</p>
+    </div>
+
+    <div id="s-done" hidden>
+      <h1 class="ok">Оплата прошла — вот ваш ключ</h1>
+      <div class="key" id="key"></div>
+      <div class="actions">
+        <button class="btn" id="copy" type="button">Скопировать ключ</button>
+        <a class="btn ghost" href="./#download">Скачать приложение</a>
+      </div>
+      <p><b>Как активировать:</b></p>
+      <ol>
+        <li>Откройте TSPL Label Print.</li>
+        <li>Внизу окна нажмите «Ввести ключ…».</li>
+        <li>Вставьте ключ и нажмите «Активировать».</li>
+      </ol>
+      <p class="dim">Этот же ключ отправлен на <span id="email"></span>, чек об оплате придёт отдельным письмом. Ключ работает без интернета на всех ваших Mac — сохраните письмо. Номер лицензии: <span id="kid"></span>.</p>
+    </div>
+
+    <div id="s-pending" hidden>
+      <h1>Платёж ещё обрабатывается</h1>
+      <p>Банк пока не подтвердил оплату. Как только подтвердит, ключ придёт на почту — обычно в течение нескольких минут. Эту страницу можно закрыть.</p>
+      <div class="actions" style="margin-top:1.2rem"><button class="btn ghost" type="button" id="retry">Проверить ещё раз</button></div>
+    </div>
+
+    <div id="s-failed" hidden>
+      <h1 class="err">Оплата не прошла</h1>
+      <p>Деньги не списаны. Можно попробовать ещё раз — другой картой или через СБП.</p>
+      <div class="actions" style="margin-top:1.2rem"><a class="btn" href="./#buy">Попробовать снова</a></div>
+    </div>
+
+    <div id="s-unknown" hidden>
+      <h1>Ключ отправлен на почту</h1>
+      <p>Если вы оплатили покупку, письмо с ключом придёт на указанный email в течение нескольких минут. Проверьте папку «Спам».</p>
+    </div>
+
+    <p class="dim">Вопросы и проблемы: <a href="mailto:vitaliy.chardymov@gmail.com">vitaliy.chardymov@gmail.com</a></p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var SHOP_ENDPOINT = '__TSPL_SHOP_ENDPOINT__';
+  var POLL_MS = 3000, MAX_TRIES = 40;
+
+  var params = new URLSearchParams(location.search);
+  var paymentId = params.get('p');
+  if (!paymentId) { try { paymentId = localStorage.getItem('tspl_payment_id'); } catch (e) {} }
+
+  var states = ['wait', 'done', 'pending', 'failed', 'unknown'];
+  function show(name) {
+    states.forEach(function (s) { document.getElementById('s-' + s).hidden = s !== name; });
+  }
+
+  if (!paymentId || SHOP_ENDPOINT.indexOf('__') === 0) { show('unknown'); return; }
+
+  var tries = 0;
+  function check() {
+    tries++;
+    fetch(SHOP_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify({ action: 'status', payment_id: paymentId })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.status === 'succeeded' && res.key) {
+          document.getElementById('key').textContent = res.key;
+          document.getElementById('email').textContent = res.email || 'ваш email';
+          document.getElementById('kid').textContent = res.license_id || '';
+          show('done');
+        } else if (res.status === 'canceled') {
+          try { localStorage.removeItem('tspl_payment_id'); } catch (e) {}
+          show('failed');
+        } else if (tries < MAX_TRIES) {
+          setTimeout(check, POLL_MS);
+        } else {
+          show('pending');
+        }
+      })
+      .catch(function () {
+        if (tries < MAX_TRIES) setTimeout(check, POLL_MS); else show('pending');
+      });
+  }
+  check();
+
+  document.getElementById('retry').addEventListener('click', function () { tries = 0; show('wait'); check(); });
+  document.getElementById('copy').addEventListener('click', function () {
+    var btn = this, key = document.getElementById('key').textContent;
+    function done() { btn.textContent = 'Скопировано ✓'; setTimeout(function () { btn.textContent = 'Скопировать ключ'; }, 2000); }
+    if (navigator.clipboard) navigator.clipboard.writeText(key).then(done, function () {});
+    else {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('key'));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); done();
+    }
+  });
+})();
+</script>
+</body>
+</html>
