@@ -36,7 +36,18 @@ json_field() { python3 -c 'import json,sys; d=json.load(sys.stdin)
 for k in sys.argv[1].split("."): d=d[k]
 print(d)' "$1"; }
 
-echo "Folder: $(yc config get folder-id)"
+# yc may not be on PATH yet (fresh install, or a shell that didn't read ~/.zshrc).
+YC_BIN=$(command -v yc || echo "$HOME/yandex-cloud/bin/yc")
+[ -x "$YC_BIN" ] || { echo "Не найден yc. Установка: curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash"; exit 1; }
+# Recent yc versions need the API endpoint set explicitly for serverless commands.
+yc() { "$YC_BIN" --endpoint "${YC_ENDPOINT:-api.cloud.yandex.net:443}" "$@"; }
+
+FOLDER_ID=$(yc config get folder-id 2>/dev/null || true)
+[ -n "$FOLDER_ID" ] || { echo "yc ещё не настроен. Запустите в Терминале: $YC_BIN init"; exit 1; }
+echo "Folder: $FOLDER_ID"
+
+# Secrets are typed in by a person; refuse to run where nobody can type.
+need_tty() { [ -t 0 ] || { echo "Нужен ввод с клавиатуры — запустите скрипт в окне Терминала."; exit 1; }; }
 
 # 0. Shop id: from the environment, from the deployed function, or asked.
 if [ -z "${YOOKASSA_SHOP_ID:-}" ]; then
@@ -46,13 +57,14 @@ try: print(json.load(sys.stdin)["environment"]["YOOKASSA_SHOP_ID"])
 except Exception: pass' || true)
 fi
 if [ -z "${YOOKASSA_SHOP_ID:-}" ]; then
+  need_tty
   read -r -p "shopId магазина ЮKassa (Интеграция → Ключи API): " YOOKASSA_SHOP_ID
 fi
 [ -n "$YOOKASSA_SHOP_ID" ] || { echo "Нужен shopId."; exit 1; }
 
 # 1. Service account the function runs as (it may only read its secrets).
 if ! yc iam service-account get --name "$SA_NAME" >/dev/null 2>&1; then
-  echo "Creating service account $SA_NAME…"
+  echo "Creating service account ${SA_NAME}…"
   yc iam service-account create --name "$SA_NAME" >/dev/null
 fi
 SA_ID=$(yc iam service-account get --name "$SA_NAME" --format json | json_field id)
@@ -63,6 +75,7 @@ make_shop_payload() {
   echo
   echo "Секретный ключ ЮKassa для магазина $YOOKASSA_SHOP_ID"
   echo "(ЮKassa → Интеграция → Ключи API; тестовый начинается с test_, боевой с live_)."
+  need_tty
   read -r -s -p "Секретный ключ (ввод не отображается): " YK_SECRET; echo
   [ -n "$YK_SECRET" ] || { echo "Пустой ключ, отмена."; exit 1; }
   SHOP_PAYLOAD=$(YK_SECRET="$YK_SECRET" KEY_FILE="$PRIVATE_KEY_FILE" python3 -c 'import json,os
@@ -89,6 +102,7 @@ if ! yc lockbox secret get --name "$SMTP_SECRET_NAME" >/dev/null 2>&1; then
   echo
   echo "Нужен пароль приложения Яндекс Почты для $SMTP_USER"
   echo "(id.yandex.ru → Безопасность → Пароли приложений → Почта)."
+  need_tty
   read -r -s -p "Пароль приложения (ввод не отображается): " SMTP_PASSWORD; echo
   [ -n "$SMTP_PASSWORD" ] || { echo "Пустой пароль, отмена."; exit 1; }
   PAYLOAD=$(SMTP_PASSWORD="$SMTP_PASSWORD" python3 -c 'import json,os
@@ -112,7 +126,7 @@ done
 
 # 3. The function itself, public so the website and YooKassa can call it.
 if ! yc serverless function get --name "$FUNCTION_NAME" >/dev/null 2>&1; then
-  echo "Creating function $FUNCTION_NAME…"
+  echo "Creating function ${FUNCTION_NAME}…"
   yc serverless function create --name "$FUNCTION_NAME" \
     --description "TSPL Label Print shop: YooKassa payments and license keys" >/dev/null
   yc serverless function allow-unauthenticated-invoke --name "$FUNCTION_NAME" >/dev/null

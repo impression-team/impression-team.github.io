@@ -21,11 +21,22 @@ json_field() { python3 -c 'import json,sys; d=json.load(sys.stdin)
 for k in sys.argv[1].split("."): d=d[k]
 print(d)' "$1"; }
 
-echo "Folder: $(yc config get folder-id)"
+# yc may not be on PATH yet (fresh install, or a shell that didn't read ~/.zshrc).
+YC_BIN=$(command -v yc || echo "$HOME/yandex-cloud/bin/yc")
+[ -x "$YC_BIN" ] || { echo "Не найден yc. Установка: curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash"; exit 1; }
+# Recent yc versions need the API endpoint set explicitly for serverless commands.
+yc() { "$YC_BIN" --endpoint "${YC_ENDPOINT:-api.cloud.yandex.net:443}" "$@"; }
+
+FOLDER_ID=$(yc config get folder-id 2>/dev/null || true)
+[ -n "$FOLDER_ID" ] || { echo "yc ещё не настроен. Запустите в Терминале: $YC_BIN init"; exit 1; }
+echo "Folder: $FOLDER_ID"
+
+# Secrets are typed in by a person; refuse to run where nobody can type.
+need_tty() { [ -t 0 ] || { echo "Нужен ввод с клавиатуры — запустите скрипт в окне Терминала."; exit 1; }; }
 
 # 1. Service account the function runs as (it may only read the secret).
 if ! yc iam service-account get --name "$SA_NAME" >/dev/null 2>&1; then
-  echo "Creating service account $SA_NAME…"
+  echo "Creating service account ${SA_NAME}…"
   yc iam service-account create --name "$SA_NAME" >/dev/null
 fi
 SA_ID=$(yc iam service-account get --name "$SA_NAME" --format json | json_field id)
@@ -35,6 +46,7 @@ if ! yc lockbox secret get --name "$SECRET_NAME" >/dev/null 2>&1; then
   echo
   echo "Нужен пароль приложения Яндекс Почты для $SMTP_USER"
   echo "(id.yandex.ru → Безопасность → Пароли приложений → Почта)."
+  need_tty
   read -r -s -p "Пароль приложения (ввод не отображается): " SMTP_PASSWORD; echo
   [ -n "$SMTP_PASSWORD" ] || { echo "Пустой пароль, отмена."; exit 1; }
   PAYLOAD=$(SMTP_PASSWORD="$SMTP_PASSWORD" python3 -c 'import json,os
@@ -52,7 +64,7 @@ yc lockbox secret add-access-binding --id "$SECRET_ID" \
 
 # 3. The function itself, public so the website can call it.
 if ! yc serverless function get --name "$FUNCTION_NAME" >/dev/null 2>&1; then
-  echo "Creating function $FUNCTION_NAME…"
+  echo "Creating function ${FUNCTION_NAME}…"
   yc serverless function create --name "$FUNCTION_NAME" \
     --description "Request form from impression-team.github.io/services.html" >/dev/null
   yc serverless function allow-unauthenticated-invoke --name "$FUNCTION_NAME" >/dev/null
