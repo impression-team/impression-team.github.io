@@ -42,19 +42,28 @@ fi
 SA_ID=$(yc iam service-account get --name "$SA_NAME" --format json | json_field id)
 
 # 2. Lockbox secret with the SMTP app password.
-if ! yc lockbox secret get --name "$SECRET_NAME" >/dev/null 2>&1; then
+#    To replace a wrong or revoked password: RESET_SMTP_PASSWORD=1 ./form-handler/deploy.sh
+ask_password_payload() {
   echo
   echo "Нужен пароль приложения Яндекс Почты для $SMTP_USER"
-  echo "(id.yandex.ru → Безопасность → Пароли приложений → Почта)."
+  echo "(войдите в id.yandex.ru именно под $SMTP_USER → Безопасность → Пароли приложений → Почта)."
   need_tty
   read -r -s -p "Пароль приложения (ввод не отображается): " SMTP_PASSWORD; echo
   [ -n "$SMTP_PASSWORD" ] || { echo "Пустой пароль, отмена."; exit 1; }
   PAYLOAD=$(SMTP_PASSWORD="$SMTP_PASSWORD" python3 -c 'import json,os
 print(json.dumps([{"key": "SMTP_PASSWORD", "text_value": os.environ["SMTP_PASSWORD"]}]))')
   unset SMTP_PASSWORD
+}
+if ! yc lockbox secret get --name "$SECRET_NAME" >/dev/null 2>&1; then
+  ask_password_payload
   yc lockbox secret create --name "$SECRET_NAME" --payload "$PAYLOAD" >/dev/null
   unset PAYLOAD
   echo "Secret $SECRET_NAME created."
+elif [ "${RESET_SMTP_PASSWORD:-0}" = 1 ]; then
+  ask_password_payload
+  printf '%s' "$PAYLOAD" | yc lockbox secret add-version --name "$SECRET_NAME" --payload - >/dev/null
+  unset PAYLOAD
+  echo "Password in $SECRET_NAME replaced."
 fi
 SECRET_JSON=$(yc lockbox secret get --name "$SECRET_NAME" --format json)
 SECRET_ID=$(echo "$SECRET_JSON" | json_field id)
