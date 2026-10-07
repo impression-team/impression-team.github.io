@@ -5,7 +5,7 @@ The function validates the data, checks that personal data consent was given,
 and forwards the request to MAIL_TO through Yandex Mail SMTP.
 
 Environment:
-  SMTP_USER       Yandex Mail login used to send, e.g. chardymov@yandex.ru
+  SMTP_USER       Yandex Mail login used to send, e.g. vitaliy.chardymov@yandex.ru
   SMTP_PASSWORD   app password for SMTP_USER (comes from Lockbox, never in code)
   MAIL_TO         where requests are delivered (default: SMTP_USER)
   ALLOWED_ORIGINS space-separated origins allowed to post the form

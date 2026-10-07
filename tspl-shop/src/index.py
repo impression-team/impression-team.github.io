@@ -22,7 +22,7 @@ Environment:
   YOOKASSA_SHOP_ID      shop id from the YooKassa dashboard
   YOOKASSA_SECRET_KEY   secret API key (Lockbox)
   TSPL_PRIVATE_KEY      base64 Ed25519 seed from Licensing/private_key.txt (Lockbox)
-  SMTP_USER             Yandex Mail login used to send, e.g. chardymov@yandex.ru
+  SMTP_USER             Yandex Mail login used to send, e.g. vitaliy.chardymov@yandex.ru
   SMTP_PASSWORD         app password for SMTP_USER (Lockbox, shared with form-handler)
   MAIL_TO               where sale notices go (default: SMTP_USER)
   SUPPORT_EMAIL         Reply-To for buyers (default: vitaliy.chardymov@gmail.com)
