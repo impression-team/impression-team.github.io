@@ -14,8 +14,8 @@ cd "$(dirname "$0")"
 FUNCTION_NAME="impression-form"
 SA_NAME="impression-form-sa"
 SECRET_NAME="impression-form-smtp"
-SMTP_USER="${SMTP_USER:-chardymov@yandex.ru}"
-MAIL_TO="${MAIL_TO:-chardymov@yandex.ru}"
+SMTP_USER="${SMTP_USER:-vitaliy.chardymov@yandex.ru}"
+MAIL_TO="${MAIL_TO:-vitaliy.chardymov@yandex.ru}"
 
 json_field() { python3 -c 'import json,sys; d=json.load(sys.stdin)
 for k in sys.argv[1].split("."): d=d[k]
