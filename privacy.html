@@ -75,13 +75,14 @@
   <h2 id="short">2. The short version</h2>
   <div class="card">
     <ul>
-      <li>The Games have no registration, no login and no user profiles. We never ask for your name,
+      <li>The Games have no registration and no accounts of their own. We never ask for your name,
       email address, phone number or postal address.</li>
-      <li>Your game progress is stored on your device only. We do not upload it anywhere.</li>
+      <li>Your game progress is stored on your device. Where a Game supports cloud saving, a copy is kept in
+      your own iCloud account (iOS) or Google Play Games profile (Android) — never on our servers.</li>
       <li>The Games show advertising. Our advertising partners may collect a device advertising identifier
       and technical device data in order to select and measure ads.</li>
-      <li>We use Google Firebase (Google Analytics for Firebase and Firebase Crashlytics) to see how the Games
-      are used and to find and fix crashes. This data is tied to app-level identifiers, not to your name or
+      <li>We use Google Firebase (Google Analytics for Firebase and Firebase Crashlytics) and Unity Analytics
+      to see how the Games are used and to find and fix crashes. This data is tied to app-level identifiers, not to your name or
       contact details.</li>
       <li>Purchases are processed by Apple and Google. We never see your card details.</li>
       <li>You can turn off personalised advertising at any time in your device settings, and in the
@@ -100,7 +101,23 @@
   saved locally on your device. This data stays on the device, and deleting the Game deletes it.
   We do not operate game servers and we do not keep copies of your saves.</p>
 
-  <h3>3.3 Information collected automatically by our partners</h3>
+  <h3>3.3 Cloud saves and game services</h3>
+  <p>Some Games can sync your progress and offer achievements and leaderboards through the platform's own
+  services. They work through your Apple or Google account; we never receive your account email or password.</p>
+  <ul>
+    <li><strong>iCloud (iOS):</strong> game progress and settings may be saved to your iCloud account so that
+    you can continue on another device or after reinstalling the Game. This data is stored by Apple in your
+    iCloud under Apple's privacy policy; we cannot see or access it.</li>
+    <li><strong>Google Play Games (Android):</strong> if you use Google Play Games, the Game receives your
+    Play Games player ID, gamer name and avatar, and stores achievements, leaderboard scores and, where
+    available, saved games in your Play Games profile. Your gamer name and scores may be visible to other
+    players, depending on your Play Games profile settings. This data is stored by Google under Google's
+    privacy policy.</li>
+  </ul>
+  <p>Using these services is optional: the Games work without them, and section 6.4 explains how to turn
+  them off or delete the data.</p>
+
+  <h3>3.4 Information collected automatically by our partners</h3>
   <p>To show advertising, to understand how the Games are used and to keep them working, our partners
   (listed in section 5) may process:</p>
   <table>
@@ -112,7 +129,8 @@
     </tr>
     <tr>
       <td>App instance identifiers</td>
-      <td>Firebase installation ID, Google Analytics app instance ID, Crashlytics installation UUID</td>
+      <td>Firebase installation ID, Google Analytics app instance ID, Crashlytics installation UUID,
+      Unity installation ID and Unity Analytics player ID</td>
       <td>Counting unique installs and sessions, linking crash reports from the same installation</td>
     </tr>
     <tr>
@@ -127,7 +145,8 @@
       example level started or completed, purchases made), events related to advertising, which ads were
       shown, viewed or clicked, ad revenue data; approximate location (country, region, city) derived from
       the IP address</td>
-      <td>Usage statistics (Google Analytics for Firebase), ad measurement and reporting, improving the Games</td>
+      <td>Usage statistics (Google Analytics for Firebase, Unity Analytics), ad measurement and reporting,
+      improving the Games</td>
     </tr>
     <tr>
       <td>Diagnostics</td>
@@ -154,6 +173,8 @@
     <li>To fix crashes and improve gameplay balance.</li>
     <li>To produce aggregated usage statistics, such as how many players reach a level or how long sessions
     last.</li>
+    <li>To sync your progress between devices and to show achievements and leaderboards through iCloud or
+    Google Play Games, if you use them.</li>
   </ul>
   <p>We do not sell your personal information for money, and we do not use it to build profiles outside
   advertising. Where our partners use advertising identifiers for cross-context behavioural advertising,
@@ -177,16 +198,17 @@
     <li>Google Firebase — Google Analytics for Firebase and Firebase Crashlytics, provided by Google LLC /
       Google Ireland Limited — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy and security</a>,
       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google privacy policy</a></li>
+    <li>Unity Analytics (Unity Gaming Services), provided by Unity Technologies — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">privacy policy for players</a></li>
   </ul>
   <p>Platform services we rely on:</p>
   <ul>
-    <li>Apple (App Store, StoreKit, App Analytics, crash reports) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">privacy policy</a></li>
-    <li>Google (Google Play, Google Play Billing, Android vitals) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a></li>
+    <li>Apple (App Store, StoreKit, iCloud, App Analytics, crash reports) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">privacy policy</a></li>
+    <li>Google (Google Play, Google Play Billing, Google Play Games services, Android vitals) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">privacy policy</a></li>
     <li>Unity Technologies (game engine and in-app purchasing) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">privacy policy</a></li>
   </ul>
   <p>These companies act as independent controllers of the data they collect through their own SDKs, and
-  their own privacy policies apply to that processing. Google processes Firebase data on our behalf as a
-  data processor under the Firebase data processing terms.</p>
+  their own privacy policies apply to that processing. Google processes Firebase data, and Unity processes
+  Unity Analytics data, on our behalf as data processors under their data processing terms.</p>
 
   <h2 id="consent">6. Consent, tracking and your choices</h2>
 
@@ -207,6 +229,16 @@
     <li><strong>Android:</strong> Settings → Google → Ads → “Delete advertising ID” or “Opt out of Ads Personalisation”.</li>
     <li><strong>Consent dialog:</strong> delete and reinstall the Game, or write to us at the address in section 12
       and we will tell you how to bring the dialog back in the version you have.</li>
+  </ul>
+
+  <h3>6.4 Cloud saves and Google Play Games</h3>
+  <ul>
+    <li><strong>iCloud:</strong> to stop syncing a Game, go to Settings → [your name] → iCloud → apps using
+      iCloud and turn the Game off. To delete its saved data, go to Settings → [your name] → iCloud →
+      Manage Account Storage, choose the Game and delete its data.</li>
+    <li><strong>Google Play Games:</strong> in the Google Play Games settings you can choose who sees your
+      profile and gameplay activity, or delete your Play Games profile together with its achievements,
+      scores and saved games.</li>
   </ul>
 
   <h2 id="purchases">7. In-app purchases</h2>
@@ -235,8 +267,10 @@
     <li><strong>California (CCPA/CPRA):</strong> you may opt out of the “sale” or “sharing” of personal
     information for cross-context behavioural advertising by using the device settings in section 6.3.
     We do not discriminate against users who exercise their rights.</li>
-    <li><strong>Deleting everything:</strong> uninstalling a Game removes all local data. Purchases stay
-    recorded by Apple or Google so that you can restore them.</li>
+    <li><strong>Deleting everything:</strong> uninstalling a Game removes all local data. Copies in iCloud or
+    Google Play Games are deleted as described in section 6.4. To delete analytics data collected by Firebase
+    or Unity Analytics, write to us and we will ask them to delete it. Purchases stay recorded by Apple or
+    Google so that you can restore them.</li>
   </ul>
   <p>To make a request, write to the address in section 12. We answer within 30 days.</p>
 
@@ -244,7 +278,9 @@
   <p>We keep no personal databases of our own. Data collected by advertising partners is retained according
   to their own policies. Firebase Crashlytics keeps crash reports for 90 days; Google Analytics for Firebase
   keeps user-level data for the retention period set in our Firebase project, no longer than 14 months, and
-  after that only aggregated reports remain. Support correspondence is kept for up to 24 months. Data may be processed on servers
+  after that only aggregated reports remain. Unity Analytics data is retained according to Unity's data
+  retention rules. Data in your iCloud account or Google Play Games profile stays there until you delete it.
+  Support correspondence is kept for up to 24 months. Data may be processed on servers
   in countries other than your own, including the United States; our partners rely on Standard Contractual
   Clauses or equivalent safeguards for such transfers. We use the security measures provided by the platforms
   (encrypted connections, signed applications), but no method of transmission over the internet is completely
@@ -287,12 +323,13 @@
   <h2>2. Коротко</h2>
   <div class="card">
     <ul>
-      <li>В Играх нет регистрации, входа и профилей. Мы не спрашиваем имя, почту, телефон и адрес.</li>
-      <li>Прогресс хранится только на вашем устройстве. Мы его никуда не загружаем.</li>
+      <li>В Играх нет своей регистрации и своих аккаунтов. Мы не спрашиваем имя, почту, телефон и адрес.</li>
+      <li>Прогресс хранится на вашем устройстве. Если Игра поддерживает облачные сохранения, копия хранится
+      в вашем собственном iCloud (iOS) или профиле Google Play Игр (Android), а не на наших серверах.</li>
       <li>В Играх есть реклама. Рекламные партнёры могут собирать рекламный идентификатор устройства
       и технические данные, чтобы подобрать и измерить рекламу.</li>
-      <li>Мы используем Google Firebase (Google Analytics for Firebase и Firebase Crashlytics), чтобы понимать,
-      как играют в Игры, и находить и исправлять сбои. Эти данные привязаны к идентификаторам приложения,
+      <li>Мы используем Google Firebase (Google Analytics for Firebase и Firebase Crashlytics) и Unity Analytics,
+      чтобы понимать, как играют в Игры, и находить и исправлять сбои. Эти данные привязаны к идентификаторам приложения,
       а не к вашему имени или контактам.</li>
       <li>Покупки обрабатывают Apple и Google. Данные карты мы не видим.</li>
       <li>Персонализированную рекламу можно отключить в настройках устройства, а в ЕЭЗ, Великобритании
@@ -311,7 +348,23 @@
   Они остаются на устройстве, и удаление Игры удаляет их. Своих игровых серверов у нас нет, копий
   сохранений мы не храним.</p>
 
-  <h3>3.3 Данные, которые автоматически собирают партнёры</h3>
+  <h3>3.3 Облачные сохранения и игровые сервисы</h3>
+  <p>Некоторые Игры умеют синхронизировать прогресс, показывать достижения и таблицы рекордов через сервисы
+  самой платформы. Они работают через ваш аккаунт Apple или Google; адрес почты и пароль от аккаунта мы
+  не получаем.</p>
+  <ul>
+    <li><strong>iCloud (iOS):</strong> прогресс и настройки могут сохраняться в вашем iCloud, чтобы продолжить
+    игру на другом устройстве или после переустановки. Эти данные хранит Apple в вашем iCloud по своей
+    политике конфиденциальности; мы их не видим и доступа к ним не имеем.</li>
+    <li><strong>Google Play Игры (Android):</strong> если вы пользуетесь Google Play Играми, Игра получает
+    идентификатор игрока, игровое имя и аватар и сохраняет в вашем профиле Play Игр достижения, результаты
+    в таблицах рекордов и, где это есть, сохранения игры. Игровое имя и результаты могут видеть другие игроки —
+    в зависимости от настроек вашего профиля. Эти данные хранит Google по своей политике конфиденциальности.</li>
+  </ul>
+  <p>Пользоваться этими сервисами не обязательно: Игры работают и без них, а как их отключить или удалить
+  данные, написано в разделе 6.4.</p>
+
+  <h3>3.4 Данные, которые автоматически собирают партнёры</h3>
   <p>Чтобы показывать рекламу, понимать, как используются Игры, и поддерживать их работу, партнёры (раздел 5)
   могут обрабатывать:</p>
   <table>
@@ -323,7 +376,8 @@
     </tr>
     <tr>
       <td>Идентификаторы установки приложения</td>
-      <td>Firebase installation ID, идентификатор экземпляра приложения Google Analytics, UUID установки Crashlytics</td>
+      <td>Firebase installation ID, идентификатор экземпляра приложения Google Analytics, UUID установки Crashlytics,
+      идентификатор установки Unity и идентификатор игрока Unity Analytics</td>
       <td>Подсчёт уникальных установок и сессий, связь отчётов о сбоях с одной установкой</td>
     </tr>
     <tr>
@@ -337,7 +391,8 @@
       (например, начало или прохождение уровня, покупки), рекламные события, какие объявления показаны,
       просмотрены или нажаты, доход от рекламы; примерное местоположение (страна, регион, город), определённое
       по IP-адресу</td>
-      <td>Статистика использования (Google Analytics for Firebase), измерение и отчётность по рекламе, улучшение Игр</td>
+      <td>Статистика использования (Google Analytics for Firebase, Unity Analytics), измерение и отчётность
+      по рекламе, улучшение Игр</td>
     </tr>
     <tr>
       <td>Диагностика</td>
@@ -364,6 +419,8 @@
     <li>Чтобы выявлять недобросовестный трафик и мошенничество.</li>
     <li>Чтобы исправлять сбои и улучшать баланс.</li>
     <li>Чтобы получать обобщённую статистику — например, сколько игроков доходят до уровня и сколько длятся сессии.</li>
+    <li>Чтобы синхронизировать прогресс между устройствами и показывать достижения и таблицы рекордов через
+    iCloud или Google Play Игры, если вы ими пользуетесь.</li>
   </ul>
   <p>Мы не продаём ваши данные за деньги и не строим профили вне рекламы. Использование рекламных
   идентификаторов для межконтекстной поведенческой рекламы некоторые законы (например, закон Калифорнии
@@ -386,16 +443,17 @@
     <li>Google Firebase — Google Analytics for Firebase и Firebase Crashlytics, предоставляются Google LLC /
       Google Ireland Limited — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">конфиденциальность и безопасность Firebase</a>,
       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политика Google</a></li>
+    <li>Unity Analytics (Unity Gaming Services), предоставляется Unity Technologies — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">политика для игроков</a></li>
   </ul>
   <p>Платформенные сервисы:</p>
   <ul>
-    <li>Apple (App Store, StoreKit, отчёты о сбоях) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">политика</a></li>
-    <li>Google (Google Play, Google Play Billing) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политика</a></li>
+    <li>Apple (App Store, StoreKit, iCloud, отчёты о сбоях) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">политика</a></li>
+    <li>Google (Google Play, Google Play Billing, сервисы Google Play Игр) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политика</a></li>
     <li>Unity Technologies (движок и покупки) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">политика</a></li>
   </ul>
   <p>Эти компании выступают самостоятельными операторами данных, которые собирают их собственные SDK,
-  и к такой обработке применяются их политики. Данные Firebase Google обрабатывает по нашему поручению
-  как обработчик в соответствии с условиями обработки данных Firebase.</p>
+  и к такой обработке применяются их политики. Данные Firebase обрабатывает Google, а данные Unity Analytics —
+  Unity: по нашему поручению, как обработчики, в соответствии со своими условиями обработки данных.</p>
 
   <h2>6. Согласие, отслеживание и ваш выбор</h2>
 
@@ -417,6 +475,15 @@
       или «Отключить персонализацию рекламы».</li>
     <li><strong>Окно согласия:</strong> удалите и установите Игру заново либо напишите нам (раздел 12),
       и мы подскажем, как вызвать окно в вашей версии.</li>
+  </ul>
+
+  <h3>6.4 Облачные сохранения и Google Play Игры</h3>
+  <ul>
+    <li><strong>iCloud:</strong> чтобы отключить синхронизацию Игры, откройте Настройки → [ваше имя] → iCloud →
+      приложения, использующие iCloud, и выключите Игру. Чтобы удалить её сохранения, откройте Настройки →
+      [ваше имя] → iCloud → Управление хранилищем, выберите Игру и удалите данные.</li>
+    <li><strong>Google Play Игры:</strong> в настройках Google Play Игр можно выбрать, кто видит ваш профиль
+      и игровую активность, или удалить профиль Play Игр вместе с достижениями, рекордами и сохранениями.</li>
   </ul>
 
   <h2>7. Внутриигровые покупки</h2>
@@ -444,8 +511,10 @@
     <li><strong>Калифорния (CCPA/CPRA):</strong> отказаться от «продажи» или «передачи» данных для
     межконтекстной поведенческой рекламы можно через настройки из раздела 6.3. Мы не ухудшаем условия для
     тех, кто пользуется своими правами.</li>
-    <li><strong>Удалить всё:</strong> удаление Игры стирает все локальные данные. Сведения о покупках
-    остаются у Apple и Google, чтобы вы могли их восстановить.</li>
+    <li><strong>Удалить всё:</strong> удаление Игры стирает все локальные данные. Копии в iCloud или Google
+    Play Играх удаляются так, как описано в разделе 6.4. Чтобы удалить аналитические данные Firebase или
+    Unity Analytics, напишите нам — мы попросим их удалить. Сведения о покупках остаются у Apple и Google,
+    чтобы вы могли их восстановить.</li>
   </ul>
   <p>Запрос отправляйте на адрес из раздела 12. Мы отвечаем в течение 30 дней.</p>
 
@@ -453,7 +522,9 @@
   <p>Собственных баз персональных данных мы не ведём. Данные, собранные рекламными партнёрами, хранятся
   по их правилам. Firebase Crashlytics хранит отчёты о сбоях 90 дней; Google Analytics for Firebase хранит
   данные на уровне пользователя в течение срока, заданного в нашем проекте Firebase, но не дольше 14 месяцев,
-  после чего остаются только обобщённые отчёты. Переписку с поддержкой мы храним до 24 месяцев. Данные могут обрабатываться на серверах
+  после чего остаются только обобщённые отчёты. Данные Unity Analytics хранятся по правилам Unity. Данные
+  в вашем iCloud или профиле Google Play Игр остаются там, пока вы их не удалите. Переписку с поддержкой
+  мы храним до 24 месяцев. Данные могут обрабатываться на серверах
   за пределами вашей страны, включая США; для таких передач партнёры используют стандартные договорные
   условия или равнозначные гарантии. Мы полагаемся на защиту, которую дают платформы (шифрованные
   соединения, подписанные приложения), но ни один способ передачи данных в интернете не является полностью
