@@ -1,6 +1,8 @@
 {
   "trains-and-rails": {
     "name": "Trains and Rails",
+    "appstore_url": "https://apps.apple.com/us/app/trains-and-rails/id6814487568",
+    "new": true,
     "as_rating": null,
     "as_count": 0,
     "gp_rating": null,
@@ -9,6 +11,8 @@
   },
   "bee-rush": {
     "name": "Bee Rush: Match 3 Puzzle",
+    "appstore_url": "https://apps.apple.com/us/app/bee-rush-match-3-puzzle/id1597633366",
+    "new": false,
     "as_rating": 4.53,
     "as_count": 51,
     "gp_rating": null,
@@ -17,6 +21,8 @@
   },
   "music-band-tycoon": {
     "name": "Music Band Tycoon: Idle Star",
+    "appstore_url": "https://apps.apple.com/us/app/music-band-tycoon-idle-star/id6443993567",
+    "new": false,
     "as_rating": 4.69,
     "as_count": 52,
     "gp_rating": null,
@@ -25,6 +31,8 @@
   },
   "kawaii-unicorn": {
     "name": "Kawaii Unicorn: Coloring Book",
+    "appstore_url": "https://apps.apple.com/us/app/kawaii-unicorn-coloring-book/id1552569798",
+    "new": false,
     "as_rating": 4.43,
     "as_count": 99,
     "gp_rating": null,
@@ -33,6 +41,8 @@
   },
   "bubble-rush-shooter": {
     "name": "Bubble Rush Shooter: Pop Game",
+    "appstore_url": "https://apps.apple.com/us/app/bubble-rush-shooter-pop-game/id1601039219",
+    "new": false,
     "as_rating": 5.0,
     "as_count": 4,
     "gp_rating": null,
@@ -41,6 +51,8 @@
   },
   "super-hero-hotel": {
     "name": "Super Hero Hotel: Build Tower",
+    "appstore_url": "https://apps.apple.com/us/app/super-hero-hotel-build-tower/id6475118803",
+    "new": false,
     "as_rating": null,
     "as_count": 0,
     "gp_rating": null,
@@ -49,6 +61,8 @@
   },
   "guns-and-bike": {
     "name": "Guns and Bike: Moto Shooter",
+    "appstore_url": "https://apps.apple.com/us/app/guns-and-bike-moto-shooter/id6469506304",
+    "new": false,
     "as_rating": null,
     "as_count": 0,
     "gp_rating": null,
@@ -57,6 +71,8 @@
   },
   "drag-race-queen": {
     "name": "Drag Race Queen: Bike Rush",
+    "appstore_url": "https://apps.apple.com/us/app/drag-race-queen-bike-rush/id6449099005",
+    "new": false,
     "as_rating": 5.0,
     "as_count": 2,
     "gp_rating": null,
@@ -65,6 +81,8 @@
   },
   "invaders-city-defence": {
     "name": "Invaders City Defence Idle RPG",
+    "appstore_url": "https://apps.apple.com/us/app/invaders-city-defence-idle-rpg/id6448887151",
+    "new": false,
     "as_rating": 3.83,
     "as_count": 6,
     "gp_rating": null,
@@ -73,6 +91,8 @@
   },
   "labor-rush": {
     "name": "Labor Rush: Maternity Tycoon",
+    "appstore_url": "https://apps.apple.com/us/app/labor-rush-maternity-tycoon/id6444125769",
+    "new": false,
     "as_rating": 2.4,
     "as_count": 5,
     "gp_rating": null,
@@ -81,22 +101,18 @@
   },
   "space-pipes": {
     "name": "Space Pipes",
+    "appstore_url": "https://apps.apple.com/us/app/space-pipes/id1543773816",
+    "new": false,
     "as_rating": 3.78,
     "as_count": 18,
     "gp_rating": null,
     "gp_count": 0,
     "checked": "2026-10-12"
   },
-  "house-construct-idler": {
-    "name": "House Construct Idler",
-    "as_rating": null,
-    "as_count": null,
-    "gp_rating": null,
-    "gp_count": 0,
-    "checked": "2026-10-12"
-  },
   "aircraft-constructor-idler": {
     "name": "Aircraft Constructor Idler",
+    "appstore_url": null,
+    "new": false,
     "as_rating": null,
     "as_count": null,
     "gp_rating": null,
@@ -105,6 +121,8 @@
   },
   "sniper-tank": {
     "name": "Sniper Tank: Precision Strike",
+    "appstore_url": "https://apps.apple.com/us/app/sniper-tank-precision-strike/id6450857107",
+    "new": false,
     "as_rating": 3.0,
     "as_count": 2,
     "gp_rating": null,
@@ -113,6 +131,8 @@
   },
   "dream-dart": {
     "name": "Dream Dart: Rescuing the Wild",
+    "appstore_url": "https://apps.apple.com/us/app/dream-dart-rescuing-the-wild/id6450841031",
+    "new": false,
     "as_rating": 5.0,
     "as_count": 2,
     "gp_rating": null,
@@ -121,6 +141,8 @@
   },
   "alien-invasion-puzzle": {
     "name": "Alien Invasion Puzzle",
+    "appstore_url": "https://apps.apple.com/us/app/alien-invasion-puzzle/id6462422314",
+    "new": false,
     "as_rating": 5.0,
     "as_count": 1,
     "gp_rating": null,
@@ -129,6 +151,8 @@
   },
   "magnet-guy": {
     "name": "Magnet Guy",
+    "appstore_url": "https://apps.apple.com/us/app/magnet-guy/id6452722233",
+    "new": false,
     "as_rating": 5.0,
     "as_count": 1,
     "gp_rating": null,

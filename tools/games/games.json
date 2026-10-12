@@ -90,16 +90,6 @@
       "description": "A calm connect-the-pipes puzzle: turn the pipes until the route on a broken space station runs from source to goal. No timer, no move limits."
     },
     {
-      "slug": "house-construct-idler",
-      "appstore_id": null,
-      "google_play": "house.construct.idler",
-      "name": "House Construct Idler",
-      "icon_file": "~/Games Meta/House Construct Lego/icon (3)/icon.png",
-      "genre": "Idle / Builder",
-      "tag": "idle",
-      "description": "An idle building game: construct houses brick by brick and grow your own construction business."
-    },
-    {
       "slug": "aircraft-constructor-idler",
       "appstore_id": null,
       "google_play": "aircraft.constructor.idler",

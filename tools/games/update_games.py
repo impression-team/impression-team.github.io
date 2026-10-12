@@ -8,8 +8,10 @@ Reads tools/games/games.json, then for every game:
   * icon saved to assets/games/<slug>.jpg (from the App Store, or from "icon_file" on disk).
 Then rewrites the block between <!-- GAMES:START --> and <!-- GAMES:END --> in index.html.
 
-Usage:  python3 tools/games/update_games.py [--quick]
-  --quick  only the US App Store (seconds instead of minutes; ratings then cover the US only)
+Usage:  python3 tools/games/update_games.py [--quick | --offline]
+  --quick    only the US App Store (seconds instead of minutes; ratings then cover the US only)
+  --offline  no network: rebuild the cards from ratings.json and the icons already in assets/games
+             (use after editing games.json or the display thresholds)
 Needs macOS `sips` for local icons. Standard library only.
 """
 
@@ -31,6 +33,7 @@ ICON_DIR = os.path.join(ROOT, 'assets', 'games')
 INDEX = os.path.join(ROOT, 'index.html')
 
 MIN_RATINGS = 5          # fewer ratings than this: the rating is not shown (too noisy)
+MIN_RATING = 3.5         # ratings below this are not shown on the site (still saved in ratings.json)
 NEW_BADGE_DAYS = 90      # "New" badge for games released within this many days
 ICON_PX = 256
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36'
@@ -123,7 +126,7 @@ def short_count(n):
 
 
 def rating_html(store, rating, count):
-    if not rating or count < MIN_RATINGS:
+    if not rating or count < MIN_RATINGS or rating < MIN_RATING:
         return ''
     word = 'rating' if count == 1 else 'ratings'
     return ('        <span class="game-rating" title="{store}: {r:.1f} out of 5, {c} {w}">'
@@ -161,21 +164,32 @@ def card_html(g):
 
 
 def main():
-    quick = '--quick' in sys.argv
+    quick, offline = '--quick' in sys.argv, '--offline' in sys.argv
     games = json.load(open(CONFIG, encoding='utf-8'))['games']
     known = json.load(open(RATINGS, encoding='utf-8')) if os.path.exists(RATINGS) else {}
 
     ids = [g['appstore_id'] for g in games if g.get('appstore_id')]
-    print('App Store: {} apps, {}'.format(len(ids), 'US only' if quick else '{} storefronts'.format(len(STOREFRONTS))))
-    store = appstore_data(ids, quick)
+    if offline:
+        print('Offline: using ratings.json and existing icons')
+        store = {}
+    else:
+        print('App Store: {} apps, {}'.format(len(ids), 'US only' if quick else '{} storefronts'.format(len(STOREFRONTS))))
+        store = appstore_data(ids, quick)
 
-    gp_ok = True
+    gp_ok = not offline
     today = dt.date.today()
     for g in games:
         slug = g['slug']
         prev = known.get(slug, {})
         a = store.get(g.get('appstore_id'))
-        if a:
+        if offline:
+            for k in ('name', 'as_rating', 'as_count', 'appstore_url', 'new'):
+                if prev.get(k) is not None and not (k == 'name' and g.get('name')):
+                    g[k] = prev[k]
+            g['icon'] = 'assets/games/{}.jpg'.format(slug)
+            if not os.path.exists(os.path.join(ROOT, g['icon'])):
+                g['icon'] = save_icon(slug, src_file=g['icon_file']) if g.get('icon_file') else g['icon']
+        elif a:
             g['name'] = g.get('name') or a['trackName']
             g['appstore_url'] = a['trackViewUrl'].split('?')[0]
             g['as_rating'], g['as_count'] = a.get('_rating'), a.get('_count', 0)
@@ -197,8 +211,8 @@ def main():
                 gp_ok = False
                 print('  ! Google Play unreachable ({}); keeping last known ratings'.format(err), file=sys.stderr)
 
-        known[slug] = {k: g.get(k) for k in ('name', 'as_rating', 'as_count', 'gp_rating', 'gp_count')}
-        known[slug]['checked'] = today.isoformat()
+        known[slug] = {k: g.get(k) for k in ('name', 'appstore_url', 'new', 'as_rating', 'as_count', 'gp_rating', 'gp_count')}
+        known[slug]['checked'] = prev.get('checked') if offline else today.isoformat()
         print('  {:28} AS {:>4} ({:>4})  GP {:>4} ({:>4})'.format(
             slug, g.get('as_rating') or '-', g.get('as_count') or 0, g.get('gp_rating') or '-', g.get('gp_count') or 0))
 
