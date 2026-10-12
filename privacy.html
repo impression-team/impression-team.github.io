@@ -27,6 +27,8 @@
   table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px}
   th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
   th{background:var(--card);font-weight:600}
+  th,td{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+  @media (max-width:480px){table{font-size:13.5px}th,td{padding:7px 6px}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0}
   .switch{display:flex;gap:8px;margin:0 0 4px}
   .switch button{font:inherit;font-size:14px;padding:6px 14px;border:1px solid var(--line);
@@ -47,9 +49,9 @@
 </header>
 
 <!-- ============================ ENGLISH ============================ -->
-<main id="en">
+<main id="en" lang="en">
   <h1>Privacy Policy</h1>
-  <p class="meta">Last updated: 22 September 2026 · Effective: 22 September 2026</p>
+  <p class="meta">Last updated: 12 October 2026 · Effective: 12 October 2026</p>
 
   <p>This Privacy Policy explains what information is collected when you use the mobile games
   developed and published by <strong>Vitalii Chardymov</strong> (operating as <strong>Impression Team</strong>),
@@ -78,6 +80,9 @@
       <li>Your game progress is stored on your device only. We do not upload it anywhere.</li>
       <li>The Games show advertising. Our advertising partners may collect a device advertising identifier
       and technical device data in order to select and measure ads.</li>
+      <li>We use Google Firebase (Google Analytics for Firebase and Firebase Crashlytics) to see how the Games
+      are used and to find and fix crashes. This data is tied to app-level identifiers, not to your name or
+      contact details.</li>
       <li>Purchases are processed by Apple and Google. We never see your card details.</li>
       <li>You can turn off personalised advertising at any time in your device settings, and in the
       European Economic Area, the United Kingdom and Switzerland you can change your consent choices.</li>
@@ -96,13 +101,19 @@
   We do not operate game servers and we do not keep copies of your saves.</p>
 
   <h3>3.3 Information collected automatically by our partners</h3>
-  <p>To show advertising and to keep the Games working, our partners (listed in section 5) may process:</p>
+  <p>To show advertising, to understand how the Games are used and to keep them working, our partners
+  (listed in section 5) may process:</p>
   <table>
     <tr><th>Category</th><th>Examples</th><th>Why</th></tr>
     <tr>
       <td>Advertising identifiers</td>
       <td>IDFA / IDFV on iOS, Google Advertising ID (GAID) on Android, App Set ID, vendor identifiers</td>
       <td>Selecting ads, limiting how often the same ad is shown, measuring installs and fraud prevention</td>
+    </tr>
+    <tr>
+      <td>App instance identifiers</td>
+      <td>Firebase installation ID, Google Analytics app instance ID, Crashlytics installation UUID</td>
+      <td>Counting unique installs and sessions, linking crash reports from the same installation</td>
     </tr>
     <tr>
       <td>Device and connection data</td>
@@ -112,14 +123,18 @@
     </tr>
     <tr>
       <td>App and usage data</td>
-      <td>App version, session start and length, in-game events related to advertising, which ads were
-      shown, viewed or clicked, ad revenue data</td>
-      <td>Ad measurement and reporting, improving the Games</td>
+      <td>App version, first launch and updates, session start and length, screens and in-game events (for
+      example level started or completed, purchases made), events related to advertising, which ads were
+      shown, viewed or clicked, ad revenue data; approximate location (country, region, city) derived from
+      the IP address</td>
+      <td>Usage statistics (Google Analytics for Firebase), ad measurement and reporting, improving the Games</td>
     </tr>
     <tr>
       <td>Diagnostics</td>
-      <td>Crash reports and performance data provided by Apple and Google</td>
-      <td>Fixing bugs and crashes</td>
+      <td>Crash and error reports collected by Firebase Crashlytics: stack trace, time of the crash, app
+      version, device model, operating system version, device orientation, free memory and disk space,
+      whether the device is rooted or jailbroken. Crash and performance data provided by Apple and Google</td>
+      <td>Finding, prioritising and fixing bugs and crashes</td>
     </tr>
     <tr>
       <td>Purchase data</td>
@@ -137,6 +152,8 @@
     <li>To deliver and restore in-app purchases and to honour the “Remove ads” purchase.</li>
     <li>To detect invalid traffic, fraud and abuse.</li>
     <li>To fix crashes and improve gameplay balance.</li>
+    <li>To produce aggregated usage statistics, such as how many players reach a level or how long sessions
+    last.</li>
   </ul>
   <p>We do not sell your personal information for money, and we do not use it to build profiles outside
   advertising. Where our partners use advertising identifiers for cross-context behavioural advertising,
@@ -155,6 +172,12 @@
     <li>Liftoff / Vungle — <a href="https://liftoff.io/privacy-policy/" target="_blank" rel="noopener">privacy policy</a></li>
     <li>BidMachine, Bidon, Bigo Ads, InMobi, Mintegral and other networks connected through Appodeal mediation</li>
   </ul>
+  <p>Analytics and crash reporting:</p>
+  <ul>
+    <li>Google Firebase — Google Analytics for Firebase and Firebase Crashlytics, provided by Google LLC /
+      Google Ireland Limited — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy and security</a>,
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google privacy policy</a></li>
+  </ul>
   <p>Platform services we rely on:</p>
   <ul>
     <li>Apple (App Store, StoreKit, App Analytics, crash reports) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">privacy policy</a></li>
@@ -162,7 +185,8 @@
     <li>Unity Technologies (game engine and in-app purchasing) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">privacy policy</a></li>
   </ul>
   <p>These companies act as independent controllers of the data they collect through their own SDKs, and
-  their own privacy policies apply to that processing.</p>
+  their own privacy policies apply to that processing. Google processes Firebase data on our behalf as a
+  data processor under the Firebase data processing terms.</p>
 
   <h2 id="consent">6. Consent, tracking and your choices</h2>
 
@@ -218,7 +242,9 @@
 
   <h2 id="retention">10. Retention, security and transfers</h2>
   <p>We keep no personal databases of our own. Data collected by advertising partners is retained according
-  to their own policies. Support correspondence is kept for up to 24 months. Data may be processed on servers
+  to their own policies. Firebase Crashlytics keeps crash reports for 90 days; Google Analytics for Firebase
+  keeps user-level data for the retention period set in our Firebase project, no longer than 14 months, and
+  after that only aggregated reports remain. Support correspondence is kept for up to 24 months. Data may be processed on servers
   in countries other than your own, including the United States; our partners rely on Standard Contractual
   Clauses or equivalent safeguards for such transfers. We use the security measures provided by the platforms
   (encrypted connections, signed applications), but no method of transmission over the internet is completely
@@ -236,9 +262,9 @@
 </main>
 
 <!-- ============================ РУССКИЙ ============================ -->
-<main id="ru" hidden>
+<main id="ru" lang="ru" hidden>
   <h1>Политика конфиденциальности</h1>
-  <p class="meta">Обновлено: 22 сентября 2026 г. · Действует с: 22 сентября 2026 г.</p>
+  <p class="meta">Обновлено: 12 октября 2026 г. · Действует с: 12 октября 2026 г.</p>
 
   <p>Эта политика объясняет, какие данные собираются, когда вы играете в мобильные игры,
   которые разрабатывает и публикует <strong>Виталий Чардымов</strong> (под именем <strong>Impression Team</strong>) —
@@ -265,6 +291,9 @@
       <li>Прогресс хранится только на вашем устройстве. Мы его никуда не загружаем.</li>
       <li>В Играх есть реклама. Рекламные партнёры могут собирать рекламный идентификатор устройства
       и технические данные, чтобы подобрать и измерить рекламу.</li>
+      <li>Мы используем Google Firebase (Google Analytics for Firebase и Firebase Crashlytics), чтобы понимать,
+      как играют в Игры, и находить и исправлять сбои. Эти данные привязаны к идентификаторам приложения,
+      а не к вашему имени или контактам.</li>
       <li>Покупки обрабатывают Apple и Google. Данные карты мы не видим.</li>
       <li>Персонализированную рекламу можно отключить в настройках устройства, а в ЕЭЗ, Великобритании
       и Швейцарии — изменить своё согласие.</li>
@@ -283,7 +312,8 @@
   сохранений мы не храним.</p>
 
   <h3>3.3 Данные, которые автоматически собирают партнёры</h3>
-  <p>Чтобы показывать рекламу и поддерживать работу Игр, партнёры (раздел 5) могут обрабатывать:</p>
+  <p>Чтобы показывать рекламу, понимать, как используются Игры, и поддерживать их работу, партнёры (раздел 5)
+  могут обрабатывать:</p>
   <table>
     <tr><th>Категория</th><th>Примеры</th><th>Зачем</th></tr>
     <tr>
@@ -292,20 +322,29 @@
       <td>Подбор рекламы, ограничение частоты показов, учёт установок, защита от мошенничества</td>
     </tr>
     <tr>
+      <td>Идентификаторы установки приложения</td>
+      <td>Firebase installation ID, идентификатор экземпляра приложения Google Analytics, UUID установки Crashlytics</td>
+      <td>Подсчёт уникальных установок и сессий, связь отчётов о сбоях с одной установкой</td>
+    </tr>
+    <tr>
       <td>Данные устройства и соединения</td>
       <td>Модель устройства, версия ОС, размер экрана, язык и страна, часовой пояс, оператор, тип сети, IP-адрес</td>
       <td>Показ рекламы, подходящей устройству и региону, безопасность</td>
     </tr>
     <tr>
       <td>Данные приложения и использования</td>
-      <td>Версия приложения, начало и длительность сессии, рекламные события, какие объявления показаны,
-      просмотрены или нажаты, доход от рекламы</td>
-      <td>Измерение и отчётность по рекламе, улучшение Игр</td>
+      <td>Версия приложения, первый запуск и обновления, начало и длительность сессии, экраны и игровые события
+      (например, начало или прохождение уровня, покупки), рекламные события, какие объявления показаны,
+      просмотрены или нажаты, доход от рекламы; примерное местоположение (страна, регион, город), определённое
+      по IP-адресу</td>
+      <td>Статистика использования (Google Analytics for Firebase), измерение и отчётность по рекламе, улучшение Игр</td>
     </tr>
     <tr>
       <td>Диагностика</td>
-      <td>Отчёты о сбоях и производительности от Apple и Google</td>
-      <td>Исправление ошибок</td>
+      <td>Отчёты о сбоях и ошибках Firebase Crashlytics: трассировка стека, время сбоя, версия приложения,
+      модель устройства, версия ОС, ориентация экрана, свободная память и место на диске, признак root или
+      jailbreak. Отчёты о сбоях и производительности от Apple и Google</td>
+      <td>Поиск, приоритизация и исправление ошибок и сбоев</td>
     </tr>
     <tr>
       <td>Данные о покупках</td>
@@ -324,6 +363,7 @@
     <li>Чтобы выдавать и восстанавливать покупки, включая «Без рекламы».</li>
     <li>Чтобы выявлять недобросовестный трафик и мошенничество.</li>
     <li>Чтобы исправлять сбои и улучшать баланс.</li>
+    <li>Чтобы получать обобщённую статистику — например, сколько игроков доходят до уровня и сколько длятся сессии.</li>
   </ul>
   <p>Мы не продаём ваши данные за деньги и не строим профили вне рекламы. Использование рекламных
   идентификаторов для межконтекстной поведенческой рекламы некоторые законы (например, закон Калифорнии
@@ -341,6 +381,12 @@
     <li>Liftoff / Vungle — <a href="https://liftoff.io/privacy-policy/" target="_blank" rel="noopener">политика</a></li>
     <li>BidMachine, Bidon, Bigo Ads, InMobi, Mintegral и другие сети, подключённые через медиацию Appodeal</li>
   </ul>
+  <p>Аналитика и отчёты о сбоях:</p>
+  <ul>
+    <li>Google Firebase — Google Analytics for Firebase и Firebase Crashlytics, предоставляются Google LLC /
+      Google Ireland Limited — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">конфиденциальность и безопасность Firebase</a>,
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политика Google</a></li>
+  </ul>
   <p>Платформенные сервисы:</p>
   <ul>
     <li>Apple (App Store, StoreKit, отчёты о сбоях) — <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">политика</a></li>
@@ -348,7 +394,8 @@
     <li>Unity Technologies (движок и покупки) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">политика</a></li>
   </ul>
   <p>Эти компании выступают самостоятельными операторами данных, которые собирают их собственные SDK,
-  и к такой обработке применяются их политики.</p>
+  и к такой обработке применяются их политики. Данные Firebase Google обрабатывает по нашему поручению
+  как обработчик в соответствии с условиями обработки данных Firebase.</p>
 
   <h2>6. Согласие, отслеживание и ваш выбор</h2>
 
@@ -404,7 +451,9 @@
 
   <h2>10. Хранение, защита и передача данных</h2>
   <p>Собственных баз персональных данных мы не ведём. Данные, собранные рекламными партнёрами, хранятся
-  по их правилам. Переписку с поддержкой мы храним до 24 месяцев. Данные могут обрабатываться на серверах
+  по их правилам. Firebase Crashlytics хранит отчёты о сбоях 90 дней; Google Analytics for Firebase хранит
+  данные на уровне пользователя в течение срока, заданного в нашем проекте Firebase, но не дольше 14 месяцев,
+  после чего остаются только обобщённые отчёты. Переписку с поддержкой мы храним до 24 месяцев. Данные могут обрабатываться на серверах
   за пределами вашей страны, включая США; для таких передач партнёры используют стандартные договорные
   условия или равнозначные гарантии. Мы полагаемся на защиту, которую дают платформы (шифрованные
   соединения, подписанные приложения), но ни один способ передачи данных в интернете не является полностью
