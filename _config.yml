@@ -57,3 +57,4 @@ plugins:
 # Not part of the website: backend code for the request form (Yandex Cloud Function).
 exclude:
   - form-handler/
+  - tools/

@@ -1,0 +1,145 @@
+{
+  "_comment": "Portfolio on index.html. Order here = order on the site. Run: python3 tools/games/update_games.py",
+  "games": [
+    {
+      "slug": "trains-and-rails",
+      "appstore_id": 6814487568,
+      "google_play": null,
+      "genre": "Puzzle",
+      "tag": "puzzle",
+      "description": "A relaxing track-building puzzle in cosy steampunk style: lay straight rails, curves and switches before the steam train gets there."
+    },
+    {
+      "slug": "bee-rush",
+      "appstore_id": 1597633366,
+      "google_play": "com.chardymov.slr",
+      "genre": "Match 3",
+      "tag": "puzzle",
+      "description": "A sweet match-3 puzzle with a cheerful little bee: swap candies, build juicy combos and blast through 100+ levels in a blooming meadow."
+    },
+    {
+      "slug": "music-band-tycoon",
+      "appstore_id": 6443993567,
+      "google_play": "band.manager.idler",
+      "genre": "Idle / Tycoon",
+      "tag": "idle",
+      "description": "Turn a street busker into the biggest band in the world: gather a crowd, hire musicians and grow a music empire that earns even offline."
+    },
+    {
+      "slug": "kawaii-unicorn",
+      "appstore_id": 1552569798,
+      "google_play": "com.chardymov.patu",
+      "genre": "Coloring",
+      "tag": "casual",
+      "description": "A cozy coloring book with cute unicorns, kittens, puppies and dozens of other kawaii pictures. Finish a picture and save it to your gallery."
+    },
+    {
+      "slug": "bubble-rush-shooter",
+      "appstore_id": 1601039219,
+      "google_play": "com.chardymov.brs",
+      "genre": "Bubble Shooter",
+      "tag": "puzzle",
+      "description": "A colourful, relaxing bubble shooter with a cheerful fox: aim, bounce shots off the walls and pop groups of three or more bubbles."
+    },
+    {
+      "slug": "super-hero-hotel",
+      "appstore_id": 6475118803,
+      "google_play": "idle.craft.simulator",
+      "genre": "Idle / Builder",
+      "tag": "idle",
+      "description": "Build your own pocket tower hotel from toy bricks, hire workers and superheroes and grow it into a hotel empire."
+    },
+    {
+      "slug": "guns-and-bike",
+      "appstore_id": 6469506304,
+      "google_play": "guns.and.bike",
+      "genre": "Action",
+      "tag": "action",
+      "description": "Your motorcycle rides by itself, your job is to stay alive: jump ramps, drift and take out gangsters in slow-motion shootouts."
+    },
+    {
+      "slug": "drag-race-queen",
+      "appstore_id": 6449099005,
+      "google_play": "drag.race.queen",
+      "genre": "Racing",
+      "tag": "racing",
+      "description": "A one-button bike racer: hold to open the throttle, let go before you crash and be the first to cross the line."
+    },
+    {
+      "slug": "invaders-city-defence",
+      "appstore_id": 6448887151,
+      "google_play": "invaders.city.defence",
+      "genre": "Action / RPG",
+      "tag": "action",
+      "description": "Lead a special forces squad against the undead: top-down shooting, base defence and RPG upgrades to win the city back block by block."
+    },
+    {
+      "slug": "labor-rush",
+      "appstore_id": 6444125769,
+      "google_play": "baby.boom.room",
+      "genre": "Idle / Tycoon",
+      "tag": "idle",
+      "description": "Take over a struggling maternity hospital and make it the most profitable in the city: open wards, upgrade equipment and hire staff."
+    },
+    {
+      "slug": "space-pipes",
+      "appstore_id": 1543773816,
+      "google_play": "com.chardymov.pipesconnect",
+      "genre": "Puzzle",
+      "tag": "puzzle",
+      "description": "A calm connect-the-pipes puzzle: turn the pipes until the route on a broken space station runs from source to goal. No timer, no move limits."
+    },
+    {
+      "slug": "house-construct-idler",
+      "appstore_id": null,
+      "google_play": "house.construct.idler",
+      "name": "House Construct Idler",
+      "icon_file": "~/Games Meta/House Construct Lego/icon (3)/icon.png",
+      "genre": "Idle / Builder",
+      "tag": "idle",
+      "description": "An idle building game: construct houses brick by brick and grow your own construction business."
+    },
+    {
+      "slug": "aircraft-constructor-idler",
+      "appstore_id": null,
+      "google_play": "aircraft.constructor.idler",
+      "name": "Aircraft Constructor Idler",
+      "icon_file": "~/Unity Projects/aircraftconstructoridler/Assets/ART/UI/Icon.png",
+      "genre": "Idle / Builder",
+      "tag": "idle",
+      "description": "An idle factory game: deliver parts, assemble aircraft and expand your own plane production line."
+    },
+    {
+      "slug": "sniper-tank",
+      "appstore_id": 6450857107,
+      "google_play": null,
+      "genre": "Action / Shooter",
+      "tag": "action",
+      "description": "Command a tank and make precise long-range shots through a sniper scope with cannon, machine gun and air strikes."
+    },
+    {
+      "slug": "dream-dart",
+      "appstore_id": 6450841031,
+      "google_play": null,
+      "genre": "Action / Shooter",
+      "tag": "action",
+      "description": "Rescue wild animals on farmland: track them with a thermal scope, put them to sleep with tranquilizer darts and release them safely."
+    },
+    {
+      "slug": "alien-invasion-puzzle",
+      "appstore_id": 6462422314,
+      "google_play": null,
+      "genre": "Puzzle",
+      "tag": "puzzle",
+      "description": "Play as an escaped alien spider: stretch your tentacles through mazes, avoid traps and drag scientists to your jaws."
+    },
+    {
+      "slug": "magnet-guy",
+      "appstore_id": 6452722233,
+      "google_play": null,
+      "genre": "Puzzle",
+      "tag": "puzzle",
+      "description": "Tap to switch the magnet on and guide the character through tricky mazes, avoiding obstacles on the way to the exit."
+    }
+  ]
+}
