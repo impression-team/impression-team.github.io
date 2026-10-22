@@ -92,7 +92,8 @@
       <li>Your game progress is stored on your device. Where a Game supports cloud saving, a copy is kept in
       your own iCloud account (iOS) or Google Play Games profile (Android) — never on our servers.</li>
       <li>The Games show advertising. Our advertising partners may collect a device advertising identifier
-      and technical device data in order to select and measure ads.</li>
+      and technical device data in order to select and measure ads. Some Games use Adjust to measure which
+      ad campaigns brought the install.</li>
       <li>We use Google Firebase (Google Analytics for Firebase and Firebase Crashlytics) and Unity Analytics
       to see how the Games are used and to find and fix crashes. This data is tied to app-level identifiers, not to your name or
       contact details.</li>
@@ -172,6 +173,12 @@
       <td>Purchase receipts and transaction identifiers issued by the App Store or Google Play</td>
       <td>Delivering the item you bought and restoring earlier purchases</td>
     </tr>
+    <tr>
+      <td>Install attribution</td>
+      <td>Time of install and first launch, the ad network, campaign and ad that led to the install, in-game
+      events and purchase revenue, together with the identifiers and device data listed above (Adjust)</td>
+      <td>Measuring which ad campaigns bring players, preventing fraudulent installs</td>
+    </tr>
   </table>
   <p>We do not collect your precise location. The Games do not use the camera, the microphone, the
   contact list, photos, calendars or health data.</p>
@@ -194,16 +201,22 @@
   explains how to opt out.</p>
 
   <h2 id="partners">5. Partners who may process data</h2>
-  <p>Advertising in the Games is delivered through <strong>Appodeal</strong>, which mediates several advertising
-  networks. Depending on your region and the available demand, ads may be served by:</p>
+  <p>Advertising in the Games is delivered through the <strong>Appodeal</strong> and <strong>AppLovin MAX</strong>
+  mediation platforms, which connect several advertising networks. Depending on the Game, your region and the
+  available demand, ads may be served by:</p>
   <ul>
     <li>Appodeal — <a href="https://www.appodeal.com/home/privacy-policy/" target="_blank" rel="noopener">privacy policy</a>,
       <a href="https://www.appodeal.com/home/partners/" target="_blank" rel="noopener">list of advertising partners</a></li>
     <li>Google AdMob / Google Ads — <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how Google uses data</a></li>
-    <li>AppLovin — <a href="https://www.applovin.com/privacy/" target="_blank" rel="noopener">privacy policy</a></li>
+    <li>AppLovin (AppLovin MAX mediation and AppLovin ads), provided by AppLovin Corporation — <a href="https://www.applovin.com/privacy/" target="_blank" rel="noopener">privacy policy</a></li>
     <li>Unity Ads — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">privacy policy</a></li>
     <li>Liftoff / Vungle — <a href="https://liftoff.io/privacy-policy/" target="_blank" rel="noopener">privacy policy</a></li>
-    <li>BidMachine, Bidon, Bigo Ads, InMobi, Mintegral and other networks connected through Appodeal mediation</li>
+    <li>BidMachine, Bidon, Bigo Ads, InMobi, Mintegral and other networks connected through Appodeal or
+      AppLovin MAX mediation</li>
+  </ul>
+  <p>Install attribution:</p>
+  <ul>
+    <li>Adjust, provided by Adjust GmbH — <a href="https://www.adjust.com/terms/privacy-policy/" target="_blank" rel="noopener">privacy policy</a></li>
   </ul>
   <p>Analytics and crash reporting:</p>
   <ul>
@@ -219,8 +232,9 @@
     <li>Unity Technologies (game engine and in-app purchasing) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">privacy policy</a></li>
   </ul>
   <p>These companies act as independent controllers of the data they collect through their own SDKs, and
-  their own privacy policies apply to that processing. Google processes Firebase data, and Unity processes
-  Unity Analytics data, on our behalf as data processors under their data processing terms.</p>
+  their own privacy policies apply to that processing. Google processes Firebase data, Unity processes
+  Unity Analytics data and Adjust processes attribution data on our behalf as data processors under their
+  data processing terms.</p>
 
   <h2 id="consent">6. Consent, tracking and your choices</h2>
 
@@ -280,8 +294,8 @@
     information for cross-context behavioural advertising by using the device settings in section 6.3.
     We do not discriminate against users who exercise their rights.</li>
     <li><strong>Deleting everything:</strong> uninstalling a Game removes all local data. Copies in iCloud or
-    Google Play Games are deleted as described in section 6.4. To delete analytics data collected by Firebase
-    or Unity Analytics, write to us and we will ask them to delete it. Purchases stay recorded by Apple or
+    Google Play Games are deleted as described in section 6.4. To delete analytics and attribution data
+    collected by Firebase, Unity Analytics or Adjust, write to us and we will ask them to delete it. Purchases stay recorded by Apple or
     Google so that you can restore them.</li>
   </ul>
   <p>To make a request, write to the address in section 12. We answer within 30 days.</p>
@@ -290,8 +304,8 @@
   <p>We keep no personal databases of our own. Data collected by advertising partners is retained according
   to their own policies. Firebase Crashlytics keeps crash reports for 90 days; Google Analytics for Firebase
   keeps user-level data for the retention period set in our Firebase project, no longer than 14 months, and
-  after that only aggregated reports remain. Unity Analytics data is retained according to Unity's data
-  retention rules. Data in your iCloud account or Google Play Games profile stays there until you delete it.
+  after that only aggregated reports remain. Unity Analytics and Adjust data is retained according to
+  Unity's and Adjust's data retention rules. Data in your iCloud account or Google Play Games profile stays there until you delete it.
   Support correspondence is kept for up to 24 months. Data may be processed on servers
   in countries other than your own, including the United States; our partners rely on Standard Contractual
   Clauses or equivalent safeguards for such transfers. We use the security measures provided by the platforms
@@ -352,7 +366,8 @@
       <li>Прогресс хранится на вашем устройстве. Если Игра поддерживает облачные сохранения, копия хранится
       в вашем собственном iCloud (iOS) или профиле Google Play Игр (Android), а не на наших серверах.</li>
       <li>В Играх есть реклама. Рекламные партнёры могут собирать рекламный идентификатор устройства
-      и технические данные, чтобы подобрать и измерить рекламу.</li>
+      и технические данные, чтобы подобрать и измерить рекламу. Некоторые Игры используют Adjust, чтобы
+      понимать, какая рекламная кампания привела к установке.</li>
       <li>Мы используем Google Firebase (Google Analytics for Firebase и Firebase Crashlytics) и Unity Analytics,
       чтобы понимать, как играют в Игры, и находить и исправлять сбои. Эти данные привязаны к идентификаторам приложения,
       а не к вашему имени или контактам.</li>
@@ -431,6 +446,13 @@
       <td>Чеки и идентификаторы транзакций от App Store или Google Play</td>
       <td>Выдача купленного и восстановление покупок</td>
     </tr>
+    <tr>
+      <td>Атрибуция установок</td>
+      <td>Время установки и первого запуска, рекламная сеть, кампания и объявление, после которых была
+      установка, игровые события и доход от покупок вместе с идентификаторами и данными устройства,
+      перечисленными выше (Adjust)</td>
+      <td>Оценка того, какие рекламные кампании приводят игроков, защита от мошеннических установок</td>
+    </tr>
   </table>
   <p>Точную геолокацию мы не собираем. Игры не используют камеру, микрофон, контакты, фотографии,
   календари и данные о здоровье.</p>
@@ -452,16 +474,21 @@
   CCPA) считают «продажей» или «передачей» — как отказаться, написано в разделе 9.</p>
 
   <h2>5. Партнёры</h2>
-  <p>Реклама в Играх показывается через <strong>Appodeal</strong>, который объединяет несколько рекламных сетей.
-  В зависимости от региона и спроса рекламу могут показывать:</p>
+  <p>Реклама в Играх показывается через платформы медиации <strong>Appodeal</strong> и <strong>AppLovin MAX</strong>,
+  которые объединяют несколько рекламных сетей. В зависимости от Игры, региона и спроса рекламу могут показывать:</p>
   <ul>
     <li>Appodeal — <a href="https://www.appodeal.com/home/privacy-policy/" target="_blank" rel="noopener">политика</a>,
       <a href="https://www.appodeal.com/home/partners/" target="_blank" rel="noopener">список партнёров</a></li>
     <li>Google AdMob / Google Ads — <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">как Google использует данные</a></li>
-    <li>AppLovin — <a href="https://www.applovin.com/privacy/" target="_blank" rel="noopener">политика</a></li>
+    <li>AppLovin (медиация AppLovin MAX и реклама AppLovin), предоставляется AppLovin Corporation — <a href="https://www.applovin.com/privacy/" target="_blank" rel="noopener">политика</a></li>
     <li>Unity Ads — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">политика</a></li>
     <li>Liftoff / Vungle — <a href="https://liftoff.io/privacy-policy/" target="_blank" rel="noopener">политика</a></li>
-    <li>BidMachine, Bidon, Bigo Ads, InMobi, Mintegral и другие сети, подключённые через медиацию Appodeal</li>
+    <li>BidMachine, Bidon, Bigo Ads, InMobi, Mintegral и другие сети, подключённые через медиацию Appodeal
+      или AppLovin MAX</li>
+  </ul>
+  <p>Атрибуция установок:</p>
+  <ul>
+    <li>Adjust, предоставляется Adjust GmbH — <a href="https://www.adjust.com/terms/privacy-policy/" target="_blank" rel="noopener">политика</a></li>
   </ul>
   <p>Аналитика и отчёты о сбоях:</p>
   <ul>
@@ -477,8 +504,9 @@
     <li>Unity Technologies (движок и покупки) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">политика</a></li>
   </ul>
   <p>Эти компании выступают самостоятельными операторами данных, которые собирают их собственные SDK,
-  и к такой обработке применяются их политики. Данные Firebase обрабатывает Google, а данные Unity Analytics —
-  Unity: по нашему поручению, как обработчики, в соответствии со своими условиями обработки данных.</p>
+  и к такой обработке применяются их политики. Данные Firebase обрабатывает Google, данные Unity Analytics —
+  Unity, данные атрибуции — Adjust: по нашему поручению, как обработчики, в соответствии со своими условиями
+  обработки данных.</p>
 
   <h2>6. Согласие, отслеживание и ваш выбор</h2>
 
@@ -537,8 +565,8 @@
     межконтекстной поведенческой рекламы можно через настройки из раздела 6.3. Мы не ухудшаем условия для
     тех, кто пользуется своими правами.</li>
     <li><strong>Удалить всё:</strong> удаление Игры стирает все локальные данные. Копии в iCloud или Google
-    Play Играх удаляются так, как описано в разделе 6.4. Чтобы удалить аналитические данные Firebase или
-    Unity Analytics, напишите нам — мы попросим их удалить. Сведения о покупках остаются у Apple и Google,
+    Play Играх удаляются так, как описано в разделе 6.4. Чтобы удалить данные аналитики и атрибуции Firebase,
+    Unity Analytics или Adjust, напишите нам — мы попросим их удалить. Сведения о покупках остаются у Apple и Google,
     чтобы вы могли их восстановить.</li>
   </ul>
   <p>Запрос отправляйте на адрес из раздела 12. Мы отвечаем в течение 30 дней.</p>
@@ -547,7 +575,7 @@
   <p>Собственных баз персональных данных мы не ведём. Данные, собранные рекламными партнёрами, хранятся
   по их правилам. Firebase Crashlytics хранит отчёты о сбоях 90 дней; Google Analytics for Firebase хранит
   данные на уровне пользователя в течение срока, заданного в нашем проекте Firebase, но не дольше 14 месяцев,
-  после чего остаются только обобщённые отчёты. Данные Unity Analytics хранятся по правилам Unity. Данные
+  после чего остаются только обобщённые отчёты. Данные Unity Analytics и Adjust хранятся по правилам Unity и Adjust. Данные
   в вашем iCloud или профиле Google Play Игр остаются там, пока вы их не удалите. Переписку с поддержкой
   мы храним до 24 месяцев. Данные могут обрабатываться на серверах
   за пределами вашей страны, включая США; для таких передач партнёры используют стандартные договорные
