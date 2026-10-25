@@ -74,14 +74,29 @@ def token():
     return _token[0]
 
 
+def _request(method, url, body=None, raw=False):
+    """Authorized call with retries on network hiccups (this connection drops TLS handshakes now and then)."""
+    data = json.dumps(body).encode() if body is not None else None
+    for attempt in range(4):
+        req = urllib.request.Request(url, data=data, method=method, headers={
+            'Authorization': 'Bearer ' + token(), 'Content-Type': 'application/json'})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                out = r.read()
+            return out if raw else (json.loads(out) if out else {})
+        except urllib.error.HTTPError as e:
+            if e.code >= 500 and attempt < 3:
+                time.sleep(3 * (attempt + 1))
+                continue
+            raise GooglePlayError('{} {}: {}'.format(e.code, url.split('?')[0], e.read()[:300].decode('utf-8', 'replace')))
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            if attempt == 3:
+                raise GooglePlayError('network error for {}: {}'.format(url.split('?')[0], e))
+            time.sleep(3 * (attempt + 1))
+
+
 def _get(url, raw=False):
-    req = urllib.request.Request(url, headers={'Authorization': 'Bearer ' + token()})
-    try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            data = r.read()
-    except urllib.error.HTTPError as e:
-        raise GooglePlayError('{} {}: {}'.format(e.code, url.split('?')[0], e.read()[:300].decode('utf-8', 'replace')))
-    return data if raw else json.loads(data)
+    return _request('GET', url, raw=raw)
 
 
 def apps():
@@ -106,6 +121,23 @@ def _parse_bucket(uri):
 def ratings(bucket_uri, packages):
     """Latest monthly ratings overview per package: the last row's 'Total Average Rating'."""
     bucket, prefix = _parse_bucket(bucket_uri)
+    names = _list_objects(bucket, prefix)
+    result = {}
+    for pkg in packages:
+        files = sorted(n for n in names if n.startswith('{}ratings_{}_'.format(prefix, pkg)) and n.endswith('_overview.csv'))
+        if not files:
+            continue
+        name = files[-1]
+        rows = [r for r in _read_csv(bucket, name) if (r.get('Total Average Rating') or '').strip() not in ('', 'NA')]
+        if rows:
+            last = rows[-1]
+            result[pkg] = {'rating': round(float(last['Total Average Rating']), 2), 'count': None,
+                           'month': name.rsplit('_', 2)[-2]}
+    return result
+
+
+
+def _list_objects(bucket, prefix):
     names, page = [], ''
     while True:
         url = 'https://storage.googleapis.com/storage/v1/b/{}/o?prefix={}'.format(bucket, urllib.parse.quote(prefix))
@@ -115,23 +147,57 @@ def ratings(bucket_uri, packages):
         names += [o['name'] for o in data.get('items', [])]
         page = data.get('nextPageToken')
         if not page:
-            break
-    result = {}
-    for pkg in packages:
-        files = sorted(n for n in names if n.startswith('{}ratings_{}_'.format(prefix, pkg)) and n.endswith('_overview.csv'))
-        if not files:
-            continue
-        name = files[-1]
-        raw = _get('https://storage.googleapis.com/storage/v1/b/{}/o/{}?alt=media'.format(
-            bucket, urllib.parse.quote(name, safe='')), raw=True)
-        text = raw.decode('utf-16') if raw[:2] in (b'\xff\xfe', b'\xfe\xff') else raw.decode('utf-8-sig')
-        rows = [r for r in csv.DictReader(io.StringIO(text)) if (r.get('Total Average Rating') or '').strip() not in ('', 'NA')]
-        if rows:
-            last = rows[-1]
-            result[pkg] = {'rating': round(float(last['Total Average Rating']), 2), 'count': None,
-                           'month': name.rsplit('_', 2)[-2]}
-    return result
+            return names
 
+
+def _read_csv(bucket, name):
+    raw = _get('https://storage.googleapis.com/storage/v1/b/{}/o/{}?alt=media'.format(
+        bucket, urllib.parse.quote(name, safe='')), raw=True)
+    text = raw.decode('utf-16') if raw[:2] in (b'\xff\xfe', b'\xfe\xff') else raw.decode('utf-8-sig')
+    return list(csv.DictReader(io.StringIO(text)))
+
+
+def rating_counts(bucket_uri):
+    """{package: number of ratings} from the reviews export (it includes ratings without text).
+    A review edited later can appear in several monthly files, so each is counted once."""
+    bucket, _ = _parse_bucket(bucket_uri)
+    seen = {}
+    for name in _list_objects(bucket, 'reviews/'):
+        if not name.endswith('.csv'):
+            continue
+        for row in _read_csv(bucket, name):
+            key = row.get('Review Link') or (row.get('Device'), row.get('Review Submit Millis Since Epoch'))
+            seen.setdefault(row['Package Name'], set()).add(key)
+    return {pkg: len(keys) for pkg, keys in seen.items()}
+
+
+def _with_edit(package, fn):
+    """Runs fn(edit_url) inside a temporary edit that is always deleted, never committed."""
+    base = 'https://androidpublisher.googleapis.com/androidpublisher/v3/applications/{}/edits'.format(package)
+    edit = _request('POST', base, {})
+    url = '{}/{}'.format(base, edit['id'])
+    try:
+        return fn(url)
+    finally:
+        _request('DELETE', url)
+
+
+def is_live(package):
+    """True if the production track has a release that is rolled out (completed or in progress)."""
+    tracks = _with_edit(package, lambda url: _get(url + '/tracks').get('tracks', []))
+    return any(t['track'] == 'production' and any(r.get('status') in ('completed', 'inProgress')
+                                                  for r in t.get('releases', [])) for t in tracks)
+
+
+def listing(package, language=None):
+    """Store listing: {'title', 'short', 'full', 'icon'} in the app's default language (or `language`)."""
+    def read(url):
+        lang = language or _get(url + '/details').get('defaultLanguage', 'en-US')
+        data = _get('{}/listings/{}'.format(url, lang))
+        icons = _get('{}/listings/{}/icon'.format(url, lang)).get('images', [])
+        return {'title': data.get('title'), 'short': data.get('shortDescription'),
+                'full': data.get('fullDescription'), 'icon': icons[0]['url'] if icons else None, 'language': lang}
+    return _with_edit(package, read)
 
 if __name__ == '__main__':
     try:

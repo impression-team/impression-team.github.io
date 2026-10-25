@@ -1,10 +1,15 @@
 {
   "_comment": "Portfolio on index.html. Order here = order on the site. Run: python3 tools/games/update_games.py",
+  "google_play_bucket": "gs://pubsite_prod_8809016086551507428",
+  "google_play_skip": [
+    "com.logik.mechmerge",
+    "house.construct.idler"
+  ],
   "games": [
     {
       "slug": "sea-diver",
       "appstore_id": 6818245473,
-      "google_play": null,
+      "google_play": "com.chardymov.diver",
       "genre": "Casual / Adventure",
       "tag": "casual",
       "description": "Dive from your boat into reefs, shipwrecks and sunken ruins, grab pearls and pirate gold and get back up before the air runs out. Better gear takes you deeper."
@@ -18,9 +23,17 @@
       "description": "A cosy side-view ant colony simulator: draw tunnels with your finger and watch your colony dig, gather food, defend the nest and grow."
     },
     {
+      "slug": "crush-crew",
+      "appstore_id": null,
+      "google_play": "com.chardymov.crushcrew",
+      "genre": "Action / Shooter",
+      "tag": "action",
+      "description": "Smash through the zombie horde in an armoured jeep, jump out with your squad to clear the streets, rescue survivors, defend the base and take the city back."
+    },
+    {
       "slug": "trains-and-rails",
       "appstore_id": 6814487568,
-      "google_play": null,
+      "google_play": "com.chardymov.trains",
       "genre": "Puzzle",
       "tag": "puzzle",
       "description": "A relaxing track-building puzzle in cosy steampunk style: lay straight rails, curves and switches before the steam train gets there."
@@ -118,7 +131,7 @@
     {
       "slug": "sniper-tank",
       "appstore_id": 6450857107,
-      "google_play": null,
+      "google_play": "sniperTank.PrecisionStrike.v1",
       "genre": "Action / Shooter",
       "tag": "action",
       "description": "Command a tank and make precise long-range shots through a sniper scope with cannon, machine gun and air strikes."
@@ -126,7 +139,7 @@
     {
       "slug": "dream-dart",
       "appstore_id": 6450841031,
-      "google_play": null,
+      "google_play": "dreamDart.RescuingTheWild.v1",
       "genre": "Action / Shooter",
       "tag": "action",
       "description": "Rescue wild animals on farmland: track them with a thermal scope, put them to sleep with tranquilizer darts and release them safely."
@@ -134,7 +147,7 @@
     {
       "slug": "alien-invasion-puzzle",
       "appstore_id": 6462422314,
-      "google_play": null,
+      "google_play": "alien.invasion.puzzle",
       "genre": "Puzzle",
       "tag": "puzzle",
       "description": "Play as an escaped alien spider: stretch your tentacles through mazes, avoid traps and drag scientists to your jaws."
@@ -142,7 +155,7 @@
     {
       "slug": "magnet-guy",
       "appstore_id": 6452722233,
-      "google_play": null,
+      "google_play": "magnet.guy.v1",
       "genre": "Puzzle",
       "tag": "puzzle",
       "description": "Tap to switch the magnet on and guide the character through tricky mazes, avoiding obstacles on the way to the exit."

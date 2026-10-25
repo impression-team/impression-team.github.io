@@ -3,9 +3,11 @@
 
 Reads tools/games/games.json, then for every game:
   * App Store (iTunes Lookup API): name, icon, link and ratings summed over all storefronts;
-  * Google Play: rating from the store page (skipped quietly if play.google.com is unreachable,
-    the last known value from ratings.json is kept);
-  * icon saved to assets/games/<slug>.jpg (from the App Store, or from "icon_file" on disk).
+  * Google Play (through Google APIs, see google_play.py; needs the service account key):
+    rating and number of ratings from the Play Console reports, whether the game is live in production
+    (no live release -> no Google Play button), name and icon for games that are only on Google Play;
+    without the key or network the last known values from ratings.json are kept;
+  * icon saved to assets/games/<slug>.jpg (App Store, then "icon_file" on disk, then the Play listing).
 Then rewrites the block between <!-- GAMES:START --> and <!-- GAMES:END --> in index.html.
 
 Usage:  python3 tools/games/update_games.py [--quick | --offline]
@@ -91,26 +93,44 @@ def appstore_data(ids, quick):
     return meta
 
 
-def google_play_rating(package):
-    page = get('https://play.google.com/store/apps/details?id={}&hl=en&gl=US'.format(package), timeout=10).decode('utf-8', 'replace')
-    for block in re.findall(r'<script type="application/ld\+json"[^>]*>(.*?)</script>', page, re.S):
-        try:
-            data = json.loads(block)
-        except ValueError:
-            continue
-        agg = data.get('aggregateRating') if isinstance(data, dict) else None
-        if agg:
-            return {'rating': round(float(agg['ratingValue']), 2), 'count': int(agg['ratingCount']), 'name': data.get('name')}
-    return {'rating': None, 'count': 0, 'name': None}
+def google_play_data(games, bucket, skip):
+    """{package: {'name', 'rating', 'count', 'live'}} for the packages in games.json, or None if unavailable."""
+    sys.path.insert(0, os.path.dirname(__file__))
+    import google_play as gp
+    try:
+        apps = {a['package']: a['name'] for a in gp.apps()}
+        packages = [g['google_play'] for g in games if g.get('google_play')]
+        ratings = gp.ratings(bucket.rstrip('/') + '/stats/ratings/', packages) if bucket else {}
+        counts = gp.rating_counts(bucket) if bucket else {}
+        out = {}
+        for pkg in packages:
+            out[pkg] = {'name': apps.get(pkg), 'rating': (ratings.get(pkg) or {}).get('rating'),
+                        'count': counts.get(pkg, 0), 'live': pkg in apps and gp.is_live(pkg)}
+        missing = sorted(set(apps) - set(packages) - set(skip))
+        if missing:
+            print('  Google Play apps not on the site: ' + ', '.join('{} ({})'.format(apps[p], p) for p in missing))
+        return out, gp
+    except gp.GooglePlayError as err:
+        print('  ! Google Play API unavailable ({}); keeping last known values'.format(err), file=sys.stderr)
+        return None, gp
 
 
-def save_icon(slug, src_url=None, src_file=None):
+def save_icon(slug, src_url=None, src_file=None, play_url=None):
     os.makedirs(ICON_DIR, exist_ok=True)
     out = os.path.join(ICON_DIR, slug + '.jpg')
     if src_url:
         url = re.sub(r'/\d+x\d+bb\.(jpg|png)$', '/{0}x{0}bb.jpg'.format(ICON_PX), src_url)
         with open(out, 'wb') as f:
             f.write(get(url))
+    elif play_url:
+        tmp = out + '.download'
+        with open(tmp, 'wb') as f:
+            f.write(get('{}=s{}'.format(play_url, ICON_PX)))
+        try:
+            subprocess.run(['sips', '-Z', str(ICON_PX), '-s', 'format', 'jpeg', '-s', 'formatOptions', '85',
+                            tmp, '--out', out], check=True, capture_output=True)
+        finally:
+            os.remove(tmp)
     elif src_file:
         subprocess.run(['sips', '-Z', str(ICON_PX), '-s', 'format', 'jpeg', '-s', 'formatOptions', '85',
                         os.path.expanduser(src_file), '--out', out], check=True, capture_output=True)
@@ -165,7 +185,8 @@ def card_html(g):
 
 def main():
     quick, offline = '--quick' in sys.argv, '--offline' in sys.argv
-    games = json.load(open(CONFIG, encoding='utf-8'))['games']
+    config = json.load(open(CONFIG, encoding='utf-8'))
+    games = config['games']
     known = json.load(open(RATINGS, encoding='utf-8')) if os.path.exists(RATINGS) else {}
 
     ids = [g['appstore_id'] for g in games if g.get('appstore_id')]
@@ -176,7 +197,10 @@ def main():
         print('App Store: {} apps, {}'.format(len(ids), 'US only' if quick else '{} storefronts'.format(len(STOREFRONTS))))
         store = appstore_data(ids, quick)
 
-    gp_ok = not offline
+    play, gp = (None, None)
+    if not offline:
+        print('Google Play: reports, live status and names')
+        play, gp = google_play_data(games, config.get('google_play_bucket'), config.get('google_play_skip', []))
     today = dt.date.today()
     for g in games:
         slug = g['slug']
@@ -199,19 +223,34 @@ def main():
         else:
             if g.get('appstore_id'):
                 print('  ! {}: not found in the App Store'.format(slug), file=sys.stderr)
-            g['icon'] = save_icon(slug, src_file=g['icon_file'])
+            g['icon'] = None
 
         g['gp_rating'], g['gp_count'] = prev.get('gp_rating'), prev.get('gp_count', 0)
-        if g.get('google_play') and gp_ok:
-            try:
-                gp = google_play_rating(g['google_play'])
-                g['gp_rating'], g['gp_count'] = gp['rating'], gp['count']
-                g['name'] = g.get('name') or gp['name']
-            except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as err:
-                gp_ok = False
-                print('  ! Google Play unreachable ({}); keeping last known ratings'.format(err), file=sys.stderr)
+        g['gp_live'] = prev.get('gp_live', True)
+        p = (play or {}).get(g.get('google_play'))
+        if p:
+            g['gp_rating'], g['gp_count'], g['gp_live'] = p['rating'], p['count'], p['live']
+            g['name'] = g.get('name') or p['name']
+        if g.get('google_play') and not g['gp_live']:
+            print('  ! {}: no live production release on Google Play, button hidden'.format(slug), file=sys.stderr)
+        if not g.get('gp_live'):
+            g['google_play'] = None
+        if not g.get('name'):
+            g['name'] = prev.get('name') or slug
 
-        known[slug] = {k: g.get(k) for k in ('name', 'appstore_url', 'new', 'as_rating', 'as_count', 'gp_rating', 'gp_count')}
+        if g['icon'] is None:                      # games that are not on the App Store
+            if g.get('icon_file'):
+                g['icon'] = save_icon(slug, src_file=g['icon_file'])
+            elif gp and g.get('google_play') and not offline:
+                try:
+                    g['icon'] = save_icon(slug, play_url=gp.listing(g['google_play'])['icon'])
+                except Exception as err:            # keep the previous icon if the download fails
+                    print('  ! {}: Play icon not downloaded ({})'.format(slug, err), file=sys.stderr)
+            if g['icon'] is None:
+                g['icon'] = 'assets/games/{}.jpg'.format(slug)
+
+        known[slug] = {k: g.get(k) for k in ('name', 'appstore_url', 'new', 'as_rating', 'as_count',
+                                            'gp_rating', 'gp_count', 'gp_live')}
         known[slug]['checked'] = prev.get('checked') if offline else today.isoformat()
         print('  {:28} AS {:>4} ({:>4})  GP {:>4} ({:>4})'.format(
             slug, g.get('as_rating') or '-', g.get('as_count') or 0, g.get('gp_rating') or '-', g.get('gp_count') or 0))

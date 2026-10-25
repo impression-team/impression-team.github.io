@@ -7,6 +7,7 @@
     "as_count": 0,
     "gp_rating": null,
     "gp_count": 0,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "bee-rush": {
@@ -15,8 +16,9 @@
     "new": false,
     "as_rating": 4.54,
     "as_count": 52,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 4.0,
+    "gp_count": 7,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "music-band-tycoon": {
@@ -25,8 +27,9 @@
     "new": false,
     "as_rating": 4.69,
     "as_count": 52,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 4.23,
+    "gp_count": 56,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "kawaii-unicorn": {
@@ -35,8 +38,9 @@
     "new": false,
     "as_rating": 4.43,
     "as_count": 99,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 4.21,
+    "gp_count": 37,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "bubble-rush-shooter": {
@@ -45,8 +49,9 @@
     "new": false,
     "as_rating": 5.0,
     "as_count": 4,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 3.09,
+    "gp_count": 25,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "super-hero-hotel": {
@@ -55,8 +60,9 @@
     "new": false,
     "as_rating": null,
     "as_count": 0,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 4.56,
+    "gp_count": 15,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "guns-and-bike": {
@@ -65,8 +71,9 @@
     "new": false,
     "as_rating": null,
     "as_count": 0,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 5.0,
+    "gp_count": 1,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "drag-race-queen": {
@@ -75,8 +82,9 @@
     "new": false,
     "as_rating": 5.0,
     "as_count": 2,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 3.8,
+    "gp_count": 49,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "invaders-city-defence": {
@@ -85,8 +93,9 @@
     "new": false,
     "as_rating": 3.83,
     "as_count": 6,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 3.0,
+    "gp_count": 4,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "labor-rush": {
@@ -95,8 +104,9 @@
     "new": false,
     "as_rating": 2.4,
     "as_count": 5,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 3.42,
+    "gp_count": 34,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "space-pipes": {
@@ -105,8 +115,9 @@
     "new": false,
     "as_rating": 3.89,
     "as_count": 18,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 3.76,
+    "gp_count": 17,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "aircraft-constructor-idler": {
@@ -115,8 +126,9 @@
     "new": null,
     "as_rating": null,
     "as_count": null,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 3.33,
+    "gp_count": 50,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "sniper-tank": {
@@ -127,6 +139,7 @@
     "as_count": 2,
     "gp_rating": null,
     "gp_count": 0,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "dream-dart": {
@@ -135,8 +148,9 @@
     "new": false,
     "as_rating": 5.0,
     "as_count": 2,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 1.0,
+    "gp_count": 1,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "alien-invasion-puzzle": {
@@ -147,6 +161,7 @@
     "as_count": 1,
     "gp_rating": null,
     "gp_count": 0,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "magnet-guy": {
@@ -157,6 +172,7 @@
     "as_count": 1,
     "gp_rating": null,
     "gp_count": 0,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "sea-diver": {
@@ -167,6 +183,7 @@
     "as_count": 0,
     "gp_rating": null,
     "gp_count": 0,
+    "gp_live": true,
     "checked": "2026-10-25"
   },
   "antheim": {
@@ -175,8 +192,20 @@
     "new": true,
     "as_rating": null,
     "as_count": 0,
+    "gp_rating": 5.0,
+    "gp_count": 4,
+    "gp_live": true,
+    "checked": "2026-10-25"
+  },
+  "crush-crew": {
+    "name": "Crush Crew: Zombie Survival",
+    "appstore_url": null,
+    "new": null,
+    "as_rating": null,
+    "as_count": null,
     "gp_rating": null,
     "gp_count": 0,
+    "gp_live": true,
     "checked": "2026-10-25"
   }
 }
