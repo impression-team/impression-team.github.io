@@ -158,5 +158,25 @@
     "gp_rating": null,
     "gp_count": 0,
     "checked": "2026-10-25"
+  },
+  "sea-diver": {
+    "name": "Sea Diver: Scuba Treasure Hunt",
+    "appstore_url": "https://apps.apple.com/us/app/sea-diver-scuba-treasure-hunt/id6818245473",
+    "new": true,
+    "as_rating": null,
+    "as_count": 0,
+    "gp_rating": null,
+    "gp_count": 0,
+    "checked": "2026-10-25"
+  },
+  "antheim": {
+    "name": "Antheim: Ant Colony Sim",
+    "appstore_url": "https://apps.apple.com/us/app/antheim-ant-colony-sim/id6814969517",
+    "new": true,
+    "as_rating": null,
+    "as_count": 0,
+    "gp_rating": null,
+    "gp_count": 0,
+    "checked": "2026-10-25"
   }
 }

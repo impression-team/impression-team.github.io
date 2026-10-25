@@ -2,6 +2,22 @@
   "_comment": "Portfolio on index.html. Order here = order on the site. Run: python3 tools/games/update_games.py",
   "games": [
     {
+      "slug": "sea-diver",
+      "appstore_id": 6818245473,
+      "google_play": null,
+      "genre": "Casual / Adventure",
+      "tag": "casual",
+      "description": "Dive from your boat into reefs, shipwrecks and sunken ruins, grab pearls and pirate gold and get back up before the air runs out. Better gear takes you deeper."
+    },
+    {
+      "slug": "antheim",
+      "appstore_id": 6814969517,
+      "google_play": "com.chardymov.antcolony",
+      "genre": "Simulation",
+      "tag": "idle",
+      "description": "A cosy side-view ant colony simulator: draw tunnels with your finger and watch your colony dig, gather food, defend the nest and grow."
+    },
+    {
       "slug": "trains-and-rails",
       "appstore_id": 6814487568,
       "google_play": null,
