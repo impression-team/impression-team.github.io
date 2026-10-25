@@ -1,23 +1,23 @@
 {
   "trains-and-rails": {
-    "name": "Trains and Rails",
-    "appstore_url": "https://apps.apple.com/us/app/trains-and-rails/id6814487568",
+    "name": "Trains and Rails: Train Puzzle",
+    "appstore_url": "https://apps.apple.com/us/app/trains-and-rails-train-puzzle/id6814487568",
     "new": true,
     "as_rating": null,
     "as_count": 0,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "bee-rush": {
     "name": "Bee Rush: Match 3 Puzzle",
     "appstore_url": "https://apps.apple.com/us/app/bee-rush-match-3-puzzle/id1597633366",
     "new": false,
-    "as_rating": 4.53,
-    "as_count": 51,
+    "as_rating": 4.54,
+    "as_count": 52,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "music-band-tycoon": {
     "name": "Music Band Tycoon: Idle Star",
@@ -27,7 +27,7 @@
     "as_count": 52,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "kawaii-unicorn": {
     "name": "Kawaii Unicorn: Coloring Book",
@@ -37,7 +37,7 @@
     "as_count": 99,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "bubble-rush-shooter": {
     "name": "Bubble Rush Shooter: Pop Game",
@@ -47,17 +47,17 @@
     "as_count": 4,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "super-hero-hotel": {
-    "name": "Super Hero Hotel: Build Tower",
-    "appstore_url": "https://apps.apple.com/us/app/super-hero-hotel-build-tower/id6475118803",
+    "name": "Hero Hotel: Idle Tower Tycoon",
+    "appstore_url": "https://apps.apple.com/us/app/hero-hotel-idle-tower-tycoon/id6475118803",
     "new": false,
     "as_rating": null,
     "as_count": 0,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "guns-and-bike": {
     "name": "Guns and Bike: Moto Shooter",
@@ -67,7 +67,7 @@
     "as_count": 0,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "drag-race-queen": {
     "name": "Drag Race Queen: Bike Rush",
@@ -77,7 +77,7 @@
     "as_count": 2,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "invaders-city-defence": {
     "name": "Invaders City Defence Idle RPG",
@@ -87,7 +87,7 @@
     "as_count": 6,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "labor-rush": {
     "name": "Labor Rush: Maternity Tycoon",
@@ -97,27 +97,27 @@
     "as_count": 5,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "space-pipes": {
     "name": "Space Pipes",
     "appstore_url": "https://apps.apple.com/us/app/space-pipes/id1543773816",
     "new": false,
-    "as_rating": 3.78,
+    "as_rating": 3.89,
     "as_count": 18,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "aircraft-constructor-idler": {
     "name": "Aircraft Constructor Idler",
     "appstore_url": null,
-    "new": false,
+    "new": null,
     "as_rating": null,
     "as_count": null,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "sniper-tank": {
     "name": "Sniper Tank: Precision Strike",
@@ -127,7 +127,7 @@
     "as_count": 2,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "dream-dart": {
     "name": "Dream Dart: Rescuing the Wild",
@@ -137,7 +137,7 @@
     "as_count": 2,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "alien-invasion-puzzle": {
     "name": "Alien Invasion Puzzle",
@@ -147,7 +147,7 @@
     "as_count": 1,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   },
   "magnet-guy": {
     "name": "Magnet Guy",
@@ -157,6 +157,6 @@
     "as_count": 1,
     "gp_rating": null,
     "gp_count": 0,
-    "checked": "2026-10-12"
+    "checked": "2026-10-25"
   }
 }
