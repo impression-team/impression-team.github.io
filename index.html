@@ -490,6 +490,11 @@
       padding: 1.8rem;
       transition: all 0.25s;
     }
+    /* The whole card opens the app page: the title link stretches over it,
+       the store buttons sit above that layer and keep their own links. */
+    .app-card { position: relative; cursor: pointer; }
+    .app-card-link::after { content: ''; position: absolute; inset: 0; border-radius: 8px; }
+    .app-card .game-links { position: relative; z-index: 1; }
     .app-card:hover {
       border-color: var(--accent);
       box-shadow: 0 0 25px var(--glow);
@@ -503,7 +508,6 @@
       align-items: center;
       justify-content: center;
       font-size: 3rem;
-      text-decoration: none;
     }
     .app-body h3 {
       font-family: 'Orbitron', sans-serif;
@@ -1050,13 +1054,12 @@
     <h2>Apps</h2>
     <div class="separator"></div>
     <div class="app-card">
-      <a href="tspl/en/" class="app-icon gc-puzzle" aria-label="TSPL Label Print website">🏷️</a>
+      <div class="app-icon gc-puzzle">🏷️</div>
       <div class="app-body">
-        <h3><a href="tspl/en/">TSPL Label Print</a></h3>
+        <h3><a href="tspl/en/" class="app-card-link">TSPL Label Print</a></h3>
         <span class="game-genre-tag tag-puzzle">macOS · Utilities</span>
         <p>Print labels from PDF files and images on a thermal label printer — no vendor driver required. A fix for label printers whose drivers don't support your version of macOS or Apple silicon.</p>
         <div class="game-links">
-          <a href="tspl/en/" class="store-btn">Website &amp; Free Trial</a>
           <a href="tspl/" class="store-btn" hreflang="ru" lang="ru">По-русски</a>
           <a href="https://apps.apple.com/us/app/tspl-label-print/id6815395919?mt=12" target="_blank" class="store-btn">Mac App Store</a>
           <a href="tspl-privacy.html" class="store-btn">Privacy Policy</a>
