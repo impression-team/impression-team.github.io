@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TSPL Label Print — print labels on a Mac without the printer driver</title>
+  <meta name="description" content="Thermal label printer stopped printing after a macOS update or on an Apple M1–M4 Mac? TSPL Label Print prints PDFs and images to TSPL printers (Xprinter, TSC, Gprinter) without the vendor driver. Free trial: 20 labels." />
+  <link rel="canonical" href="https://impression-team.github.io/tspl/en/" />
+  <link rel="alternate" hreflang="en" href="https://impression-team.github.io/tspl/en/" />
+  <link rel="alternate" hreflang="ru" href="https://impression-team.github.io/tspl/" />
+  <link rel="alternate" hreflang="x-default" href="https://impression-team.github.io/tspl/en/" />
+  <meta property="og:title" content="TSPL Label Print — print labels on a Mac without the printer driver" />
+  <meta property="og:description" content="Shipping labels and price tags from PDF to a TSPL thermal printer on an Apple silicon Mac. No vendor driver needed." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://impression-team.github.io/tspl/en/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TSPL Label Print",
+    "operatingSystem": "macOS 13 or later",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Prints labels from PDF files and images on TSPL thermal label printers without the vendor driver.",
+    "offers": { "@type": "Offer", "price": "4.99", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "Impression Team Studio" }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #050a14;
+      --bg2: #080f1e;
+      --accent: #00d4ff;
+      --accent2: #7b2fff;
+      --accent3: #ff3e6c;
+      --glow: rgba(0, 212, 255, 0.25);
+      --text: #c8d8f0;
+      --text-dim: #6a7f9a;
+      --card-bg: rgba(10, 20, 40, 0.85);
+      --border: rgba(0, 212, 255, 0.18);
+      --ok: #00dc78;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Exo 2', sans-serif; font-weight: 300; overflow-x: hidden; }
+    a { color: var(--accent); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1.2rem 4rem;
+      background: rgba(5, 10, 20, 0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+    .nav-logo span { color: var(--accent2); }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; align-items: center; }
+    nav ul a { text-decoration: none; color: var(--text-dim); font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    nav ul a:hover { color: var(--accent); }
+    nav .nav-buy { color: #000; background: var(--accent); padding: 0.45rem 1rem; border-radius: 3px; font-weight: 600; }
+    nav .nav-buy:hover { color: #000; box-shadow: 0 0 20px rgba(0,212,255,0.6); }
+
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
+    .section-tag { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+    h2 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.5rem, 3.2vw, 2.3rem); font-weight: 700; color: #fff; margin-bottom: 1rem; line-height: 1.2; }
+    .separator { width: 60px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 2rem; }
+    .lead { font-size: 1.05rem; line-height: 1.7; max-width: 760px; margin-bottom: 1.5rem; }
+
+    /* Hero */
+    #hero {
+      min-height: 88vh; display: flex; align-items: center;
+      padding: 8rem 2rem 4rem;
+      background-image:
+        radial-gradient(circle at 75% 45%, rgba(123,47,255,0.20) 0%, transparent 40%),
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: auto, 60px 60px, 60px 60px;
+    }
+    .hero-grid { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center; }
+    .hero-tag { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 2px; padding: 0.35rem 1rem; margin-bottom: 1.5rem; display: inline-block; }
+    h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(1.9rem, 4.4vw, 3.4rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.3rem; color: #fff; text-shadow: 0 0 40px rgba(0,212,255,0.35); }
+    h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub { font-size: clamp(1rem, 1.8vw, 1.15rem); color: var(--text); line-height: 1.65; margin-bottom: 2rem; max-width: 600px; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .hero-note { font-size: 0.85rem; color: var(--text-dim); }
+    .btn { display: inline-block; padding: 0.85rem 1.8rem; border-radius: 3px; font-family: 'Exo 2', sans-serif; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; cursor: pointer; border: 0; text-align: center; }
+    .btn-primary { background: var(--accent); color: #000; font-weight: 700; box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    .btn-primary:hover:not(:disabled) { box-shadow: 0 0 35px rgba(0,212,255,0.8); transform: translateY(-2px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .btn-outline { border: 1px solid var(--accent2); color: #c9b3ff; background: none; }
+    .btn-outline:hover { background: rgba(123,47,255,0.15); box-shadow: 0 0 20px rgba(123,47,255,0.4); }
+
+    /* Label mock */
+    .label-mock { justify-self: center; width: min(320px, 100%); }
+    .label {
+      background: #f4f1ea; color: #111; border-radius: 6px; padding: 1.1rem 1.2rem;
+      font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem; line-height: 1.35;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 20px 60px rgba(0,0,0,0.55), 0 0 60px rgba(0,212,255,0.12);
+      transform: rotate(-2deg);
+    }
+    .label .bars { height: 64px; margin: 0.7rem 0 0.4rem; background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 12px); }
+    .label .big { font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em; }
+    .label .row { display: flex; justify-content: space-between; }
+    .label-caption { text-align: center; font-size: 0.8rem; color: var(--text-dim); margin-top: 1.4rem; }
+
+    /* Problem */
+    #problem { background: var(--bg2); }
+    .symptoms { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+    .symptom { border: 1px solid var(--border); border-left: 3px solid var(--accent3); background: var(--card-bg); border-radius: 6px; padding: 1.2rem 1.3rem; line-height: 1.55; font-size: 0.95rem; }
+    .symptom code { color: #ffb3c4; font-size: 0.85rem; word-break: break-all; }
+    .why { line-height: 1.7; max-width: 780px; }
+
+    /* How */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .step { border-left: 2px solid var(--accent2); padding: 0.4rem 0 0.4rem 1.4rem; }
+    .step-num { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--accent); display: block; margin-bottom: 0.4rem; }
+    .step h3 { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: #fff; margin-bottom: 0.4rem; line-height: 1.4; }
+    .step p { font-size: 0.92rem; color: var(--text-dim); line-height: 1.55; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0.6rem 2rem; list-style: none; }
+    .features li { padding-left: 1.3rem; position: relative; line-height: 1.55; font-size: 0.97rem; }
+    .features li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+
+    /* Download + buy */
+    #get { background: var(--bg2); }
+    .get-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
+    .panel { border: 1px solid var(--border); background: var(--card-bg); border-radius: 8px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; scroll-margin-top: 6rem; }
+    .panel.buy { border-color: var(--accent); box-shadow: 0 0 30px rgba(0,212,255,0.12); }
+    .panel h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #fff; }
+    .panel p, .panel li { line-height: 1.6; font-size: 0.95rem; }
+    .panel ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .panel ul li { padding-left: 1.3rem; position: relative; }
+    .panel ul li::before { content: '✓'; position: absolute; left: 0; color: var(--ok); }
+    .price { font-family: 'Orbitron', sans-serif; font-size: 2.4rem; font-weight: 900; color: #fff; }
+    .price small { font-size: 0.9rem; font-weight: 400; color: var(--text-dim); font-family: 'Exo 2', sans-serif; margin-left: 0.4rem; }
+    .dim { color: var(--text-dim); font-size: 0.85rem; line-height: 1.55; }
+    label.lbl { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+    input[type="email"] { width: 100%; background: rgba(5,10,20,0.8); border: 1px solid var(--border); border-radius: 4px; color: #fff; font-family: 'Exo 2', sans-serif; font-size: 1rem; padding: 0.75rem 0.9rem; }
+    input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
+    .check { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.88rem; line-height: 1.5; }
+    .check input { flex-shrink: 0; width: 20px; height: 20px; margin-top: 0.1rem; accent-color: var(--accent); cursor: pointer; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .form-status { font-size: 0.92rem; line-height: 1.5; min-height: 1.4em; }
+    .form-status.err { color: var(--accent3); }
+    .form-status.ok { color: var(--ok); }
+    .pay-methods { font-size: 0.8rem; color: var(--text-dim); }
+
+    /* FAQ */
+    .faq { max-width: 820px; }
+    .faq details { border-bottom: 1px solid var(--border); padding: 1.1rem 0; }
+    .faq summary { cursor: pointer; font-weight: 600; color: #fff; font-size: 1.02rem; list-style: none; position: relative; padding-right: 2rem; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; position: absolute; right: 0; top: -0.1rem; color: var(--accent); font-size: 1.3rem; }
+    .faq details[open] summary::after { content: '–'; }
+    .faq details p { margin-top: 0.7rem; line-height: 1.65; font-size: 0.97rem; }
+
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); text-align: center; padding: 2rem 1rem; font-size: 0.8rem; color: var(--text-dim); line-height: 1.8; }
+    footer span { color: var(--accent); }
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--accent); }
+    .footer-req summary { cursor: pointer; width: fit-content; margin: 0 auto; }
+    .nav-lang { margin-left: auto; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.12em; text-decoration: none; border: 1px solid var(--border); border-radius: 3px; padding: 0.35rem 0.6rem; }
+    .nav-lang:hover { color: var(--accent); border-color: var(--accent); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1rem; }
+      nav ul li:not(:last-child) { display: none; }
+      .hero-grid, .get-grid { grid-template-columns: 1fr; }
+      .label-mock { order: -1; width: min(260px, 80%); }
+      .section-inner { padding: 4rem 1rem; }
+      #hero { padding: 6.5rem 1rem 3rem; min-height: auto; }
+      .panel { padding: 1.4rem 1.1rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-logo { font-size: 0.8rem; }
+      .hero-cta .btn { width: 100%; }
+      .features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">Impression<span>&nbsp;Team</span></a>
+  <a href="../" class="nav-lang" hreflang="ru" lang="ru" title="Русская версия">RU</a>
+  <ul>
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#get" class="nav-buy">Get it</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">// macOS · Apple silicon</div>
+      <h1>Your label printer<br>prints again <em>on&nbsp;a&nbsp;Mac</em></h1>
+      <p class="hero-sub">TSPL Label Print prints labels from PDF files and images on thermal printers that speak TSPL — Xprinter, TSC, Gprinter and others — <b>without the vendor driver</b>. For printers that stopped working after a macOS update or never worked on an M1–M4 Mac.</p>
+      <div class="hero-cta">
+        <a href="#download" class="btn btn-primary">Free trial</a>
+        <a href="https://apps.apple.com/us/app/tspl-label-print/id6815395919?mt=12" class="btn btn-outline" target="_blank" rel="noopener">Mac App Store</a>
+      </div>
+      <p class="hero-note">The free trial prints 20 labels with every feature unlocked. macOS 13 or later.</p>
+    </div>
+    <div class="label-mock" aria-hidden="true">
+      <div class="label">
+        <div class="row"><span>PRIORITY · 4×6</span><span>2.6 lb</span></div>
+        <div class="bars"></div>
+        <div class="big">9400 1118 9922</div>
+        <div class="row"><span>Austin → Denver</span><span>1/1</span></div>
+      </div>
+      <p class="label-caption">PDF from your shipping account → label in seconds</p>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="section-inner">
+    <span class="section-tag">// Sound familiar?</span>
+    <h2>The Mac sends the job,<br>the printer stays silent</h2>
+    <div class="separator"></div>
+    <div class="symptoms">
+      <div class="symptom">The job shows up in the print queue and disappears, but no label comes out.</div>
+      <div class="symptom">The printer worked before a macOS update and doesn't now. Reinstalling the driver doesn't help.</div>
+      <div class="symptom">The driver from the vendor's website won't install or won't work on an Apple M1–M4 Mac.</div>
+      <div class="symptom">The print log (<code>/var/log/cups/error_log</code>) shows <code>com.apple.badarch-error</code>.</div>
+    </div>
+    <p class="why">The cause is almost always the same: the driver's filter was built only for older Intel Macs, and current macOS on Apple silicon refuses to run it. The printer is fine — the commands just never reach it. TSPL Label Print turns your label into TSPL commands itself and sends them straight to the printer, bypassing the broken driver.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="section-inner">
+    <span class="section-tag">// How it works</span>
+    <h2>Three steps to a printed label</h2>
+    <div class="separator"></div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Printer in Printers &amp; Scanners</h3>
+        <p>If the printer is already added in macOS, there's nothing to do. If not, add it with any driver, for example "Generic PostScript Printer".</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Open your label</h3>
+        <p>Drag in a PDF from your marketplace or shipping account, or a PNG or JPG. The preview shows exactly what will come out.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Print</h3>
+        <p>Set the label size and click Print. A multi-page PDF prints one page per label.</p>
+      </div>
+    </div>
+
+    <ul class="features">
+      <li>PDF, PNG, JPG, TIFF, HEIC — open or drag into the window</li>
+      <li>Exact 203 dpi black-and-white preview, just like the printout</li>
+      <li>Any label size: 4×6 in, 58×40 mm, 75×50 mm and your own</li>
+      <li>Number of copies and gap between labels</li>
+      <li>Auto-rotation to the label orientation, or rotate manually</li>
+      <li>Dithering for logos and photos, invert</li>
+      <li>Print density and speed, 180° flip</li>
+      <li>Test label to check size and direction</li>
+      <li>Works offline and sends nothing anywhere</li>
+      <li>English and Russian interface; tested on Xprinter XP-360B with Apple silicon Macs</li>
+    </ul>
+  </div>
+</section>
+
+<section id="get">
+  <div class="section-inner">
+    <span class="section-tag">// Try and buy</span>
+    <h2>Test it with your printer first</h2>
+    <div class="separator"></div>
+    <div class="get-grid">
+      <div class="panel" id="download">
+        <h3>Free trial</h3>
+        <p>The full app, limited to 20 labels. The test label doesn't count, so you can tune the settings as long as you like.</p>
+        <ul>
+          <li>macOS 13 Ventura or later</li>
+          <li>Apple silicon and Intel Macs</li>
+          <li>Signed and notarized by Apple</li>
+        </ul>
+        <a href="../TSPL-Label-Print.zip" class="btn btn-primary" download>Download .zip</a>
+        <p class="dim">Unzip the archive and drag TSPL Label Print into your Applications folder.</p>
+      </div>
+
+      <div class="panel buy" id="buy">
+        <h3>Full version</h3>
+        <div class="price">$4.99<small>one-time purchase, no subscription</small></div>
+        <ul>
+          <li>Unlimited labels</li>
+          <li>Purchase and updates through the Mac App Store</li>
+          <li>Install on all your Macs with the same Apple Account</li>
+          <li>Works offline, collects no data</li>
+        </ul>
+        <a href="https://apps.apple.com/us/app/tspl-label-print/id6815395919?mt=12" class="btn btn-primary" target="_blank" rel="noopener">Buy on the Mac App Store</a>
+        <p class="dim">Price shown is for the US store; Apple sets local prices in other countries. Before installing the App Store version, delete the trial copy — your settings stay.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="section-inner">
+    <span class="section-tag">// FAQ</span>
+    <h2>Questions</h2>
+    <div class="separator"></div>
+    <div class="faq">
+      <details>
+        <summary>Which printers are supported?</summary>
+        <p>Thermal label printers that use the TSPL / TSPL2 command language at 203 dpi, connected to your Mac over USB or the network and added in Printers &amp; Scanners. That covers most budget Xprinter, TSC, Gprinter printers and their clones. Tested on Xprinter XP-360B. The easiest check is to download the trial and print a test label — it's free.</p>
+      </details>
+      <details>
+        <summary>My printer doesn't print — will this help?</summary>
+        <p>If the printer receives the job but prints nothing, and the CUPS log shows <code>badarch</code>, then yes, that's exactly the case this app solves. If macOS doesn't see the printer at all (it isn't detected over USB), the problem is the connection, and the app can't fix it. The trial shows this before you pay.</p>
+      </details>
+      <details>
+        <summary>Do I need to remove the old driver?</summary>
+        <p>No. The app sends raw jobs that bypass the driver's filter, so the old driver doesn't get in the way. You can keep the print queue as it is.</p>
+      </details>
+      <details>
+        <summary>How do I go from the trial to the full version?</summary>
+        <p>Buy TSPL Label Print on the <a href="https://apps.apple.com/us/app/tspl-label-print/id6815395919?mt=12" target="_blank" rel="noopener">Mac App Store</a>, delete the trial copy from Applications and install the App Store version. Label sizes and other settings carry over.</p>
+      </details>
+      <details>
+        <summary>Can I get a refund?</summary>
+        <p>Purchases made on the Mac App Store are refunded by Apple: request one at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>. That's why we recommend printing a few labels with the trial first.</p>
+      </details>
+      <details>
+        <summary>Can I pay another way, or buy several licenses for a company?</summary>
+        <p>License keys for the website version are sold in Russian rubles on the <a href="../" hreflang="ru">Russian page</a>. For anything else, write to <a href="mailto:vitaliy.chardymov@gmail.com">vitaliy.chardymov@gmail.com</a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024–2026 <span>Impression Team Studio</span> · TSPL Label Print</p>
+  <p>
+    <a href="../../tspl-privacy.html">App privacy policy</a> ·
+    <a href="mailto:vitaliy.chardymov@gmail.com">Support</a> ·
+    <a href="../" hreflang="ru">Русская версия</a>
+  </p>
+  <p>Xprinter, TSC and Gprinter are trademarks of their respective owners and are mentioned only to describe compatibility.</p>
+</footer>
+
+</body>
+</html>

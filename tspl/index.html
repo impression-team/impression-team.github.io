@@ -6,6 +6,19 @@
   <title>TSPL Label Print — печать этикеток на Mac без драйвера</title>
   <meta name="description" content="Принтер этикеток не печатает на Mac после обновления macOS или на Apple M1–M4? TSPL Label Print печатает PDF и картинки на термопринтеры TSPL (Xprinter, TSC, Gprinter) без драйвера. 20 этикеток бесплатно." />
   <link rel="canonical" href="https://impression-team.github.io/tspl/" />
+  <link rel="alternate" hreflang="ru" href="https://impression-team.github.io/tspl/" />
+  <link rel="alternate" hreflang="en" href="https://impression-team.github.io/tspl/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://impression-team.github.io/tspl/en/" />
+  <script>
+    // Кнопка «Купить» в пробной версии ведёт сюда (#buy). Приложение говорит на первом языке
+    // системы; если он не русский, покупателю нужна английская страница с Mac App Store.
+    (function () {
+      var first = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      if (location.hash === '#buy' && !/^ru/i.test(first)) {
+        location.replace('en/#get');
+      }
+    })();
+  </script>
   <meta property="og:title" content="TSPL Label Print — печать этикеток на Mac без драйвера" />
   <meta property="og:description" content="PDF-этикетки маркетплейсов на термопринтер с Mac на Apple silicon. Без драйвера производителя." />
   <meta property="og:type" content="website" />
@@ -157,6 +170,8 @@
     footer a { color: var(--text-dim); }
     footer a:hover { color: var(--accent); }
     .footer-req summary { cursor: pointer; width: fit-content; margin: 0 auto; }
+    .nav-lang { margin-left: auto; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.12em; text-decoration: none; border: 1px solid var(--border); border-radius: 3px; padding: 0.35rem 0.6rem; }
+    .nav-lang:hover { color: var(--accent); border-color: var(--accent); }
 
     @media (max-width: 900px) {
       nav { padding: 1rem 1rem; }
@@ -178,6 +193,7 @@
 
 <nav>
   <a href="../index.html" class="nav-logo">Impression<span>&nbsp;Team</span></a>
+  <a href="en/" class="nav-lang" hreflang="en" lang="en" title="English version">EN</a>
   <ul>
     <li><a href="#problem">Проблема</a></li>
     <li><a href="#how">Как работает</a></li>
@@ -366,7 +382,8 @@
     <a href="oferta.html">Лицензионный договор (оферта)</a> ·
     <a href="../pd-policy.html">Политика обработки персональных данных</a> ·
     <a href="../tspl-privacy.html">Конфиденциальность приложения</a> ·
-    <a href="mailto:vitaliy.chardymov@gmail.com">Поддержка</a>
+    <a href="mailto:vitaliy.chardymov@gmail.com">Поддержка</a> ·
+    <a href="en/" hreflang="en">English</a>
   </p>
   <p>Xprinter, TSC, Gprinter — товарные знаки их владельцев; упоминаются для описания совместимости.</p>
 </footer>
