@@ -1,0 +1,53 @@
+{
+ "sources": {
+  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/75/90/0a/75900ae4-a56f-6178-ebaf-5e6d7a58d149/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1024x1024bb.png",
+  "shots": [
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/f2/07/a7f207e4-e122-dd68-5947-de8ba2a43084/01_wreck.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/fd/1a/55/fd1a5531-1552-ca0c-6598-08fde5666583/02_shark.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/bc/30/94/bc309423-9b54-435c-9dce-23a2bef4b2f3/03_cave.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/4d/4f/7b/4d4f7bdb-e4b4-fd16-62c0-7276c1e10678/04_deep.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/71/3e/93/713e936f-a0a9-fe3f-12ca-40bd00bc7266/05_gear.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/e9/07/31/e9073130-9374-6f5a-7c42-3bbe3370d53b/06_oceans.png/9999x9999bb.jpg"
+  ],
+  "video": "~/Unity Projects/Sea Diver/StoreAssets/yandex/video/promo-en-1920x1080.mp4@1792878336",
+  "sheet": "4188e97f2a602a93aa42907d3a9e8039b9de3d40e8ad237197fe8f7e755200f3"
+ },
+ "dims": [
+  [
+   2868,
+   1320,
+   1434,
+   660
+  ],
+  [
+   2868,
+   1320,
+   1434,
+   660
+  ],
+  [
+   2868,
+   1320,
+   1434,
+   660
+  ],
+  [
+   2868,
+   1320,
+   1434,
+   660
+  ],
+  [
+   2868,
+   1320,
+   1434,
+   660
+  ],
+  [
+   2868,
+   1320,
+   1434,
+   660
+  ]
+ ]
+}

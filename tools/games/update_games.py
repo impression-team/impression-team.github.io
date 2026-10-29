@@ -165,20 +165,22 @@ def card_html(g):
                   'class="store-btn">Google Play</a>\n').format(e(g['google_play']))
     ratings = rating_html('App Store', g.get('as_rating'), g.get('as_count', 0)) + \
         rating_html('Google Play', g.get('gp_rating'), g.get('gp_count', 0))
+    # the whole card opens the game's press page (the title link is stretched over the card in CSS)
     return (
         '  <article class="game-card">\n'
         '    <div class="game-head">\n'
         '      <img class="game-icon" src="{icon}" alt="{name} icon" width="80" height="80" loading="lazy">\n'
         '      <div>\n'
-        '        <h3>{name}</h3>\n'
+        '        <h3><a class="game-link" href="{page}/">{name}</a></h3>\n'
         '        <span class="game-genre-tag tag-{tag}">{genre}</span>{badge}\n'
         '      </div>\n'
         '    </div>\n'
         '    <p class="game-desc">{desc}</p>\n'
         '{ratings_block}'
-        '    <div class="game-links">\n{links}    </div>\n'
+        '    <div class="game-links">\n{links}        <span class="game-more">Press kit ›</span>\n    </div>\n'
         '  </article>\n'
     ).format(icon=e(g['icon']), name=e(g['name']), tag=e(g['tag']), genre=e(g['genre']), badge=badge,
+             page=e(g.get('page') or g['slug']),
              desc=e(g['description']), links=links,
              ratings_block='      <div class="game-ratings">\n{}      </div>\n'.format(ratings) if ratings else '')
 

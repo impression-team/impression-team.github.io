@@ -12,7 +12,10 @@
       "google_play": "com.chardymov.diver",
       "genre": "Casual / Adventure",
       "tag": "casual",
-      "description": "Dive from your boat into reefs, shipwrecks and sunken ruins, grab pearls and pirate gold and get back up before the air runs out. Better gear takes you deeper."
+      "description": "Dive from your boat into reefs, shipwrecks and sunken ruins, grab pearls and pirate gold and get back up before the air runs out. Better gear takes you deeper.",
+      "press": {
+        "video": "~/Unity Projects/Sea Diver/StoreAssets/yandex/video/promo-en-1920x1080.mp4"
+      }
     },
     {
       "slug": "antheim",
@@ -20,7 +23,8 @@
       "google_play": "com.chardymov.antcolony",
       "genre": "Simulation",
       "tag": "idle",
-      "description": "A cosy side-view ant colony simulator: draw tunnels with your finger and watch your colony dig, gather food, defend the nest and grow."
+      "description": "A cosy side-view ant colony simulator: draw tunnels with your finger and watch your colony dig, gather food, defend the nest and grow.",
+      "press_page": "custom"
     },
     {
       "slug": "crush-crew",
@@ -36,7 +40,10 @@
       "google_play": "com.chardymov.trains",
       "genre": "Puzzle",
       "tag": "puzzle",
-      "description": "A relaxing track-building puzzle in cosy steampunk style: lay straight rails, curves and switches before the steam train gets there."
+      "description": "A relaxing track-building puzzle in cosy steampunk style: lay straight rails, curves and switches before the steam train gets there.",
+      "press": {
+        "video": "~/Unity Projects/Trains and Rails/VideoCaptures/out/final/youtube_promo_en.mp4"
+      }
     },
     {
       "slug": "bee-rush",
@@ -76,7 +83,9 @@
       "google_play": "idle.craft.simulator",
       "genre": "Idle / Builder",
       "tag": "idle",
-      "description": "Build your own pocket tower hotel from toy bricks, hire workers and superheroes and grow it into a hotel empire."
+      "description": "Build your own pocket tower hotel from toy bricks, hire workers and superheroes and grow it into a hotel empire.",
+      "page": "hero-hotel",
+      "aso": "hero-hotel"
     },
     {
       "slug": "guns-and-bike",

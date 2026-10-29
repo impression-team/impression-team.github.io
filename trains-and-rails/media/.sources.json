@@ -1,0 +1,53 @@
+{
+ "sources": {
+  "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/52/9b/32/529b32c2-e032-84d0-6661-21a2c62afefa/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1024x1024bb.png",
+  "shots": [
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/dd/d3/6d/ddd36dd0-6d81-2b94-f262-13e3d77555e6/01_drag.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/8a/9c/32/8a9c322a-63bb-b277-8b31-412420f5eb21/02_bridge.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/51/d4/22/51d422e3-ebe1-0624-143b-7f24b13d24b5/03_crossing.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/5f/5c/f4/5f5cf46a-aac3-5f82-4936-903df10c1c8a/04_halt.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/eb/c6/5f/ebc65fe2-3130-814c-964e-5d25799f2595/05_tunnel.png/9999x9999bb.jpg",
+   "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/bd/fb/6d/bdfb6dc2-030c-3c6b-9473-02b243d5ec86/06_volcano.png/9999x9999bb.jpg"
+  ],
+  "video": "~/Unity Projects/Trains and Rails/VideoCaptures/out/final/youtube_promo_en.mp4@1789993914",
+  "sheet": "0e8c83d56e5271207d3307995d4532478e7e97dab1cbec245861743780b42624"
+ },
+ "dims": [
+  [
+   1320,
+   2868,
+   660,
+   1434
+  ],
+  [
+   1320,
+   2868,
+   660,
+   1434
+  ],
+  [
+   1320,
+   2868,
+   660,
+   1434
+  ],
+  [
+   1320,
+   2868,
+   660,
+   1434
+  ],
+  [
+   1320,
+   2868,
+   660,
+   1434
+  ],
+  [
+   1320,
+   2868,
+   660,
+   1434
+  ]
+ ]
+}
