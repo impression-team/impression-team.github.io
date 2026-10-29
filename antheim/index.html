@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antheim: Ant Colony Sim — press page | Impression Team</title>
+  <meta name="description" content="Antheim is a cosy side-view ant colony simulator for iPhone, iPad, Mac and Android: draw tunnels with your finger and watch the colony dig, flood, fight and grow. Videos, screenshots, fact sheet and press kit." />
+  <link rel="canonical" href="https://impression-team.github.io/antheim/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Antheim: Ant Colony Sim" />
+  <meta property="og:description" content="Dig tunnels, grow the nest. A side-view ant colony sim where you draw the tunnels with your finger." />
+  <meta property="og:url" content="https://impression-team.github.io/antheim/" />
+  <meta property="og:image" content="https://impression-team.github.io/antheim/media/water.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="media/icon-512.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050a14;
+      --bg2: #080f1e;
+      --accent: #00d4ff;
+      --accent2: #7b2fff;
+      --warm: #ffb44a;
+      --text: #c8d8f0;
+      --text-dim: #6a7f9a;
+      --card-bg: rgba(10, 20, 40, 0.85);
+      --border: rgba(0, 212, 255, 0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 4rem;
+      background: rgba(5, 10, 20, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-logo span { color: var(--accent2); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--accent); }
+
+    section { position: relative; }
+    .inner { max-width: 1120px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-tag {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+    .separator {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Hero ── */
+    #top {
+      background:
+        radial-gradient(circle at 75% 40%, rgba(255,180,74,0.12) 0%, transparent 45%),
+        radial-gradient(circle at 20% 30%, rgba(123,47,255,0.16) 0%, transparent 45%),
+        linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+      background-size: auto, auto, 60px 60px, 60px 60px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding-top: 4.5rem;
+      padding-bottom: 4rem;
+    }
+    .hero-icon {
+      width: 168px; height: 168px;
+      border-radius: 38px;
+      box-shadow: 0 0 50px rgba(255,180,74,0.25), 0 10px 40px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      color: var(--warm);
+      margin-bottom: 1.6rem;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 1.2rem 1.6rem; align-items: flex-start; }
+    .badge { display: flex; flex-direction: column; gap: 0.35rem; text-decoration: none; }
+    .badge img { height: 52px; width: auto; display: block; }
+    .badge small { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-dim); text-transform: uppercase; }
+
+    /* ── Pitch ── */
+    #about { background: var(--bg2); }
+    .pitch p { font-size: 1.12rem; line-height: 1.75; max-width: 860px; margin-bottom: 1.1rem; color: var(--text); }
+    .pitch strong { color: #fff; font-weight: 600; }
+
+    /* ── Videos ── */
+    .videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    figure.video {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--card-bg);
+    }
+    figure.video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+    figure.video figcaption { padding: 0.9rem 1.1rem; }
+    figure.video figcaption b {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--warm);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    figure.video figcaption span { font-size: 0.9rem; color: var(--text-dim); }
+
+    /* ── Screenshots ── */
+    #screenshots { background: var(--bg2); }
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    .shots a { display: block; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+    .shots img { display: block; width: 100%; height: auto; }
+    .note { font-size: 0.85rem; color: var(--text-dim); margin-top: 1rem; }
+
+    /* ── What's new / Winter ── */
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .card {
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.8rem;
+    }
+    .card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #fff; margin-bottom: 0.3rem; }
+    .card .when { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); margin-bottom: 1rem; display: block; }
+    .card ul { list-style: none; }
+    .card li { position: relative; padding-left: 1.2rem; margin-bottom: 0.6rem; font-size: 0.95rem; }
+    .card li::before { content: '›'; position: absolute; left: 0; color: var(--accent2); font-weight: 600; }
+    .card p { font-size: 0.95rem; margin-bottom: 0.7rem; }
+
+    /* ── Facts ── */
+    #facts { background: var(--bg2); }
+    .facts { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-dim); font-weight: 400; width: 34%; white-space: nowrap; }
+    td { color: var(--text); }
+    .kit h3 { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; color: #fff; margin-bottom: 0.6rem; }
+    .kit p, .kit li { font-size: 0.92rem; }
+    .kit ul { list-style: none; margin: 0.8rem 0 1.4rem; }
+    .kit li { padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem; }
+    .kit li::before { content: '›'; position: absolute; left: 0; color: var(--accent2); }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.8rem;
+      border-radius: 3px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(0,212,255,0.45);
+    }
+    .btn:hover { box-shadow: 0 0 32px rgba(0,212,255,0.75); }
+    .btn small { font-weight: 400; letter-spacing: 0.05em; text-transform: none; opacity: 0.75; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.9;
+    }
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0.9rem 1.2rem; }
+      nav ul { display: none; }
+      .inner { padding: 3.5rem 1rem; }
+      .hero { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 2.5rem; }
+      .hero-icon { width: 120px; height: 120px; border-radius: 27px; }
+      .videos, .two, .facts { grid-template-columns: 1fr; }
+      .shots {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 46%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 0.6rem;
+      }
+      .shots a { scroll-snap-align: start; }
+      th { width: 40%; white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">Impression<span>&nbsp;Team</span></a>
+  <ul>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#new">What's new</a></li>
+    <li><a href="#facts">Press kit</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="top">
+  <div class="inner hero">
+    <img class="hero-icon" src="media/icon-512.png" alt="Antheim app icon" width="168" height="168" />
+    <div>
+      <span class="section-tag">// Press page</span>
+      <h1>Antheim: Ant Colony Sim</h1>
+      <p class="subtitle">Dig tunnels, grow the nest</p>
+      <div class="badges">
+        <a class="badge" href="https://apps.apple.com/app/id6814969517" target="_blank" rel="noopener">
+          <img src="media/badge-app-store.svg" alt="Download on the App Store" />
+          <small>iPhone · iPad · Mac</small>
+        </a>
+        <a class="badge" href="https://play.google.com/store/apps/details?id=com.chardymov.antcolony" target="_blank" rel="noopener">
+          <img src="media/badge-google-play.svg" alt="Get it on Google Play" />
+          <small>Android</small>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pitch -->
+<section id="about">
+  <div class="inner pitch">
+    <span class="section-tag">// The game</span>
+    <h2>You draw the tunnels. The colony digs them.</h2>
+    <div class="separator"></div>
+    <p>Antheim is a cosy side-view ant colony simulator. You draw a tunnel with your finger, and the whole
+    colony digs the drawn path, carries the soil to the surface grain by grain and opens whatever was hidden
+    underground.</p>
+    <p><strong>The underground is alive.</strong> Break into a pocket of ground water and it pours down the
+    shafts until you dig a drain. Boulders fall when the soil under them is dug out and crush whoever stands
+    there, raiders included.</p>
+    <p><strong>Every chamber has its own rules:</strong> a nursery, storage, an aphid farm for honeydew,
+    a brewery that turns honeydew into mead (drink it and the colony works twice as fast), a laboratory with
+    permanent research and sentry posts whose soldiers meet raiders at the door. Spiders, centipedes and rival
+    colonies attack across four worlds — Flower Meadow, Pine Forest, Autumn Grove and Tropical Jungle.</p>
+  </div>
+</section>
+
+<!-- Videos -->
+<section id="videos">
+  <div class="inner">
+    <span class="section-tag">// In motion</span>
+    <h2>Four short stories from the anthill</h2>
+    <div class="separator"></div>
+    <div class="videos">
+      <figure class="video">
+        <video src="media/water.mp4" poster="media/water.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption><b>Ground water</b><span>Dig into a water pocket and it floods the shafts below until you drain it.</span></figcaption>
+      </figure>
+      <figure class="video">
+        <video src="media/rock.mp4" poster="media/rock.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption><b>Falling rocks</b><span>Dig out the soil under a boulder and it falls on whoever is below.</span></figcaption>
+      </figure>
+      <figure class="video">
+        <video src="media/raid.mp4" poster="media/raid.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption><b>Raids</b><span>Spiders and rival colonies attack, and every ant drops its work to defend the queen.</span></figcaption>
+      </figure>
+      <figure class="video">
+        <video src="media/mead.mp4" poster="media/mead.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <figcaption><b>Mead</b><span>The brewery turns aphid honeydew into mead that makes the colony work twice as fast.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Screenshots -->
+<section id="screenshots">
+  <div class="inner">
+    <span class="section-tag">// Screenshots</span>
+    <h2>iPhone screenshots</h2>
+    <div class="separator"></div>
+    <div class="shots">
+      <a href="media/screen-1.jpg" target="_blank"><img src="media/screen-1.jpg" alt="Drawing a tunnel with a finger" width="660" height="1434" loading="lazy" /></a>
+      <a href="media/screen-2.jpg" target="_blank"><img src="media/screen-2.jpg" alt="The colony digs the drawn tunnel" width="660" height="1434" loading="lazy" /></a>
+      <a href="media/screen-3.jpg" target="_blank"><img src="media/screen-3.jpg" alt="Ground water flooding a shaft" width="660" height="1434" loading="lazy" /></a>
+      <a href="media/screen-4.jpg" target="_blank"><img src="media/screen-4.jpg" alt="A boulder falling into a tunnel" width="660" height="1434" loading="lazy" /></a>
+      <a href="media/screen-5.jpg" target="_blank"><img src="media/screen-5.jpg" alt="Ants defending the nest from a raid" width="660" height="1434" loading="lazy" /></a>
+      <a href="media/screen-6.jpg" target="_blank"><img src="media/screen-6.jpg" alt="The four worlds of Antheim" width="660" height="1434" loading="lazy" /></a>
+    </div>
+    <p class="note">Full-size screenshots (1320 × 2868) are in the press kit below.</p>
+  </div>
+</section>
+
+<!-- What's new / Winter -->
+<section id="new">
+  <div class="inner">
+    <span class="section-tag">// Coming up</span>
+    <h2>Version 1.3 and the winter event</h2>
+    <div class="separator"></div>
+    <div class="two">
+      <div class="card">
+        <h3>What's new in 1.3 — Day and Night</h3>
+        <span class="when">November 2026</span>
+        <ul>
+          <li>Day and night with real weather: dawn over the meadow, rain that darkens the soil, snow over the pine forest.</li>
+          <li>Every world has its own ants and its own raiders: carpenter ants, earwigs and a hedgehog in the Pine Forest; wasps, chafers and a badger in the Autumn Grove; army ants, rhino beetles and an armadillo in the Tropics.</li>
+          <li>Coming back the next day: a summary of what the colony did while you were away, a seven-day gift calendar that never resets, and optional reminders.</li>
+          <li>Live world cards, a new loading screen with tips, and Bahasa Indonesia as the tenth language.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Winter in the Anthill</h3>
+        <span class="when">15 December – 10 January</span>
+        <p>A free holiday event. Snow settles on the meadow and the pine forest, snow caps the bushes, a lantern
+        lights up by the entrance at dusk and a fir tree with lights stands by the queen.</p>
+        <p>Every day brings a winter task — stock up 300 food, open two caves, hatch five ants, or beat a raid at
+        dusk or at night — with crystals as the reward. Seven completed tasks give the queen a winter hat she
+        keeps forever. No purchase needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Facts and press kit -->
+<section id="facts">
+  <div class="inner">
+    <span class="section-tag">// For press</span>
+    <h2>Fact sheet</h2>
+    <div class="separator"></div>
+    <div class="facts">
+      <table>
+        <tr><th>Title</th><td>Antheim: Ant Colony Sim</td></tr>
+        <tr><th>Developer</th><td>Impression Team (on the App Store as Vitalii Chardymov), publishing games since 2021</td></tr>
+        <tr><th>Platforms</th><td>iPhone and iPad (iOS / iPadOS 15+), Mac, Android</td></tr>
+        <tr><th>Released</th><td>October 2026</td></tr>
+        <tr><th>Price</th><td>Free, with optional in-app purchases and optional rewarded videos</td></tr>
+        <tr><th>Age rating</th><td>4+</td></tr>
+        <tr><th>Languages</th><td>10: English, Russian, Spanish, Portuguese (Brazil), German, French, Japanese, Korean, Chinese (Simplified), Bahasa Indonesia (from 1.3)</td></tr>
+        <tr><th>Play</th><td>No account or sign-in, works offline, progress saves to iCloud</td></tr>
+        <tr><th>Contact</th><td><a href="mailto:vitalii.chardymov@gmail.com">vitalii.chardymov@gmail.com</a></td></tr>
+        <tr><th>Privacy</th><td><a href="../privacy.html">Privacy policy</a></td></tr>
+      </table>
+      <div class="kit">
+        <h3>Press kit</h3>
+        <p>Everything in one archive, free to use in coverage of Antheim:</p>
+        <ul>
+          <li>App icon, 1024 × 1024</li>
+          <li>6 iPhone screenshots, 1320 × 2868</li>
+          <li>4 key frames from the gameplay videos, 1920 × 1080</li>
+          <li>Fact sheet and description (text)</li>
+        </ul>
+        <a class="btn" href="presskit.zip" download>Download press kit <small>(ZIP, 3.7 MB)</small></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024–2026 Impression Team Studio</p>
+  <p><a href="../">All games</a> · <a href="../privacy.html">Privacy Policy</a> · <a href="../terms.html">Terms</a></p>
+</footer>
+
+<script>
+  // Respect reduced motion: no autoplay, show controls instead.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) {
+      v.removeAttribute('autoplay');
+      v.pause();
+      v.controls = true;
+    });
+  }
+</script>
+
+</body>
+</html>
