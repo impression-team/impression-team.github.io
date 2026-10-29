@@ -51,7 +51,7 @@
 <!-- ============================ ENGLISH ============================ -->
 <main id="en" lang="en">
   <h1>Privacy Policy</h1>
-  <p class="meta">Last updated: 25 October 2026 · Effective: 25 October 2026</p>
+  <p class="meta">Last updated: 30 October 2026 · Effective: 30 October 2026</p>
 
   <p>This Privacy Policy explains what information is collected when you use the mobile games
   developed and published by <strong>Vitalii Chardymov</strong> (operating as <strong>Impression Team</strong>),
@@ -96,8 +96,10 @@
       and technical device data in order to select and measure ads. Some Games use Adjust to measure which
       ad campaigns brought the install; for some Games this data goes to our publishing partner.</li>
       <li>We use Google Firebase (Google Analytics for Firebase and Firebase Crashlytics) and Unity Analytics
-      to see how the Games are used and to find and fix crashes. This data is tied to app-level identifiers, not to your name or
-      contact details.</li>
+      to see how the Games are used and to find and fix crashes. Some Games also use Unity Remote Config to update
+      settings, such as the dates of seasonal events, without an app update; it signs the Game in with an anonymous
+      Unity player ID, with no login screen and no account. This data is tied to app-level identifiers, not to your
+      name or contact details.</li>
       <li>Purchases are processed by Apple and Google. We never see your card details.</li>
       <li>You can turn off personalised advertising at any time in your device settings, and in the
       European Economic Area, the United Kingdom and Switzerland you can change your consent choices.</li>
@@ -144,8 +146,9 @@
     <tr>
       <td>App instance identifiers</td>
       <td>Firebase installation ID, Google Analytics app instance ID, Crashlytics installation UUID,
-      Unity installation ID and Unity Analytics player ID</td>
-      <td>Counting unique installs and sessions, linking crash reports from the same installation</td>
+      Unity installation ID, Unity Analytics player ID and Unity Authentication anonymous player ID</td>
+      <td>Counting unique installs and sessions, linking crash reports from the same installation, fetching game
+      settings (Unity Remote Config)</td>
     </tr>
     <tr>
       <td>Device and connection data</td>
@@ -196,6 +199,7 @@
     last.</li>
     <li>To sync your progress between devices and to show achievements and leaderboards through iCloud or
     Google Play Games, if you use them.</li>
+    <li>To change game settings, such as the dates of seasonal events, without an app update (Unity Remote Config).</li>
   </ul>
   <p>We do not sell your personal information for money, and we do not use it to build profiles outside
   advertising. Where our partners use advertising identifiers for cross-context behavioural advertising,
@@ -223,12 +227,16 @@
   <p>Publishing partners: some Games are distributed on Google Play together with a publishing partner. In
   such Games the Adjust account belongs to the publisher, which receives the attribution data described in
   section 3.4 and uses it, under its own privacy policy, to measure and run marketing for the Game.</p>
-  <p>Analytics and crash reporting:</p>
+  <p>Analytics, crash reporting and game settings:</p>
   <ul>
     <li>Google Firebase — Google Analytics for Firebase and Firebase Crashlytics, provided by Google LLC /
       Google Ireland Limited — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy and security</a>,
       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google privacy policy</a></li>
     <li>Unity Analytics (Unity Gaming Services), provided by Unity Technologies — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">privacy policy for players</a></li>
+    <li>Unity Remote Config and Unity Authentication (Unity Gaming Services), provided by Unity Technologies —
+      delivery of game settings, such as the dates of seasonal events, without an app update; Authentication signs
+      the Game in anonymously and assigns a random Unity player ID, with no name, email or account —
+      <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">privacy policy for players</a></li>
   </ul>
   <p>Platform services we rely on:</p>
   <ul>
@@ -238,7 +246,7 @@
   </ul>
   <p>These companies act as independent controllers of the data they collect through their own SDKs, and
   their own privacy policies apply to that processing. Google processes Firebase data and Unity processes
-  Unity Analytics data on our behalf as data processors under their data processing terms. Adjust processes
+  Unity Analytics, Remote Config and Authentication data on our behalf as data processors under their data processing terms. Adjust processes
   attribution data as a data processor for the owner of the Adjust account — us or our publishing partner.</p>
 
   <h2 id="consent">6. Consent, tracking and your choices</h2>
@@ -300,7 +308,7 @@
     We do not discriminate against users who exercise their rights.</li>
     <li><strong>Deleting everything:</strong> uninstalling a Game removes all local data. Copies in iCloud or
     Google Play Games are deleted as described in section 6.4. To delete analytics and attribution data
-    collected by Firebase, Unity Analytics or Adjust, write to us and we will ask them, and where relevant
+    collected by Firebase, Unity Gaming Services or Adjust, write to us and we will ask them, and where relevant
     our publishing partner, to delete it. Purchases stay recorded by Apple or
     Google so that you can restore them.</li>
   </ul>
@@ -310,7 +318,7 @@
   <p>We keep no personal databases of our own. Data collected by advertising partners is retained according
   to their own policies. Firebase Crashlytics keeps crash reports for 90 days; Google Analytics for Firebase
   keeps user-level data for the retention period set in our Firebase project, no longer than 14 months, and
-  after that only aggregated reports remain. Unity Analytics and Adjust data is retained according to
+  after that only aggregated reports remain. Unity Gaming Services (Analytics, Remote Config, Authentication) and Adjust data is retained according to
   Unity's and Adjust's data retention rules. Data in your iCloud account or Google Play Games profile stays there until you delete it.
   Support correspondence is kept for up to 24 months. Data may be processed on servers
   in countries other than your own, including the United States; our partners rely on Standard Contractual
@@ -332,7 +340,7 @@
 <!-- ============================ РУССКИЙ ============================ -->
 <main id="ru" lang="ru" hidden>
   <h1>Политика конфиденциальности</h1>
-  <p class="meta">Обновлено: 25 октября 2026 г. · Действует с: 25 октября 2026 г.</p>
+  <p class="meta">Обновлено: 30 октября 2026 г. · Действует с: 30 октября 2026 г.</p>
 
   <p>Эта политика объясняет, какие данные собираются, когда вы играете в мобильные игры,
   которые разрабатывает и публикует <strong>Виталий Чардымов</strong> (под именем <strong>Impression Team</strong>) —
@@ -377,8 +385,10 @@
       понимать, какая рекламная кампания привела к установке; в части Игр эти данные получает наш
       партнёр-издатель.</li>
       <li>Мы используем Google Firebase (Google Analytics for Firebase и Firebase Crashlytics) и Unity Analytics,
-      чтобы понимать, как играют в Игры, и находить и исправлять сбои. Эти данные привязаны к идентификаторам приложения,
-      а не к вашему имени или контактам.</li>
+      чтобы понимать, как играют в Игры, и находить и исправлять сбои. Некоторые Игры также используют Unity Remote Config,
+      чтобы менять настройки, например даты сезонных событий, без обновления приложения; для этого Игра входит
+      в Unity анонимно, со случайным идентификатором игрока, без экрана входа и без аккаунта. Эти данные привязаны
+      к идентификаторам приложения, а не к вашему имени или контактам.</li>
       <li>Покупки обрабатывают Apple и Google. Данные карты мы не видим.</li>
       <li>Персонализированную рекламу можно отключить в настройках устройства, а в ЕЭЗ, Великобритании
       и Швейцарии — изменить своё согласие.</li>
@@ -425,8 +435,9 @@
     <tr>
       <td>Идентификаторы установки приложения</td>
       <td>Firebase installation ID, идентификатор экземпляра приложения Google Analytics, UUID установки Crashlytics,
-      идентификатор установки Unity и идентификатор игрока Unity Analytics</td>
-      <td>Подсчёт уникальных установок и сессий, связь отчётов о сбоях с одной установкой</td>
+      идентификатор установки Unity, идентификатор игрока Unity Analytics и анонимный идентификатор игрока Unity Authentication</td>
+      <td>Подсчёт уникальных установок и сессий, связь отчётов о сбоях с одной установкой, получение настроек
+      Игры (Unity Remote Config)</td>
     </tr>
     <tr>
       <td>Данные устройства и соединения</td>
@@ -476,6 +487,7 @@
     <li>Чтобы получать обобщённую статистику — например, сколько игроков доходят до уровня и сколько длятся сессии.</li>
     <li>Чтобы синхронизировать прогресс между устройствами и показывать достижения и таблицы рекордов через
     iCloud или Google Play Игры, если вы ими пользуетесь.</li>
+    <li>Чтобы менять настройки Игры, например даты сезонных событий, без обновления приложения (Unity Remote Config).</li>
   </ul>
   <p>Мы не продаём ваши данные за деньги и не строим профили вне рекламы. Использование рекламных
   идентификаторов для межконтекстной поведенческой рекламы некоторые законы (например, закон Калифорнии
@@ -501,12 +513,16 @@
   <p>Партнёры-издатели: некоторые Игры распространяются в Google Play вместе с партнёром-издателем. В таких
   Играх аккаунт Adjust принадлежит издателю: он получает данные атрибуции, описанные в разделе 3.4,
   и использует их по своей политике конфиденциальности, чтобы оценивать и вести маркетинг Игры.</p>
-  <p>Аналитика и отчёты о сбоях:</p>
+  <p>Аналитика, отчёты о сбоях и настройки игр:</p>
   <ul>
     <li>Google Firebase — Google Analytics for Firebase и Firebase Crashlytics, предоставляются Google LLC /
       Google Ireland Limited — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">конфиденциальность и безопасность Firebase</a>,
       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политика Google</a></li>
     <li>Unity Analytics (Unity Gaming Services), предоставляется Unity Technologies — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">политика для игроков</a></li>
+    <li>Unity Remote Config и Unity Authentication (Unity Gaming Services), предоставляются Unity Technologies —
+      доставка настроек Игры, например дат сезонных событий, без обновления приложения; Authentication выполняет
+      анонимный вход и присваивает случайный идентификатор игрока Unity, без имени, почты и аккаунта —
+      <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">политика для игроков</a></li>
   </ul>
   <p>Платформенные сервисы:</p>
   <ul>
@@ -515,8 +531,8 @@
     <li>Unity Technologies (движок и покупки) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">политика</a></li>
   </ul>
   <p>Эти компании выступают самостоятельными операторами данных, которые собирают их собственные SDK,
-  и к такой обработке применяются их политики. Данные Firebase обрабатывает Google, а данные Unity Analytics —
-  Unity: по нашему поручению, как обработчики, в соответствии со своими условиями обработки данных. Данные
+  и к такой обработке применяются их политики. Данные Firebase обрабатывает Google, а данные Unity Analytics,
+  Remote Config и Authentication — Unity: по нашему поручению, как обработчики, в соответствии со своими условиями обработки данных. Данные
   атрибуции Adjust обрабатывает как обработчик для владельца аккаунта Adjust — нас или нашего партнёра-издателя.</p>
 
   <h2>6. Согласие, отслеживание и ваш выбор</h2>
@@ -577,7 +593,7 @@
     тех, кто пользуется своими правами.</li>
     <li><strong>Удалить всё:</strong> удаление Игры стирает все локальные данные. Копии в iCloud или Google
     Play Играх удаляются так, как описано в разделе 6.4. Чтобы удалить данные аналитики и атрибуции Firebase,
-    Unity Analytics или Adjust, напишите нам — мы попросим их, а при необходимости и нашего партнёра-издателя,
+    Unity Gaming Services или Adjust, напишите нам — мы попросим их, а при необходимости и нашего партнёра-издателя,
     удалить эти данные. Сведения о покупках остаются у Apple и Google,
     чтобы вы могли их восстановить.</li>
   </ul>
@@ -587,7 +603,8 @@
   <p>Собственных баз персональных данных мы не ведём. Данные, собранные рекламными партнёрами, хранятся
   по их правилам. Firebase Crashlytics хранит отчёты о сбоях 90 дней; Google Analytics for Firebase хранит
   данные на уровне пользователя в течение срока, заданного в нашем проекте Firebase, но не дольше 14 месяцев,
-  после чего остаются только обобщённые отчёты. Данные Unity Analytics и Adjust хранятся по правилам Unity и Adjust. Данные
+  после чего остаются только обобщённые отчёты. Данные Unity Gaming Services (Analytics, Remote Config, Authentication) и Adjust
+  хранятся по правилам Unity и Adjust. Данные
   в вашем iCloud или профиле Google Play Игр остаются там, пока вы их не удалите. Переписку с поддержкой
   мы храним до 24 месяцев. Данные могут обрабатываться на серверах
   за пределами вашей страны, включая США; для таких передач партнёры используют стандартные договорные
