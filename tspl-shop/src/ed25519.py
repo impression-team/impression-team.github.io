@@ -81,3 +81,38 @@ def sign(seed, msg):
     k = int.from_bytes(_sha512(R + A + msg), 'little') % _L
     S = (r + k * a) % _L
     return R + int.to_bytes(S, 32, 'little')
+
+
+def _on_curve(P):
+    x, y, z, _ = P
+    zi = pow(z, _p - 2, _p)
+    x, y = x * zi % _p, y * zi % _p
+    return (-x * x + y * y - 1 - _d * x * x * y * y) % _p == 0
+
+
+def _decode_point(s):
+    y = int.from_bytes(s, 'little')
+    sign = y >> 255
+    y &= (1 << 255) - 1
+    x = _xrecover(y)
+    if (x & 1) != sign:
+        x = _p - x
+    P = (x, y, 1, x * y % _p)
+    if not _on_curve(P):
+        raise ValueError('point is not on curve')
+    return P
+
+
+def verify_sig(pub, msg, sig):
+    if len(sig) != 64 or len(pub) != 32:
+        return False
+    try:
+        A = _decode_point(pub)
+        R = _decode_point(sig[:32])
+    except ValueError:
+        return False
+    S = int.from_bytes(sig[32:], 'little')
+    if S >= _L:
+        return False
+    k = int.from_bytes(_sha512(sig[:32] + pub + msg), 'little') % _L
+    return _encode_point(_mul(S, _B)) == _encode_point(_add(R, _mul(k, A)))

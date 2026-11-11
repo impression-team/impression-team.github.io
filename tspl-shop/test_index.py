@@ -41,13 +41,12 @@ def paid(**overrides):
 
 
 def verify_key(key, public):
-    """Mirror of License.verify in the app (CryptoKit) using the cryptography package."""
-    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+    """Mirror of License.verify in the app (CryptoKit)."""
     body = key[len('TSPL-'):]
     data_s, sig_s = body.split('.')
     pad = lambda s: s + '=' * (-len(s) % 4)  # noqa: E731
     data = base64.urlsafe_b64decode(pad(data_s))
-    Ed25519PublicKey.from_public_bytes(public).verify(base64.urlsafe_b64decode(pad(sig_s)), data)
+    assert ed25519.verify_sig(public, data, base64.urlsafe_b64decode(pad(sig_s)))
     return json.loads(data)
 
 
