@@ -7,6 +7,30 @@
   ],
   "games": [
     {
+      "slug": "sand-workshop",
+      "appstore_id": 6833500754,
+      "google_play": "com.chardymov.sand",
+      "genre": "Puzzle / Sand",
+      "tag": "puzzle",
+      "description": "A relaxing block puzzle with falling sand: drop pieces into a glass jar, match colors to clear lines and turn every completed level into a layered sand-art picture."
+    },
+    {
+      "slug": "arrow-mahjong",
+      "appstore_id": 6827032141,
+      "google_play": "com.chardymov.arrow",
+      "genre": "Mahjong / Puzzle",
+      "tag": "puzzle",
+      "description": "A cozy mix of mahjong and arrow puzzles: slide tiles along their arrows, match three in the tray and reveal themed pictures across 144 calm levels."
+    },
+    {
+      "slug": "word-jars",
+      "appstore_id": null,
+      "google_play": "com.chardymov.wordsort",
+      "genre": "Word / Puzzle",
+      "tag": "puzzle",
+      "description": "A cozy word-sorting puzzle: move letter balls between glass jars, spell themed words and fill your notebook. No timer, no losing, plus a daily word challenge."
+    },
+    {
       "slug": "sea-diver",
       "appstore_id": 6818245473,
       "google_play": "com.chardymov.diver",

@@ -207,5 +207,38 @@
     "gp_count": 1,
     "gp_live": true,
     "checked": "2026-11-16"
+  },
+  "sand-workshop": {
+    "name": "Sand Workshop: Block Puzzle",
+    "appstore_url": "https://apps.apple.com/us/app/sand-workshop-block-puzzle/id6833500754",
+    "new": true,
+    "as_rating": null,
+    "as_count": 0,
+    "gp_rating": null,
+    "gp_count": 0,
+    "gp_live": true,
+    "checked": "2026-11-16"
+  },
+  "arrow-mahjong": {
+    "name": "Arrow Mahjong: Tile Match",
+    "appstore_url": "https://apps.apple.com/us/app/arrow-mahjong-tile-match/id6827032141",
+    "new": true,
+    "as_rating": null,
+    "as_count": 0,
+    "gp_rating": null,
+    "gp_count": 0,
+    "gp_live": true,
+    "checked": "2026-11-16"
+  },
+  "word-jars": {
+    "name": "Word Jars: Letter Sort",
+    "appstore_url": null,
+    "new": null,
+    "as_rating": null,
+    "as_count": null,
+    "gp_rating": null,
+    "gp_count": 0,
+    "gp_live": true,
+    "checked": "2026-11-16"
   }
 }

@@ -6,7 +6,8 @@ For each game: <page>/index.html, <page>/media/ (icon, screenshots, optional tra
 
 Sources:
   * texts       ~/Unity Projects/aso-tool/texts/<aso>/appstore|play/en-US.yaml (the store texts)
-  * App Store   iTunes Lookup: name, icon, screenshots, release date, age rating, devices
+  * App Store   iTunes Lookup: name, icon, screenshots, release date, age rating, devices;
+                description and the card subtitle are fallbacks when no aso-tool texts exist
   * Google Play via google_play.py (Play-only games): icon and phone screenshots of the listing
   * trailer     "press": {"video": "<path>"} in games.json — a local 16:9 video, compressed with ffmpeg
 Games with "press_page": "custom" (Antheim) have a hand-made page and are skipped.
@@ -303,8 +304,11 @@ def build(game, apps, gp_live):
     aso = game.get('aso') or page
     texts = load_texts(aso)
     a = apps.get(game.get('appstore_id'))
+    if not texts['description'] and a:
+        texts['description'] = a.get('description') or ''
+    texts['subtitle'] = texts['subtitle'] or game.get('description', '')
     name = (a or {}).get('trackName') or texts['name'] or game.get('name') or slug
-    subtitle = texts['subtitle'] or ''
+    subtitle = texts['subtitle']
     gp = game.get('google_play') if gp_live.get(slug, True) else None
     out_dir = os.path.join(ROOT, page)
     media = os.path.join(out_dir, 'media')
