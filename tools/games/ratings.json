@@ -8,7 +8,7 @@
     "gp_rating": null,
     "gp_count": 0,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "bee-rush": {
     "name": "Bee Rush: Match 3 Puzzle",
@@ -19,29 +19,29 @@
     "gp_rating": 4.0,
     "gp_count": 7,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "music-band-tycoon": {
     "name": "Music Band Tycoon: Idle Star",
     "appstore_url": "https://apps.apple.com/us/app/music-band-tycoon-idle-star/id6443993567",
     "new": false,
-    "as_rating": 4.69,
-    "as_count": 52,
-    "gp_rating": 4.23,
+    "as_rating": 4.7,
+    "as_count": 53,
+    "gp_rating": 4.24,
     "gp_count": 56,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "kawaii-unicorn": {
     "name": "Kawaii Unicorn: Coloring Book",
     "appstore_url": "https://apps.apple.com/us/app/kawaii-unicorn-coloring-book/id1552569798",
     "new": false,
-    "as_rating": 4.43,
-    "as_count": 99,
+    "as_rating": 4.41,
+    "as_count": 101,
     "gp_rating": 4.21,
     "gp_count": 37,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "bubble-rush-shooter": {
     "name": "Bubble Rush Shooter: Pop Game",
@@ -52,18 +52,18 @@
     "gp_rating": 3.09,
     "gp_count": 25,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "super-hero-hotel": {
     "name": "Hero Hotel: Idle Tower Tycoon",
     "appstore_url": "https://apps.apple.com/us/app/hero-hotel-idle-tower-tycoon/id6475118803",
     "new": false,
-    "as_rating": null,
-    "as_count": 0,
-    "gp_rating": 4.56,
-    "gp_count": 15,
+    "as_rating": 5.0,
+    "as_count": 1,
+    "gp_rating": 4.35,
+    "gp_count": 16,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "guns-and-bike": {
     "name": "Guns and Bike: Moto Shooter",
@@ -74,7 +74,7 @@
     "gp_rating": 5.0,
     "gp_count": 1,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "drag-race-queen": {
     "name": "Drag Race Queen: Bike Rush",
@@ -85,7 +85,7 @@
     "gp_rating": 3.8,
     "gp_count": 49,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "invaders-city-defence": {
     "name": "Invaders City Defence Idle RPG",
@@ -93,10 +93,10 @@
     "new": false,
     "as_rating": 3.83,
     "as_count": 6,
-    "gp_rating": 3.0,
-    "gp_count": 4,
+    "gp_rating": 3.4,
+    "gp_count": 5,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "labor-rush": {
     "name": "Labor Rush: Maternity Tycoon",
@@ -104,10 +104,10 @@
     "new": false,
     "as_rating": 2.4,
     "as_count": 5,
-    "gp_rating": 3.42,
+    "gp_rating": 3.41,
     "gp_count": 34,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "space-pipes": {
     "name": "Space Pipes",
@@ -118,7 +118,7 @@
     "gp_rating": 3.76,
     "gp_count": 17,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "aircraft-constructor-idler": {
     "name": "Aircraft Constructor Idler",
@@ -129,7 +129,7 @@
     "gp_rating": 3.33,
     "gp_count": 50,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "sniper-tank": {
     "name": "Sniper Tank: Precision Strike",
@@ -140,7 +140,7 @@
     "gp_rating": null,
     "gp_count": 0,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "dream-dart": {
     "name": "Dream Dart: Rescuing the Wild",
@@ -151,7 +151,7 @@
     "gp_rating": 1.0,
     "gp_count": 1,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "alien-invasion-puzzle": {
     "name": "Alien Invasion Puzzle",
@@ -162,7 +162,7 @@
     "gp_rating": null,
     "gp_count": 0,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "magnet-guy": {
     "name": "Magnet Guy",
@@ -173,29 +173,29 @@
     "gp_rating": null,
     "gp_count": 0,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "sea-diver": {
     "name": "Sea Diver: Scuba Treasure Hunt",
     "appstore_url": "https://apps.apple.com/us/app/sea-diver-scuba-treasure-hunt/id6818245473",
     "new": true,
-    "as_rating": null,
-    "as_count": 0,
-    "gp_rating": null,
-    "gp_count": 0,
+    "as_rating": 4.0,
+    "as_count": 2,
+    "gp_rating": 5.0,
+    "gp_count": 1,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "antheim": {
     "name": "Antheim: Ant Colony Sim",
     "appstore_url": "https://apps.apple.com/us/app/antheim-ant-colony-sim/id6814969517",
     "new": true,
-    "as_rating": null,
-    "as_count": 0,
-    "gp_rating": 5.0,
-    "gp_count": 4,
+    "as_rating": 4.0,
+    "as_count": 9,
+    "gp_rating": 4.32,
+    "gp_count": 20,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   },
   "crush-crew": {
     "name": "Crush Crew: Zombie Survival",
@@ -203,9 +203,9 @@
     "new": null,
     "as_rating": null,
     "as_count": null,
-    "gp_rating": null,
-    "gp_count": 0,
+    "gp_rating": 5.0,
+    "gp_count": 1,
     "gp_live": true,
-    "checked": "2026-10-25"
+    "checked": "2026-11-16"
   }
 }
