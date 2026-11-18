@@ -41,6 +41,19 @@
   </style>
 </head>
 <body>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114211759', 'ym');
+
+    ym(114211759, 'init', {ssr:true, webvisor:false, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114211759" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <nav><a href="../index.html" class="nav-logo">Impression<span>&nbsp;Team</span></a></nav>
 <main>
   <div class="card">
@@ -103,6 +116,14 @@
     states.forEach(function (s) { document.getElementById('s-' + s).hidden = s !== name; });
   }
 
+  function trackPurchase() {
+    if (typeof ym !== 'function') return;
+    var goalKey = 'tspl_goal_purchase_' + paymentId;
+    try { if (localStorage.getItem(goalKey)) return; } catch (err) {}
+    ym(114211759, 'reachGoal', 'purchase');
+    try { localStorage.setItem(goalKey, '1'); } catch (err) {}
+  }
+
   if (!paymentId || SHOP_ENDPOINT.indexOf('__') === 0) { show('unknown'); return; }
 
   var tries = 0;
@@ -119,6 +140,7 @@
           document.getElementById('key').textContent = res.key;
           document.getElementById('email').textContent = res.email || 'ваш email';
           document.getElementById('kid').textContent = res.license_id || '';
+          trackPurchase();
           show('done');
         } else if (res.status === 'canceled') {
           try { localStorage.removeItem('tspl_payment_id'); } catch (e) {}

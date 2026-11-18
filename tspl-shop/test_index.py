@@ -76,6 +76,20 @@ class ShopTest(unittest.TestCase):
         self.assertNotIn('receipt', payload)
         self.assertTrue(self.api.call_args[1]['idempotence_key'])
 
+    def test_create_saves_only_known_attribution_fields(self):
+        self.api.return_value = {'id': PID, 'confirmation': {'confirmation_url': 'u'}}
+        self.call(event({'action': 'create', 'email': 'a@b.ru', 'offer': True, 'fill_ms': 5000,
+                         'attribution': {'utm_source': ' yandex\n', 'utm_campaign': 'tspl_search',
+                                         'yclid': '12345', 'client_id': '67890', 'unknown': 'discard',
+                                         'utm_content': 'x' * 250}}))
+        metadata = self.api.call_args[0][2]['metadata']
+        self.assertEqual(metadata['utm_source'], 'yandex')
+        self.assertEqual(metadata['utm_campaign'], 'tspl_search')
+        self.assertEqual(metadata['yclid'], '12345')
+        self.assertEqual(metadata['client_id'], '67890')
+        self.assertEqual(len(metadata['utm_content']), 200)
+        self.assertNotIn('unknown', metadata)
+
     def test_create_with_receipt(self):
         self.api.return_value = {'id': PID, 'confirmation': {'confirmation_url': 'u'}}
         with mock.patch.dict(os.environ, {'RECEIPTS': '1'}):
@@ -137,7 +151,9 @@ class ShopTest(unittest.TestCase):
 
     # ---- notification
     def test_notification_rereads_payment_and_mails_key(self):
-        self.api.return_value = paid()
+        payment = paid()
+        payment['metadata'].update({'utm_source': 'yandex', 'utm_campaign': 'tspl_search', 'yclid': '12345'})
+        self.api.return_value = payment
         fake_body = {'type': 'notification', 'event': 'payment.succeeded',
                      'object': {'id': PID, 'status': 'succeeded', 'metadata': {'email': 'attacker@x.ru'}}}
         status, _ = self.call(event(fake_body, origin=None))
@@ -148,6 +164,9 @@ class ShopTest(unittest.TestCase):
         self.assertIn('TSPL-', buyer.get_content())
         self.assertEqual(owner['To'], 'owner@yandex.ru')
         self.assertIn('ivan@example.com', owner['Subject'])
+        self.assertIn('utm_source: yandex', owner.get_content())
+        self.assertIn('utm_campaign: tspl_search', owner.get_content())
+        self.assertIn('yclid: 12345', owner.get_content())
 
     def test_notification_for_unpaid_payment_sends_nothing(self):
         self.api.return_value = paid(status='canceled', paid=False)

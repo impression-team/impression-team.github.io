@@ -411,7 +411,39 @@
   var PRICE = 499;
   var SUPPORT = 'vitaliy.chardymov@gmail.com';
   var loadedAt = Date.now();
+  var ATTR_KEY = 'tspl_attribution';
+  var ATTR_FIELDS = ['yclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'client_id'];
+  var attribution = {};
 
+  try { attribution = JSON.parse(localStorage.getItem(ATTR_KEY) || '{}') || {}; } catch (err) {}
+  var params = new URLSearchParams(location.search);
+  ATTR_FIELDS.forEach(function (key) {
+    if (key === 'client_id') return;
+    var value = params.get(key);
+    if (value) attribution[key] = value.slice(0, 200);
+  });
+  function saveAttribution() {
+    try { localStorage.setItem(ATTR_KEY, JSON.stringify(attribution)); } catch (err) {}
+  }
+  saveAttribution();
+  if (typeof ym === 'function') {
+    ym(114211759, 'getClientID', function (id) {
+      attribution.client_id = String(id).slice(0, 200);
+      saveAttribution();
+    });
+  }
+
+  function trackGoal(name, id) {
+    if (typeof ym !== 'function') return;
+    var goalKey = id ? 'tspl_goal_' + name + '_' + id : '';
+    try { if (goalKey && localStorage.getItem(goalKey)) return; } catch (err) {}
+    ym(114211759, 'reachGoal', name);
+    try { if (goalKey) localStorage.setItem(goalKey, '1'); } catch (err) {}
+  }
+
+  document.querySelectorAll('a[href$="TSPL-Label-Print.zip"]').forEach(function (link) {
+    link.addEventListener('click', function () { trackGoal('trial_download'); });
+  });
   document.querySelectorAll('.js-price').forEach(function (el) { el.textContent = PRICE; });
 
   var form = document.getElementById('buy-form');
@@ -452,13 +484,15 @@
         offer: true,
         offer_at: new Date().toISOString(),
         website: form.elements['website'].value,
-        fill_ms: Date.now() - loadedAt
+        fill_ms: Date.now() - loadedAt,
+        attribution: attribution
       })
     })
       .then(function (r) { return r.json(); })
       .then(function (res) {
         if (!res || res.success !== true || !res.url) throw new Error(res && res.error);
         try { localStorage.setItem('tspl_payment_id', res.payment_id); } catch (err) {}
+        trackGoal('checkout_start', res.payment_id);
         setStatus('ok', 'Переходим на страницу оплаты…');
         location.href = res.url;
       })

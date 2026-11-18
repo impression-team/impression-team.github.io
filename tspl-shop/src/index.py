@@ -63,6 +63,7 @@ ALLOWED_ORIGINS = set(os.environ.get('ALLOWED_ORIGINS', SITE).split())
 EMAIL_RE = re.compile(r'^[^@\s<>"]+@[^@\s<>"]+\.[^@\s<>"]+$')
 PAYMENT_ID_RE = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
 KEY_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+ATTRIBUTION_KEYS = ('yclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'client_id')
 MIN_FILL_MS = 1500
 MAX_BODY_BYTES = 20000
 
@@ -124,13 +125,18 @@ def _receipt(email):
     return receipt
 
 
-def create_payment(email, offer_at):
+def clean_attribution(data):
+    source = data if isinstance(data, dict) else {}
+    return {key: ' '.join(str(source[key]).split())[:200] for key in ATTRIBUTION_KEYS if source.get(key)}
+
+
+def create_payment(email, offer_at, attribution):
     body = {
         'amount': {'value': price(), 'currency': 'RUB'},
         'capture': True,
         'confirmation': {'type': 'redirect', 'return_url': RETURN_URL},
         'description': 'TSPL Label Print — лицензия',
-        'metadata': {'product': PRODUCT, 'email': email, 'offer_at': offer_at[:40]},
+        'metadata': {'product': PRODUCT, 'email': email, 'offer_at': offer_at[:40], **clean_attribution(attribution)},
     }
     if os.environ.get('RECEIPTS') == '1':
         body['receipt'] = _receipt(email)
@@ -230,13 +236,17 @@ def send_license(payment, kid, key):
                    reply_to=support))
     owner = os.environ.get('MAIL_TO') or os.environ['SMTP_USER']
     amount = payment.get('amount') or {}
+    meta = payment.get('metadata') or {}
+    attribution = ['{}: {}'.format(key, meta[key]) for key in ATTRIBUTION_KEYS if meta.get(key)]
     _send(_message(owner, 'Продажа TSPL Label Print{}: {}'.format(test, email), '\n'.join([
         'Покупатель: ' + email,
         'Сумма: {} {}'.format(amount.get('value'), amount.get('currency')),
         'Лицензия: ' + kid,
         'Платёж ЮKassa: ' + payment['id'],
         'Оплачен: ' + str(payment.get('captured_at') or payment.get('created_at')),
-        'Оферта принята: ' + str((payment.get('metadata') or {}).get('offer_at')),
+        'Оферта принята: ' + str(meta.get('offer_at')),
+        'Атрибуция:',
+        *(attribution or ['нет данных']),
         '',
         'Ключ уже отправлен покупателю. Если он потеряет письмо, ключ можно',
         'увидеть повторно на ' + RETURN_URL + '?p=' + payment['id'],
@@ -258,7 +268,7 @@ def handle_create(data, origin):
         return _fail(400, 'offer', origin)
     offer_at = ' '.join(str(data.get('offer_at') or '').split()) or '—'
     try:
-        payment = create_payment(email, offer_at)
+        payment = create_payment(email, offer_at, data.get('attribution'))
     except Exception:
         log.exception('create payment failed')
         return _fail(502, 'payment', origin)
